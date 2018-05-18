@@ -2,5 +2,23 @@
 
 {% block 'main' %}
 
-		
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    	<input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+    </div>
+  </div>
+</div>
+	
 {% endblock %}
+
+
+<script type="text/javascript">
+	$('#ex1').slider({
+	formatter: function(value) {
+		return 'Current value: ' + value;
+	}
+});
+</script>
