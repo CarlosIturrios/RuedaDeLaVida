@@ -1004,11 +1004,11 @@ ol {
 	Footer section
 ----------------------*/
 .footer-section {
-	background: #0d0d0d;
+	background: #e5efff;
 }
 
 .footer-section h2 {
-	color: #fff;
+	color: black;
 	font-weight: 400;
 	font-style: italic;
 	margin-bottom: 20px;
@@ -1016,12 +1016,12 @@ ol {
 
 .footer-section p {
 	font-size: 24px;
-	color: #fff;
+	color: black;
 	margin-bottom: 40px;
 }
 
 .footer-section .social a {
-	color: #fff;
+	color: blue;
 	margin-right: 40px;
 }
 
@@ -1047,7 +1047,7 @@ ol {
 	left: 0;
 	top: 0;
 	background: #000;
-	opacity: 0.7;
+	opacity: 0.4;
 }
 
 .breadcrumb-area {
