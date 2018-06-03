@@ -12,5 +12,9 @@ urlpatterns = [
 
     # App views    
    	url(r'^$', views.principal, name='principal'),
-   	
+   	url(r'^psicologica/$', views.psicologica, name='psicologica'),
+   	url(r'^relacionesAmor/$', views.relacionesAmor, name='relacionesAmor'),
+   	url(r'^productividadPersonal/$', views.productividadPersonal, name='productividadPersonal'),
+   	url(r'^register/$', views.register, name='register'),
+   	url(r'^resultados/$', views.resultados, name='resultados'),
 ]

@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm text-center">
                 <strong>
-                    ¿Qué tan feliz es usted con su salud en general, el bienestar y el estado general de su cuerpo físico?
+                    ¿Cómo efectivamente hacer cumplir y completar cada resultado que estableció para usted cada día?
                 </strong>
                 <p>
                     Mueva los controles deslizantes de abajo para seleccionar su respuesta
@@ -42,7 +42,7 @@
     <div class="row">
         <div class="col-sm text-center">
                 <strong>
-                    ¿Cómo le gustaría sentirse acerca de su estado general de salud, bienestar, vitalidad y energía?
+                    ¿Cómo le gustaría sentirse acerca de su rendimiento y productividad personal en casa o en su lugar de trabajo cada día?
                 </strong>
                 <p>
                     Mueva los controles deslizantes de abajo para seleccionar su respuesta
@@ -75,9 +75,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm text-center">
-            <form action="{% url 'WebPagRuedaDLV:psicologica' %}" method="post">
+            <form action="{% url 'WebPagRuedaDLV:register' %}" method="post">
                  {% csrf_token %}
-               <button class="btn btn-success" style="width: 100%;">Siguiente pregunta</button>
+               <button class="btn btn-success" style="width: 100%;">Obten tus resultados ahora!</button>
             </form>
         </div>
     </div>
@@ -86,13 +86,13 @@
 
 <div class="container text-center" style="text-align: center;">
     <ul class="breadcrumb" style=" background-color:  white;">
-        <li><i class="fa fa-circle-o"></i></li>
+        <li><a href="{% url 'WebPagRuedaDLV:principal' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
         &nbsp;
         <li><a href="{% url 'WebPagRuedaDLV:psicologica' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
         &nbsp;
         <li><a href="{% url 'WebPagRuedaDLV:relacionesAmor' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
         &nbsp;
-        <li><a href="{% url 'WebPagRuedaDLV:productividadPersonal' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
+        <li><i class="fa fa-circle-o"></i></li>
         &nbsp;
     </ul>
 </div>

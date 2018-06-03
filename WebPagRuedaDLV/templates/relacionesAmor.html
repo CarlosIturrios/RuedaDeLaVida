@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm text-center">
                 <strong>
-                    ¿Qué tan feliz es usted con su salud en general, el bienestar y el estado general de su cuerpo físico?
+                    ¿Cómo calificaría la calidad general de su actual relación íntima? Si no se encuentra actualmente en una relación íntima, valore su pasado más reciente o relación.
                 </strong>
                 <p>
                     Mueva los controles deslizantes de abajo para seleccionar su respuesta
@@ -42,7 +42,7 @@
     <div class="row">
         <div class="col-sm text-center">
                 <strong>
-                    ¿Cómo le gustaría sentirse acerca de su estado general de salud, bienestar, vitalidad y energía?
+                    ¿Cómo le gustaría sentirse en sus relaciones íntimas?
                 </strong>
                 <p>
                     Mueva los controles deslizantes de abajo para seleccionar su respuesta
@@ -75,7 +75,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm text-center">
-            <form action="{% url 'WebPagRuedaDLV:psicologica' %}" method="post">
+            <form action="{% url 'WebPagRuedaDLV:productividadPersonal' %}" method="post">
                  {% csrf_token %}
                <button class="btn btn-success" style="width: 100%;">Siguiente pregunta</button>
             </form>
@@ -86,11 +86,11 @@
 
 <div class="container text-center" style="text-align: center;">
     <ul class="breadcrumb" style=" background-color:  white;">
-        <li><i class="fa fa-circle-o"></i></li>
+        <li><a href="{% url 'WebPagRuedaDLV:principal' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
         &nbsp;
         <li><a href="{% url 'WebPagRuedaDLV:psicologica' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
         &nbsp;
-        <li><a href="{% url 'WebPagRuedaDLV:relacionesAmor' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
+        <li><i class="fa fa-circle-o"></i></li>
         &nbsp;
         <li><a href="{% url 'WebPagRuedaDLV:productividadPersonal' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
         &nbsp;

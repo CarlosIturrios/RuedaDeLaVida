@@ -17,3 +17,23 @@ from datetime import datetime
 # Create your views here.
 def principal(request):
 	return render(request, 'principal.html')
+
+
+def psicologica(request):
+	return render(request, 'psicologica.html')
+
+
+def relacionesAmor(request):
+	return render(request, 'relacionesAmor.html')
+
+
+def productividadPersonal(request):
+	return render(request, 'productividadPersonal.html')
+
+
+def register(request):
+	return render(request, 'register.html')
+
+
+def resultados(request):
+	return render(request, 'resultados.html')
