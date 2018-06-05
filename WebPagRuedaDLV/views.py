@@ -16,6 +16,22 @@ from datetime import datetime
 
 # Create your views here.
 def principal(request):
+	if request.method == "POST":
+		slide1 = request.POST.get('slide1', None)
+		slide2 = request.POST.get('slide2', None)
+		if slide2 <= slide1:
+			print('no se puede man')
+			return render(request, 'principal.html')
+		else:
+			if 'wheel' not in request.session:
+				request.session['wheel'] = [{'slide1': slide1, 'slide2': slide2}]
+			else:
+				wheel = request.session['wheel']
+				wheel.append({'slide1': slide1, 'slide2': slide2})
+				request.session['wheel'] = wheel
+			print(request.session['wheel'])
+			return render(request, 'psicologica.html')
+
 	return render(request, 'principal.html')
 
 

@@ -3,16 +3,13 @@
 {% block 'main' %}
 
 <br>
+<!-- chart-->
 <div class="container">
   <div class="row">
     <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-    	<div class="container">
-    		<strong>Tu espacio.</strong>
-    	</div>
-   		<div align="left" id="chartjs-radar">
- 			<canvas align="center" id="canvas"></canvas>
-		</div>
+    	<canvas id="birdsChart" width="50%" height="30%"></canvas>
     </div>
+<!--Chart -->
     <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
    		<div>
    			<strong>¿QUÉ ES Y PARA QUÉ SIRVE LA RUEDA DE LA VIDA?</strong>
@@ -162,128 +159,42 @@
 {% block 'script' %}
 
 <script type="text/javascript">
-$(function() {		
-		window.chartColors = {
-		  red: 'rgb(255, 99, 132)',
-		};
-
-		window.randomScalingFactor = function() {
-		  return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-		}
-
-		var randomScalingFactor = function() {
-		  return Math.round(Math.random() * 100);
-		};
-
-		var now = moment();
-		var dataTime1 = moment("2016-12-18T14:58:54.026Z");
-		var dataTime2 = moment("2017-01-18T20:58:54.026Z");
-		var dataTime3 = moment("2017-02-15T08:58:54.026Z");
-		var label1 =moment.duration(dataTime1.diff(now)).humanize(true);
-		var label2 =moment.duration(dataTime2.diff(now)).humanize(true);
-		var label3 =moment.duration(dataTime3.diff(now)).humanize(true);
-
-		var color = Chart.helpers.color;
-		var config = {
-		  type: 'radar',
-		  data: {
-		    labels: [
-		      "Carrera|Empresa", "Finanzas|Dinero", "Salud|","Familia|Amigos", "Amor|Relaciones", "Crecimiento personal|Aprendizaje","Diversion|Estilo de vida", "Productividad personal"],
-		    datasets: [{
-		      label: label1,
-		      backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
-		      borderColor: window.chartColors.red,
-		      pointBackgroundColor: window.chartColors.red,
-		      data: [8,8,8,8,8,10,8,7],
-		      notes: ["I am pretty happy","I am isolated","none","none","none","none","none","none"]
-		    }, ]
-		  },
-		  options: {
-		    legend: {
-		      position: 'top',
-		      display: false,
-		    },
-		    title: {
-		      display: false,
-		      text: 'RUEDA DE LA VIDA'
-		    },
-		    scale: {
-		      ticks: {
-		        beginAtZero: true
-		      }
-		    },
-		    tooltips:{
-		      enabled:false,
-		      callbacks:{
-		        label: function(tooltipItem, data){
-		          var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-		          //This will be the tooltip.body
-		          return datasetLabel + ': ' + tooltipItem.yLabel +': '+ data.datasets[tooltipItem.datasetIndex].notes[tooltipItem.index];
-		        }
-		      },
-		      custom: function(tooltip){
-		        // Tooltip Element
-		      var tooltipEl = document.getElementById('chartjs-tooltip');
-		      if (!tooltipEl) {
-		        tooltipEl = document.createElement('div');
-		        tooltipEl.id = 'chartjs-tooltip';
-		        tooltipEl.innerHTML = "<table></table>"
-		        document.body.appendChild(tooltipEl);
-		      }
-		      // Hide if no tooltip
-		      if (tooltip.opacity === 0) {
-		        tooltipEl.style.opacity = 0;
-		        return;
-		      }
-		      // Set caret Position
-		      tooltipEl.classList.remove('above', 'below', 'no-transform');
-		      if (tooltip.yAlign) {
-		        tooltipEl.classList.add(tooltip.yAlign);
-		      } else {
-		        tooltipEl.classList.add('no-transform');
-		      }
-		      function getBody(bodyItem) {
-		        return bodyItem.lines;
-		      }
-		      // Set Text
-		      if (tooltip.body) {
-		        var titleLines = tooltip.title || [];
-		        var bodyLines = tooltip.body.map(getBody);
-		        var innerHtml = '<thead>';
-		        titleLines.forEach(function(title) {
-		          innerHtml += '<tr><th>' + title + '</th></tr>';
-		        });
-		        innerHtml += '</thead><tbody>';
-		        bodyLines.forEach(function(body, i) {
-		          var colors = tooltip.labelColors[i];
-		          var style = 'background:' + colors.backgroundColor;
-		          style += '; border-color:' + colors.borderColor;
-		          style += '; border-width: 2px';
-		          var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
-		          innerHtml += '<tr><td>' + span + body + '</td></tr>';
-		        });
-		        innerHtml += '</tbody>';
-		        var tableRoot = tooltipEl.querySelector('table');
-		        tableRoot.innerHTML = innerHtml;
-		      }
-		      var position = this._chart.canvas.getBoundingClientRect();
-		      // Display, position, and set styles for font
-		      tooltipEl.style.opacity = 1;
-		      tooltipEl.style.left = position.left + tooltip.caretX + 'px';
-		      tooltipEl.style.top = position.top + tooltip.caretY + 'px';
-		      tooltipEl.style.fontFamily = tooltip._fontFamily;
-		      tooltipEl.style.fontSize = tooltip.fontSize;
-		      tooltipEl.style.fontStyle = tooltip._fontStyle;
-		      tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
-		      }
-		    }
-		  }
-		};
-		window.onload = function() {
-		  window.myRadar = new Chart(document.getElementById("canvas"), config);
-		};
-	var colorNames = Object.keys(window.chartColors);
+$(function() 
+{		
+	var birdsCanvas = document.getElementById("birdsChart");
+	var birdsData = {
+  		labels: ["Carrera|Empresa","Finanzas|Dinero","Salud|Vitalidad","Familia|Amigos","Amor|relaciones","Crecimiento personal|Aprendizaje","Diversion|Estilo de vida","Productividad personal",],
+  		datasets: [{
+    	data: [2, 4, 8, 5,7,3,10,9],
+    	backgroundColor: [
+      	"rgba(255, 0, 0, 0.5)",
+        "rgba(52, 0, 0, 0.5)",
+      	"rgba(100, 255, 0, 0.5)",
+        "rgba(144, 2, 45, 0.5)",
+        "rgba(220, 255, 0, 0.5)",
+        "rgba(0, 0, 255, 0.5)",
+        "rgba(192, 192, 192, 0.5)",
+        "rgba(255, 100, 255, 0.5)",
+    		]
+  		}]
+	};
+  var chartOptions = {
+    scale:{
+      ticks:{
+        beginAtZero: true,
+        min: 0,
+        max: 10,
+        stepSize: 1
+      }
+    }
+  }
+	var polarAreaChart = new Chart(birdsCanvas, {
+	  type: 'polarArea',
+	  data: birdsData,
+    options: chartOptions
+	});
 });
+
 </script>
 
 {% endblock %}

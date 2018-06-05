@@ -2,86 +2,86 @@
 
 {% block 'main' %}
 <br>
-<div class="container">
-    <div class="row">
-        <div class="col-sm text-center">
-                <strong>
-                    ¿Qué tan feliz es usted con su salud en general, el bienestar y el estado general de su cuerpo físico?
-                </strong>
-                <p>
-                    Mueva los controles deslizantes de abajo para seleccionar su respuesta
-                </p>
+<form action="{% url 'WebPagRuedaDLV:psicologica' %}" method="post" class="form-inline">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                    <strong>
+                        ¿Qué tan feliz es usted con su salud en general, el bienestar y el estado general de su cuerpo físico?
+                    </strong>
+                    <p>
+                        Mueva los controles deslizantes de abajo para seleccionar su respuesta
+                    </p>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm text-center">
-            <span>INSATISFECHO</span>
-            &nbsp;
-        	<input style="width: 70%"  id="ex13" type="text" data-slider-ticks="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]'/> 
-            &nbsp;
-            <span>SATISFECHO</span>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                <span>INSATISFECHO</span>
+                &nbsp;
+            	<input style="width: 70%" name="slide1" id="ex13" type="text" data-slider-ticks="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]'/> 
+                &nbsp;
+                <span>SATISFECHO</span>
+            </div>
         </div>
     </div>
-</div>
 
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-sm text-center">
-            <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
-            <br>
-            <textarea style="width: 100%;"  id="TArea1" type="multyline" rows="1" maxlength="2000"></textarea>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
+                <br>
+                <textarea style="width: 100%;"  id="TArea1" type="multyline" rows="1" maxlength="2000"></textarea>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm text-center">
-                <strong>
-                    ¿Cómo le gustaría sentirse acerca de su estado general de salud, bienestar, vitalidad y energía?
-                </strong>
-                <p>
-                    Mueva los controles deslizantes de abajo para seleccionar su respuesta
-                </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                    <strong>
+                        ¿Cómo le gustaría sentirse acerca de su estado general de salud, bienestar, vitalidad y energía?
+                    </strong>
+                    <p>
+                        Mueva los controles deslizantes de abajo para seleccionar su respuesta
+                    </p>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm text-center">
-            <span>INSATISFECHO </span>
-            <input style="width: 80%;"  id="ex6" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5"/><span> SATISFECHO</span>
-            <span id="ex6CurrentSliderValLabel">Value: <span id="ex6SliderVal">5</span></span>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                <span>INSATISFECHO </span>
+                <input style="width: 80%;" name="slide2" id="ex6" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5"/><span> SATISFECHO</span>
+                <span id="ex6CurrentSliderValLabel">Value: <span id="ex6SliderVal">5</span></span>
+            </div>
         </div>
     </div>
-</div>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-sm text-center">
-            <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
-            <br>
-            <textarea style="width: 100%;" id="TAre
-            a1" type="multyline" rows="1" maxlength="2000"></textarea>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
+                <br>
+                <textarea style="width: 100%;" id="TAre
+                a1" type="multyline" rows="1" maxlength="2000"></textarea>
+            </div>
         </div>
     </div>
-</div>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-sm text-center">
-            <form action="{% url 'WebPagRuedaDLV:psicologica' %}" method="post">
-                 {% csrf_token %}
-               <button class="btn btn-success" style="width: 100%;">Siguiente pregunta</button>
-            </form>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                <button class="btn btn-success" style="width: 100%;">Siguiente pregunta</button>
+            </div>
         </div>
     </div>
-</div>
+</form>
 <br>
 
 <div class="container text-center" style="text-align: center;">
@@ -106,7 +106,7 @@ $(function() {
        $("#ex13").slider({
             ticks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             ticks_labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-            ticks_snap_bounds: 30
+            ticks_snap_bounds: 30            
         });
    
        $("#ex6").slider();
