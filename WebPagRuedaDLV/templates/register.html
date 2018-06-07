@@ -5,16 +5,16 @@
 {% endblock %}
 
 {% block 'main' %}
-<form action="{% url 'WebPagRuedaDLV:resultados' %}" method="post">
+<form action="{% url 'WebPagRuedaDLV:register' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
     <div id="login-box">
       <div class="left">
         <h1>Registrate para obtener los resultados</h1>
         
-        <input type="text" name="username" placeholder="Nombre" />
-        <input type="text" name="lasname" placeholder="Apellidos" />
-        <input type="text" name="email" placeholder="E-mail" />
+        <input type="text" name="username" placeholder="Nombre" required="True" />
+        <input type="text" name="lasname" placeholder="Apellidos" required="True" />
+        <input type="text" name="email" placeholder="E-mail" required="True" />
         <button type="submit" class="btn btn-success center">
           ¡Ver tus resultados!
         </button>

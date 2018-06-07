@@ -30,3 +30,12 @@ class Respuesta(models.Model):
 	
 	def __str__(self):
 		return 'id: {0} area: {1} nivel: {2}'.format(self.id, self.get_area_display(), self.get_nivel_display())
+
+
+class Correo(models.Model):
+	nombre = models.CharField(max_length=200, null=False, blank=False)
+ 	apellidos = models.CharField(max_length=200, null=False, blank=False)
+ 	correo = models.CharField(max_length=200, null=False, blank=False)
+
+ 	def __str__(self):
+		return 'Nombre: {0} {1} correo: {2}'.format(self.nombre, self.apellidos, self.correo)
