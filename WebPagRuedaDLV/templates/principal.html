@@ -20,8 +20,8 @@
         <div class="row">
             <div class="col-sm text-center">
                 <span>INSATISFECHO</span>
-                &nbsp;
-                <input style="width: 70%" name="slide1" id="ex13" type="text" data-slider-ticks="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]'/> 
+                &nbsp;                
+                <input style="width: 70%" name="slide1"  id="ex18a" type="text"/>
                 &nbsp;
                 <span>SATISFECHO</span>
             </div>
@@ -98,12 +98,14 @@
 {% block 'script' %}
 
 <script type="text/javascript">
-    $(function() {
-       $("#ex13").slider({
-        ticks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        ticks_labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-        ticks_snap_bounds: 30            
-    });
+    $(document).ready(function() {
+        $("#ex18a").slider({
+            min: 0,
+            max: 10,
+            value: 5,
+            labelledby: 'ex18-label-1'
+        });
+
 
        $("#ex6").slider();
        $("#ex6").on("slide", function(slideEvt) {
