@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User, Group
 from django.conf import settings
 
+from decimal import Decimal 
 from datetime import datetime
 from .models import Correo, Respuesta
 # Create your views here.
@@ -35,32 +36,49 @@ def psicologica(request):
 		text3 = request.POST.get('text3', None)
 		text4 = request.POST.get('text4', None)
 		if slide3 < slide4:
-			request.session['wheel']['slide3'] = slide3
-			request.session['wheel']['slide4'] = slide4
-			request.session['wheel']['text3'] = text3
-			request.session['wheel']['text4'] = text4
+			wheel = request.session['wheel']
+			wheel['slide3'] = slide3
+			wheel['slide4'] = slide4
+			wheel['text3'] = text3
+			wheel['text4'] = text4
+			request.session['wheel'] = wheel
 			print(request.session['wheel'])
 			return redirect('WebPagRuedaDLV:relacionesAmor')
 	return render(request, 'psicologica.html')
 
 
 def relacionesAmor(request):
-	print(request.session['wheel'])
+	print(request.session['wheel']['slide4'])
 	if request.method == "POST":
 		slide5 = int(request.POST.get('slide5', None))
 		slide6 = int(request.POST.get('slide6', None))
 		text5 = request.POST.get('text5', None)
 		text6 = request.POST.get('text6', None)
 		if slide5 < slide6:
-			request.session['wheel']['slide5'] = slide5
-			request.session['wheel']['slide6'] = slide6
-			request.session['wheel']['text5'] = text5
-			request.session['wheel']['text6'] = text6
+			wheel = request.session['wheel']
+			wheel['slide5'] = slide5
+			wheel['slide6'] = slide6
+			wheel['text5'] = text5
+			wheel['text6'] = text6
+			request.session['wheel'] = wheel
 			return redirect('WebPagRuedaDLV:productividadPersonal')
 	return render(request, 'relacionesAmor.html') 
 
 
 def productividadPersonal(request):
+	if request.method == "POST":
+		slide7 = int(request.POST.get('slide7', None))
+		slide8 = int(request.POST.get('slide8', None))
+		text7 = request.POST.get('text7', None)
+		text8 = request.POST.get('text8', None)
+		if slide7 < slide8:
+			wheel = request.session['wheel']
+			wheel['slide7'] = slide7
+			wheel['slide8'] = slide8
+			wheel['text7'] = text7
+			wheel['text8'] = text8
+			request.session['wheel'] = wheel
+			return redirect('WebPagRuedaDLV:register')
 	return render(request, 'productividadPersonal.html')
 
 
@@ -69,14 +87,34 @@ def register(request):
 		nombre = request.POST.get('username', None)
 		apellidos = request.POST.get('lasname', None)
 		email = request.POST.get('email', None)
-		correo = Correo()
-		correo.nombre = nombre
-		correo.apellidos = apellidos
-		correo.correo = email
-		correo.save()
+		usuario = Correo()
+		usuario.usuario = nombre
+		usuario.apellidos = apellidos
+		usuario.email = email
+		usuario.save()
 		return redirect('WebPagRuedaDLV:resultados')
 	return render(request, 'register.html')
 
 
 def resultados(request):
-	return render(request, 'resultados.html')
+	slide1 = request.session['wheel']['slide1']
+	slide2 = request.session['wheel']['slide2']
+	salud = float(slide1) / float(slide2)
+	salud = (1-(salud))*100
+	salud = int(salud)
+	slide3 = request.session['wheel']['slide3']
+	slide4 = request.session['wheel']['slide4']
+	psicologica = float(slide3) / float(slide4)
+	psicologica = (1-(psicologica))*100
+	psicologica = int(psicologica)
+	slide5 = request.session['wheel']['slide5']
+	slide6 = request.session['wheel']['slide6']
+	relaciones = float(slide5) / float(slide6)
+	relaciones = (1-(relaciones))*100
+	relaciones = int(relaciones)
+	gap1 = slide1+slide3+slide5
+	gap2 = slide2+slide4+slide6
+	gaptotal = float(gap1)/float(gap2)
+	gaptotal = (1-(gaptotal))*100
+	gaptotal = int(gaptotal) 
+	return render(request, 'resultados.html', {'slide1':slide1, 'slide2':slide2, 'salud':salud, 'slide3':slide3, 'slide4':slide4, 'psicologica':psicologica, 'slide5':slide5, 'slide6':slide6, 'relaciones':relaciones, 'gaptotal':gaptotal })

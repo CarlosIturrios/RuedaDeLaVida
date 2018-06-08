@@ -29,7 +29,7 @@
     <div class="col-sm">
    		<div class="text-center">
    			<strong>Tu espacio.</strong>
-   			<h2>7.5 %</h2>
+   			<h2>{{gaptotal}}%</h2>
     	</div>
 		</div>
     </div>
@@ -52,15 +52,15 @@
  	<div class="row">
     	<div class="col-sm text-center">
      		<h3>Tu estas:</h3>
-      		<h3 style="color:black;">1</h1>
+      		<h3 style="color:black;">{{ slide1 }}</h1>
     	</div>
     	<div class="col-sm text-center">
       		<h3>Te gustaria estar:</h3>
-      		<h3 style="color:black;">2</h1>
+      		<h3 style="color:black;">{{slide2}}</h1>
     	</div>
 	    <div class="col-sm text-center">
 	     	<h3>Tu espacio:</h3>
-	     	<h3 style="color:black;">1</h1>
+	     	<h3 style="color:black;">{{salud}}%</h1>
 	    </div>
   	</div>
   	<div class="row">
@@ -84,15 +84,15 @@
  	<div class="row">
     	<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
      		<h3>Tu estas:</h3>
-      		<h3 style="color:black;">1</h1>
+      		<h3 style="color:black;">{{ slide3 }}</h1>
     	</div>
     	<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
       		<h3>Te gustaria estar:</h3>
-      		<h3 style="color:black;">2</h1>
+      		<h3 style="color:black;">{{ slide4 }}</h1>
     	</div>
 	    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
 	     	<h3>Tu espacio:</h3>
-	     	<h3 style="color:black;">1</h1>
+	     	<h3 style="color:black;">{{ psicologica }}%</h1>
 	    </div>
   	</div>
   	<div class="row">
@@ -116,15 +116,15 @@
  	<div class="row">
     	<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
      		<h3>Tu estas:</h3>
-      		<h3 style="color:black;">1</h1>
+      		<h3 style="color:black;">{{ slide5 }}</h1>
     	</div>
     	<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
       		<h3>Te gustaria estar:</h3>
-      		<h3 style="color:black;">2</h1>
+      		<h3 style="color:black;">{{ slide6 }}</h1>
     	</div>
 	    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
 	     	<h3>Tu espacio:</h3>
-	     	<h3 style="color:black;">1</h1>
+	     	<h3 style="color:black;">{{ relaciones }}%</h1>
 	    </div>
   	</div>
   	<div class="row">
@@ -165,7 +165,7 @@ $(function()
 	var birdsData = {
   		labels: ["Carrera|Empresa","Finanzas|Dinero","Salud|Vitalidad","Familia|Amigos","Amor|relaciones","Crecimiento personal|Aprendizaje","Diversion|Estilo de vida","Productividad personal",],
   		datasets: [{
-    	data: [2, 4, 8, 5,7,3,10,9],
+    	data: [0, 0, {{ slide1 }}, 5,{{ slide5 }}, {{ slide3 }},0,0 ],
     	backgroundColor: [
       	"rgba(255, 0, 0, 0.5)",
         "rgba(52, 0, 0, 0.5)",
