@@ -9,6 +9,7 @@ from django.template.loader import render_to_string, get_template #email sender
 from django.core.mail import EmailMessage, EmailMultiAlternatives #email sender
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from django.conf import settings
 
@@ -25,6 +26,8 @@ def principal(request):
 		if slide1 < slide2:
 			request.session['wheel'] = {'slide1': slide1, 'slide2': slide2, 'text1':text1, 'text2':text2}
 			return redirect('WebPagRuedaDLV:psicologica')
+		else:
+			messages.success(request, 'El primer controlador tiene que ser mayor al segundo!') 
 	return render(request, 'principal.html')
 
 
@@ -118,3 +121,8 @@ def resultados(request):
 	gaptotal = (1-(gaptotal))*100
 	gaptotal = int(gaptotal) 
 	return render(request, 'resultados.html', {'slide1':slide1, 'slide2':slide2, 'salud':salud, 'slide3':slide3, 'slide4':slide4, 'psicologica':psicologica, 'slide5':slide5, 'slide6':slide6, 'relaciones':relaciones, 'gaptotal':gaptotal })
+
+
+def slider(request):
+	messages.success(request, 'Your password was updated successfully!') 
+	return render(request,'slider.html')	

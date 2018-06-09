@@ -16,18 +16,16 @@
 </div>
 <form action="{% url 'WebPagRuedaDLV:relacionesAmor' %}" method="post">
      {% csrf_token %}
-     <div class="container">
+    <div class="container">
         <div class="row">
-            <div class="col-sm text-center">
-                <span>INSATISFECHO</span>
-                &nbsp;
-                <input style="width: 70%" name="slide5" id="ex13" type="text" data-slider-ticks="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]'/> 
-                &nbsp;
-                <span>SATISFECHO</span>
-            </div>
+            <div class="sm-3"><span>INSATISFECHO</span></div>                       
+            <div class="col-sm-9 range-control">     
+                <input name="slide5" id="inputRange" type="range" min="0" max="10" step="1" value="0" data-thumbwidth="5">
+                <output name="rangeVal">0</output>
+            </div>                
+            <div class="sm-3"><span>SATISFECHO</span></div>
         </div>
     </div>
-
     <br>
     <div class="container">
         <div class="row">
@@ -54,10 +52,12 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm text-center">
-                <span>INSATISFECHO </span>
-                <input style="width: 80%;" name="slide6" id="ex6" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5"/><span> SATISFECHO</span>
-            </div>
+            <div class="sm-3"><span>INSATISFECHO</span></div>                       
+            <div class="col-sm-9 range-control">     
+                <input name="slide6" id="inputRange" type="range" min="0" max="10" step="1" value="0" data-thumbwidth="5">
+                <output name="rangeVal">0</output>
+            </div>                
+            <div class="sm-3"><span>SATISFECHO</span></div>
         </div>
     </div>
     <br>
@@ -101,19 +101,22 @@
 {% block 'script' %}
 
 <script type="text/javascript">
-$(function() {
-    
-       $("#ex13").slider({
-            ticks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            ticks_labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-            ticks_snap_bounds: 30
+    $(document).ready(function() {
+        $('input[type="range"]').on('input', function() {
+            var control = $(this),
+            controlMin = control.attr('min'),
+            controlMax = control.attr('max'),
+            controlVal = control.val(),
+            controlThumbWidth = control.data('thumbwidth');
+            var range = controlMax - controlMin;
+            var position = ((controlVal - controlMin) / range) * 100;
+            var positionOffset = Math.round(controlThumbWidth * position / 100) - (controlThumbWidth / 2);
+            var output = control.next('output');
+            output
+            .css('left', 'calc(' + position + '% - ' + positionOffset + 'px)')
+            .text(controlVal);
         });
-   
-       $("#ex6").slider();
-       $("#ex6").on("slide", function(slideEvt) {
-       $("#ex6SliderVal").text(slideEvt.value);
-        });
-});// Document OnLoad
+    });
 </script>
 
 {% endblock %}

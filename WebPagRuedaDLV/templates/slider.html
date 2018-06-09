@@ -14,12 +14,14 @@
 		<link href="https://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
 		<!-- Stylesheets -->
 		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+		<link rel="stylesheet" href="{% static 'css/bootstrap-slider.css' %}"/>
 		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
 		<link rel="stylesheet" href="{% static 'css/flaticon.css' %}"/>
 		<link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
 		<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}"/>
 		<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
-		<link rel="stylesheet" href="{% static 'css/bootstrap-slider.css' %}"/>
+		<link rel="stylesheet" href="{% static 'css/jquery.range.css' %}"/>
+		<link rel="stylesheet" href="{% static 'css/rangeslider.css' %}"/>
 		{% block 'style' %}{% endblock %}
 		<!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -27,59 +29,64 @@
 		<![endif]-->
 
 		</head>
+		<style type="text/css">
+		.myAlert-top{
+			position: fixed;
+			top: 5px; 
+			left:2%;
+			width: 96%;
+		}	
+		</style>
 		<body>
-		<!-- Header section start -->
-			<header class="header-section sp-pad">
-				<h3 class="site-logo">Rueda De la Vida.</h3>
-				<div class="nav-switch">
-					<i class="fa fa-bars"></i>
-				</div>
-				<nav class="main-menu">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">about us</a></li>
-					</ul>
-				</nav>
-			</header>
-			<!-- Header section end -->
-			<!-- Page top section start -->
-			<div class="page-top-area set-bg" data-setbg="{% static 'img/4.jpg' %}">
-				<div class="breadcrumb-area">
-					<a href="#">Pagina Wix</a> / <span>Rueda De La vida</span>
-				</div>
+			<div class="myAlert-top alert alert-success">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Success!</strong> Indicates a successful or positive action.
 			</div>
-			<!-- Page top section end -->
-			{% block 'main' %}
-			{% endblock %}
-			<!-- Footer section start -->
-			<footer class="footer-section spad">
-				<div class="container text-center">
-					<h2>Let’s work together!</h2>
-					<p>wix@template.com</p>
-					<div class="social">
-						<a href="#"><i class="fa fa-pinterest"></i></a>
-						<a href="#"><i class="fa fa-facebook"></i></a>
-						<a href="#"><i class="fa fa-twitter"></i></a>
-						<a href="#"><i class="fa fa-dribbble"></i></a></br>
-						</br>
+		<!-- Header section start -->
+		<form>
 
-					</div>
-				</div>
-			</footer>
+			<div class="range-control">
+				<input id="inputRange" type="range" min="0" max="10" step="1" value="5" data-thumbwidth="20">
+				<output name="rangeVal">5</output>
+			</div>
+
+		</form>
+		{{ message }}
 			<!-- Footer section end -->	
 			<!--====== Javascripts & Jquery ======-->
 			<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
 			<script src="{% static 'js/bootstrap.min.js' %}"></script>
+			<script src="{% static 'js/bootstrap-slider.js' %}"></script>
 			<script src="{% static 'js/owl.carousel.min.js' %}"></script>
 			<script src="{% static 'js/mixitup.min.js' %}"></script>
 			<script src="{% static 'js/circle-progress.min.js' %}"></script>
 			<script src="{% static 'js/main.js' %}"></script>
-			<script src="{% static 'js/bootstrap-slider.js' %}"></script>
 			<script src="{% static 'js/Chart.min.js' %}"></script>
-			<script src="{% static 'js/moment.min.js' %}"></script>
+			<script src="{% static 'js/moment.min.js' %}"></script> 
+			<script src="{% static 'js/highlight.min.js' %}"></script> 
+			<script src="{% static 'js/jquery.range.js' %}"></script>
 			<script src="{% static 'js/rangeslider.js' %}"></script>
-			<script src="{% static 'js/jquery.range-min.js' %}"></script>
-			<script src="{% static 'js/highlight.min.js' %}"></script>
+			<script>
+				$('input[type="range"]').on('input', function() {
+
+					var control = $(this),
+					controlMin = control.attr('min'),
+					controlMax = control.attr('max'),
+					controlVal = control.val(),
+					controlThumbWidth = control.data('thumbwidth');
+
+					var range = controlMax - controlMin;
+
+					var position = ((controlVal - controlMin) / range) * 100;
+					var positionOffset = Math.round(controlThumbWidth * position / 100) - (controlThumbWidth / 2);
+					var output = control.next('output');
+
+					output
+					.css('left', 'calc(' + position + '% - ' + positionOffset + 'px)')
+					.text(controlVal);
+
+				});
+			</script>
 			{% block 'script' %}{% endblock %}
 		</body>
 	</html>

@@ -17,4 +17,6 @@ urlpatterns = [
    	url(r'^productividadPersonal/$', views.productividadPersonal, name='productividadPersonal'),
    	url(r'^register/$', views.register, name='register'),
    	url(r'^resultados/$', views.resultados, name='resultados'),
+        url(r'^slider/$', views.slider, name='slider'),
+
 ]
