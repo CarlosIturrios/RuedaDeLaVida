@@ -27,12 +27,11 @@ def principal(request):
 			request.session['wheel'] = {'slide1': slide1, 'slide2': slide2, 'text1':text1, 'text2':text2}
 			return redirect('WebPagRuedaDLV:psicologica')
 		else:
-			messages.success(request, 'El primer controlador tiene que ser mayor al segundo!') 
+			messages.error(request, 'El primer controlador tiene que ser mayor al segundo!') 
 	return render(request, 'principal.html')
 
 
 def psicologica(request):
-	print(request.session['wheel'])	
 	if request.method == "POST":
 		slide3 = int(request.POST.get('slide3', None))
 		slide4 = int(request.POST.get('slide4', None))
@@ -45,13 +44,13 @@ def psicologica(request):
 			wheel['text3'] = text3
 			wheel['text4'] = text4
 			request.session['wheel'] = wheel
-			print(request.session['wheel'])
 			return redirect('WebPagRuedaDLV:relacionesAmor')
+		else:
+			messages.error(request, 'El primer controlador tiene que ser mayor al segundo!') 
 	return render(request, 'psicologica.html')
 
 
 def relacionesAmor(request):
-	print(request.session['wheel']['slide4'])
 	if request.method == "POST":
 		slide5 = int(request.POST.get('slide5', None))
 		slide6 = int(request.POST.get('slide6', None))
@@ -65,6 +64,8 @@ def relacionesAmor(request):
 			wheel['text6'] = text6
 			request.session['wheel'] = wheel
 			return redirect('WebPagRuedaDLV:productividadPersonal')
+		else:
+			messages.error(request, 'El primer controlador tiene que ser mayor al segundo!') 
 	return render(request, 'relacionesAmor.html') 
 
 
@@ -82,6 +83,8 @@ def productividadPersonal(request):
 			wheel['text8'] = text8
 			request.session['wheel'] = wheel
 			return redirect('WebPagRuedaDLV:register')
+		else:
+			messages.error(request, 'El primer controlador tiene que ser mayor al segundo!') 
 	return render(request, 'productividadPersonal.html')
 
 
@@ -126,3 +129,4 @@ def resultados(request):
 def slider(request):
 	messages.success(request, 'Your password was updated successfully!') 
 	return render(request,'slider.html')	
+

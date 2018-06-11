@@ -9,6 +9,7 @@ urlpatterns = [
     # Auth Urls
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/WebPagRuedaDLV/login/'}, name='logout'),
+    #url(r'^accounts/',include('allauth.urls')),
 
     # App views    
    	url(r'^$', views.principal, name='principal'),
@@ -17,6 +18,6 @@ urlpatterns = [
    	url(r'^productividadPersonal/$', views.productividadPersonal, name='productividadPersonal'),
    	url(r'^register/$', views.register, name='register'),
    	url(r'^resultados/$', views.resultados, name='resultados'),
-        url(r'^slider/$', views.slider, name='slider'),
+    url(r'^slider/$', views.slider, name='slider'),
 
 ]
