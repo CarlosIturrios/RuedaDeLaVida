@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from .models import Correo
@@ -88,23 +88,25 @@ def productividadPersonal(request):
 def register(request):
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
+
     if request.method == "POST":
         nombre = request.POST.get('username', None)
         apellidos = request.POST.get('lasname', None)
         email = request.POST.get('email', None)
+
         usuario = Correo()
         usuario.usuario = nombre
         usuario.apellidos = apellidos
         usuario.email = email
         usuario.save()
+
         return redirect('WebPagRuedaDLV:resultados')
+
     return render(request, 'register.html')
 
 
+@login_required()
 def resultados(request):
-    if not 'wheel' in request.session:
-        return redirect('WebPagRuedaDLV:principal')
-
     slide1 = request.session['wheel']['slide1']
     slide2 = request.session['wheel']['slide2']
     salud = float(slide1) / float(slide2)

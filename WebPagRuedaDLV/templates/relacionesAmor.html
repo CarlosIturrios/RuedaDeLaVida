@@ -1,122 +1,134 @@
-{% extends 'base.html' %}
+{% extends 'site_base.html' %}
 
-{% block 'main' %}
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-sm text-center">
-            <strong>
-                ¿Cómo calificaría la calidad general de su actual relación íntima? Si no se encuentra actualmente en una relación íntima, valore su pasado más reciente o relación.
-            </strong>
-            <p>
-                Mueva los controles deslizantes de abajo para seleccionar su respuesta
-            </p>
-        </div>
-    </div>
-</div>
-<form action="{% url 'WebPagRuedaDLV:relacionesAmor' %}" method="post">
-     {% csrf_token %}
-    <div class="container">
-        <div class="row">
-            <div class="sm-3"><span>INSATISFECHO</span></div>                       
-            <div class="col-sm-9 range-control">     
-                <input name="slide5" id="inputRange" type="range" min="1" max="10" step="1" value="1" data-thumbwidth="5">
-                <output name="rangeVal">1</output>
-            </div>                
-            <div class="sm-3"><span>SATISFECHO</span></div>
-        </div>
-    </div>
+{% block main %}
     <br>
     <div class="container">
         <div class="row">
             <div class="col-sm text-center">
-                <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
-                <br>
-                <textarea style="width: 100%;" name="text5" id="TArea1" type="multyline" rows="1" maxlength="2000"></textarea>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm text-center">
                 <strong>
-                    ¿Cómo le gustaría sentirse en sus relaciones íntimas?
+                    ¿Cómo calificaría la calidad general de su actual relación íntima? Si no se encuentra actualmente en
+                    una relación íntima, valore su pasado más reciente o relación.
                 </strong>
+
                 <p>
                     Mueva los controles deslizantes de abajo para seleccionar su respuesta
                 </p>
             </div>
         </div>
     </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="sm-3"><span>INSATISFECHO</span></div>                       
-            <div class="col-sm-9 range-control">     
-                <input name="slide6" id="inputRange" type="range" min="0" max="10" step="1" value="0" data-thumbwidth="5">
-                <output name="rangeVal">0</output>
-            </div>                
-            <div class="sm-3"><span>SATISFECHO</span></div>
-        </div>
-    </div>
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm text-center">
-                <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
-                <br>
-                <textarea name="text6" style="width: 100%;" id="TAre
-                a1" type="multyline" rows="1" maxlength="2000"></textarea>
+    <form action="{% url 'WebPagRuedaDLV:relacionesAmor' %}" method="post">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="sm-3"><span>INSATISFECHO</span></div>
+                <div class="col-sm-9 range-control">
+                    <input name="slide5" id="inputRange" type="range" min="1" max="10" step="1" value="1"
+                           data-thumbwidth="5">
+                    <output name="rangeVal">1</output>
+                </div>
+                <div class="sm-3"><span>SATISFECHO</span></div>
             </div>
         </div>
-    </div>
+        <br>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm text-center">
+                    <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
+                    <br>
+                    <textarea style="width: 100%;" name="text5" id="TArea1" type="multyline" rows="1"
+                              maxlength="2000"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm text-center">
+                    <strong>
+                        ¿Cómo le gustaría sentirse en sus relaciones íntimas?
+                    </strong>
+
+                    <p>
+                        Mueva los controles deslizantes de abajo para seleccionar su respuesta
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="sm-3"><span>INSATISFECHO</span></div>
+                <div class="col-sm-9 range-control">
+                    <input name="slide6" id="inputRange" type="range" min="0" max="10" step="1" value="0"
+                           data-thumbwidth="5">
+                    <output name="rangeVal">0</output>
+                </div>
+                <div class="sm-3"><span>SATISFECHO</span></div>
+            </div>
+        </div>
+        <br>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm text-center">
+                    <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
+                    <br>
+                <textarea name="text6" style="width: 100%;" id="TAre
+                a1" type="multyline" rows="1" maxlength="2000"></textarea>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm text-center">
+
+                    <button type="submit" class="btn btn-success" style="width: 100%;">Siguiente pregunta</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
     <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm text-center">
 
-               <button type="submit" class="btn btn-success" style="width: 100%;">Siguiente pregunta</button>
-           </div>
-       </div>
+    <div class="container text-center" style="text-align: center;">
+        <ul class="breadcrumb" style=" background-color:  white;">
+            <li><a href="{% url 'WebPagRuedaDLV:principal' %}"><i style="color: black;" class="fa fa-circle"></i></a>
+            </li>
+            &nbsp;
+            <li><a href="{% url 'WebPagRuedaDLV:psicologica' %}"><i style="color: black;" class="fa fa-circle"></i></a>
+            </li>
+            &nbsp;
+            <li><i class="fa fa-circle-o"></i></li>
+            &nbsp;
+            <li><a href="{% url 'WebPagRuedaDLV:productividadPersonal' %}"><i style="color: black;"
+                                                                              class="fa fa-circle"></i></a></li>
+            &nbsp;
+        </ul>
     </div>
-</form>
-
-<br>
-
-<div class="container text-center" style="text-align: center;">
-    <ul class="breadcrumb" style=" background-color:  white;">
-        <li><a href="{% url 'WebPagRuedaDLV:principal' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
-        &nbsp;
-        <li><a href="{% url 'WebPagRuedaDLV:psicologica' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
-        &nbsp;
-        <li><i class="fa fa-circle-o"></i></li>
-        &nbsp;
-        <li><a href="{% url 'WebPagRuedaDLV:productividadPersonal' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
-        &nbsp;
-    </ul>
-</div>
 {% endblock %}
 
-{% block 'script' %}
+{% block script %}
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('input[type="range"]').on('input', function() {
-            var control = $(this),
-            controlMin = control.attr('min'),
-            controlMax = control.attr('max'),
-            controlVal = control.val(),
-            controlThumbWidth = control.data('thumbwidth');
-            var range = controlMax - controlMin;
-            var position = ((controlVal - controlMin) / range) * 100;
-            var positionOffset = Math.round(controlThumbWidth * position / 100) - (controlThumbWidth / 2);
-            var output = control.next('output');
-            output
-            .css('left', 'calc(' + position + '% - ' + positionOffset + 'px)')
-            .text(controlVal);
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type="range"]').on('input', function () {
+                var control = $(this),
+                        controlMin = control.attr('min'),
+                        controlMax = control.attr('max'),
+                        controlVal = control.val(),
+                        controlThumbWidth = control.data('thumbwidth');
+                var range = controlMax - controlMin;
+                var position = ((controlVal - controlMin) / range) * 100;
+                var positionOffset = Math.round(controlThumbWidth * position / 100) - (controlThumbWidth / 2);
+                var output = control.next('output');
+                output
+                        .css('left', 'calc(' + position + '% - ' + positionOffset + 'px)')
+                        .text(controlVal);
+            });
         });
-    });
-</script>
+    </script>
 
 {% endblock %}

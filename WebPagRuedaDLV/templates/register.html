@@ -1,36 +1,46 @@
-{% extends 'base.html' %}
+{% extends 'site_base.html' %}
 {% load static %}
-{% block 'style' %}
-	<link rel="stylesheet" href="{% static 'css/register-style.css' %}"/>
+{% load socialaccount %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/register-style.css' %}"/>
 {% endblock %}
 
-{% block 'main' %}
-<form action="{% url 'WebPagRuedaDLV:register' %}" method="post">
-  {% csrf_token %}
-  <div class="form-group">
-    <div id="login-box">
-      <div class="left">
-        <h1>Registrate para obtener los resultados</h1>
-        
-        <input type="text" name="username" placeholder="Nombre" required="True" />
-        <input type="text" name="lasname" placeholder="Apellidos" required="True" />
-        <input type="text" name="email" placeholder="E-mail" required="True" />
-        <button type="submit" class="btn btn-success center" href="google.com">          
-          ¡Ver tus resultados!
-        </button><br>
-        <input type="checkbox" name="check" value="check" checked required="True"> Acepto recibir informacion y publicidad de CO2 coaching <br>
+{% block main %}
+    <form action="{% url 'WebPagRuedaDLV:register' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <div id="login-box">
+                <div class="left">
+                    <h1>Registrate para obtener los resultados</h1>
 
-      </div>
-      
-      <div class="right">
-        <span class="loginwith">Sign in with<br />social network</span>
-        
-        <button class="social-signin facebook">Registrar con facebook</button>        
-        <button class="social-signin google">Registrar con Google+</button>
-       <a class="btn btn-warning center" style="width: 100%" href="//www.google.com">Salir</a>
-      </div>
-      <div class="or">OR</div>
-    </div>
-  </div>
-</form>
+                    <input type="text" name="username" placeholder="Nombre" required="True"/>
+                    <input type="text" name="lasname" placeholder="Apellidos" required="True"/>
+                    <input type="text" name="email" placeholder="E-mail" required="True"/>
+                    <button type="submit" class="btn btn-success center" href="google.com">
+                        ¡Ver tus resultados!
+                    </button>
+                    <br>
+                    <input type="checkbox" name="check" value="check" checked required="True"> Acepto recibir
+                    informacion y publicidad de CO2 coaching <br>
+
+                </div>
+
+                <div class="right">
+                    <span class="loginwith">Sign in with<br/>social network</span>
+
+                    <a class="social-signin facebook" href="{% provider_login_url "facebook" method="js_sdk" %}">
+                        Registrar con facebook
+                    </a>
+                    <button class="social-signin google">Registrar con Google+</button>
+                    <a class="btn btn-warning center" style="width: 100%" href="//www.google.com">Salir</a>
+                </div>
+                <div class="or">OR</div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block script %}
+    {% providers_media_js %}
 {% endblock %}

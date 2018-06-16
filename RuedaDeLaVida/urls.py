@@ -9,8 +9,16 @@ from django.views.generic import RedirectView
 from django.contrib import admin
 
 urlpatterns = [
+    # Redirect / to WebPagRuedaDLV
     url(r'^$', RedirectView.as_view(url='WebPagRuedaDLV/'), name='index'),
+
+    # URLs sitio administracion
     url(r'^admin/', admin.site.urls),
+
+    # URLs allauth
+    url(r'^allauth/',include('allauth.urls')),
+
+    # URLs WebPagRuedaDLV
     url(r'^WebPagRuedaDLV/', include('WebPagRuedaDLV.urls', namespace='WebPagRuedaDLV'))
 ]
 

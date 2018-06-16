@@ -1,119 +1,133 @@
-{% extends 'base.html' %}
+{% extends 'site_base.html' %}
 
-{% block 'main' %}
-<br>
-<form action="{% url 'WebPagRuedaDLV:productividadPersonal' %}" method="post">
-    {% csrf_token %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm text-center">
-                <strong>
-                    ¿Cómo efectivamente hacer cumplir y completar cada resultado que estableció para usted cada día?
-                </strong>
-                <p>
-                    Mueva los controles deslizantes de abajo para seleccionar su respuesta
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="sm-3"><span>INSATISFECHO</span></div>                       
-            <div class="col-sm-9 range-control">     
-                <input name="slide7" id="inputRange" type="range" min="1" max="10" step="1" value="1" data-thumbwidth="5">
-                <output name="rangeVal">1</output>
-            </div>                
-            <div class="sm-3"><span>SATISFECHO</span></div>
-        </div>
-    </div>
+{% block main %}
     <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm text-center">
-                <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
-                <br>
-                <textarea style="width: 100%;" name="text7"  id="TArea1" type="multyline" rows="1" maxlength="2000"></textarea>
-            </div>
-        </div>
-    </div>
+    <form action="{% url 'WebPagRuedaDLV:productividadPersonal' %}" method="post">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm text-center">
+                    <strong>
+                        ¿Cómo efectivamente hacer cumplir y completar cada resultado que estableció para usted cada día?
+                    </strong>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm text-center">
-                <strong>
-                    ¿Cómo le gustaría sentirse acerca de su rendimiento y productividad personal en casa o en su lugar de trabajo cada día?
-                </strong>
-                <p>
-                    Mueva los controles deslizantes de abajo para seleccionar su respuesta
-                </p>
+                    <p>
+                        Mueva los controles deslizantes de abajo para seleccionar su respuesta
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="sm-3"><span>INSATISFECHO</span></div>                       
-            <div class="col-sm-9 range-control">     
-                <input name="slide8" id="inputRange" type="range" min="1" max="10" step="1" value="1" data-thumbwidth="5">
-                <output name="rangeVal">1</output>
-            </div>                
-            <div class="sm-3"><span>SATISFECHO</span></div>
-        </div>
-    </div>
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm text-center">
-                <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
-                <br>
-                <textarea style="width: 100%;" name="text8" id="TArea2" type="multyline" rows="1" maxlength="2000"></textarea>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm text-center">            
-             <button type="submit" class="btn btn-success" style="width: 100%;">Obten tus resultados ahora!</button>
-            </div>
-        </div>
-    </div>
-</form>
-<br>
 
-<div class="container text-center" style="text-align: center;">
-    <ul class="breadcrumb" style=" background-color:  white;">
-        <li><a href="{% url 'WebPagRuedaDLV:principal' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
-        &nbsp;
-        <li><a href="{% url 'WebPagRuedaDLV:psicologica' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
-        &nbsp;
-        <li><a href="{% url 'WebPagRuedaDLV:relacionesAmor' %}"><i style="color: black;" class="fa fa-circle"></i></a></li>
-        &nbsp;
-        <li><i class="fa fa-circle-o"></i></li>
-        &nbsp;
-    </ul>
-</div>
+        <div class="container">
+            <div class="row">
+                <div class="sm-3"><span>INSATISFECHO</span></div>
+                <div class="col-sm-9 range-control">
+                    <input name="slide7" id="inputRange" type="range" min="1" max="10" step="1" value="1"
+                           data-thumbwidth="5">
+                    <output name="rangeVal">1</output>
+                </div>
+                <div class="sm-3"><span>SATISFECHO</span></div>
+            </div>
+        </div>
+        <br>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm text-center">
+                    <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
+                    <br>
+                    <textarea style="width: 100%;" name="text7" id="TArea1" type="multyline" rows="1"
+                              maxlength="2000"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm text-center">
+                    <strong>
+                        ¿Cómo le gustaría sentirse acerca de su rendimiento y productividad personal en casa o en su
+                        lugar de trabajo cada día?
+                    </strong>
+
+                    <p>
+                        Mueva los controles deslizantes de abajo para seleccionar su respuesta
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="sm-3"><span>INSATISFECHO</span></div>
+                <div class="col-sm-9 range-control">
+                    <input name="slide8" id="inputRange" type="range" min="1" max="10" step="1" value="1"
+                           data-thumbwidth="5">
+                    <output name="rangeVal">1</output>
+                </div>
+                <div class="sm-3"><span>SATISFECHO</span></div>
+            </div>
+        </div>
+        <br>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm text-center">
+                    <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
+                    <br>
+                    <textarea style="width: 100%;" name="text8" id="TArea2" type="multyline" rows="1"
+                              maxlength="2000"></textarea>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm text-center">
+                    <button type="submit" class="btn btn-success" style="width: 100%;">Obten tus resultados ahora!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br>
+
+    <div class="container text-center" style="text-align: center;">
+        <ul class="breadcrumb" style=" background-color:  white;">
+            <li><a href="{% url 'WebPagRuedaDLV:principal' %}"><i style="color: black;" class="fa fa-circle"></i></a>
+            </li>
+            &nbsp;
+            <li><a href="{% url 'WebPagRuedaDLV:psicologica' %}"><i style="color: black;" class="fa fa-circle"></i></a>
+            </li>
+            &nbsp;
+            <li><a href="{% url 'WebPagRuedaDLV:relacionesAmor' %}"><i style="color: black;"
+                                                                       class="fa fa-circle"></i></a></li>
+            &nbsp;
+            <li><i class="fa fa-circle-o"></i></li>
+            &nbsp;
+        </ul>
+    </div>
 {% endblock %}
 
-{% block 'script' %}
+{% block script %}
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('input[type="range"]').on('input', function() {
-            var control = $(this),
-            controlMin = control.attr('min'),
-            controlMax = control.attr('max'),
-            controlVal = control.val(),
-            controlThumbWidth = control.data('thumbwidth');
-            var range = controlMax - controlMin;
-            var position = ((controlVal - controlMin) / range) * 100;
-            var positionOffset = Math.round(controlThumbWidth * position / 100) - (controlThumbWidth / 2);
-            var output = control.next('output');
-            output
-            .css('left', 'calc(' + position + '% - ' + positionOffset + 'px)')
-            .text(controlVal);
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type="range"]').on('input', function () {
+                var control = $(this),
+                        controlMin = control.attr('min'),
+                        controlMax = control.attr('max'),
+                        controlVal = control.val(),
+                        controlThumbWidth = control.data('thumbwidth');
+                var range = controlMax - controlMin;
+                var position = ((controlVal - controlMin) / range) * 100;
+                var positionOffset = Math.round(controlThumbWidth * position / 100) - (controlThumbWidth / 2);
+                var output = control.next('output');
+                output
+                        .css('left', 'calc(' + position + '% - ' + positionOffset + 'px)')
+                        .text(controlVal);
+            });
         });
-    });
-</script>
+    </script>
 
 {% endblock %}

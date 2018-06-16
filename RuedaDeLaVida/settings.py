@@ -8,6 +8,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # APP CONFIG
+SITE_ID = 1
+
 DEBUG = True
 
 SECRET_KEY = 'mv9z(m^8@g5f--t8-2gmjvcwlh%4pzo^g=exmb73bxat$eh+=f'
@@ -96,9 +98,9 @@ TEMPLATES = [
 # AUTHENTICATION
 LOGIN_URL = '/WebPagRuedaDLV/login/'
 
-LOGIN_REDIRECT_URL = '/WebPagRuedaDLV/'
+LOGIN_REDIRECT_URL = '/WebPagRuedaDLV/resultados/'
 
-LOGOUT_REDIRECT_URL = None
+#LOGOUT_REDIRECT_URL = None
 
 AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
@@ -120,28 +122,39 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-SOCIALACCOUNT_PROVIDERS = \
-    {'facebook':
-       {'METHOD': 'oauth2',
-        'SCOPE': ['email','public_profile', 'user_friends'],
-        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-        'FIELDS': [
-            'id',
-            'email',
-            'name',
-            'first_name',
-            'last_name',
-            'verified',
-            'locale',
-            'timezone',
-            'link',
-            'gender',
-            'updated_time'],
-        'EXCHANGE_TOKEN': True,
-        'LOCALE_FUNC': lambda request: 'kr_KR',
-        'VERIFIED_EMAIL': False,
-        'VERSION': 'v2.4'}}
 
+# ALLAUTH
+ACCOUNT_EMAIL_REQUIRED=True
+
+#ACCOUNT_USERNAME_REQURIED=True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook':
+        {
+            'METHOD': 'oauth2',
+            'SCOPE': ['email', 'public_profile'],
+            'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+            'FIELDS': [
+                'id',
+                'email',
+                'name',
+                'first_name',
+                'last_name',
+                'verified',
+                'locale',
+                'timezone',
+                'link',
+                'gender',
+                'updated_time'
+            ],
+            'EXCHANGE_TOKEN': True,
+            'LOCALE_FUNC': lambda request: 'es_MX',
+            'VERIFIED_EMAIL': True,
+            'VERSION': 'v2.4'
+        }
+}
+SOCIAL_AUTH_FACEBOOK_KEY = '255102085037473'
+SOCIAL_AUTH_FACEBOOK_SECRET = '0e07664d558a98f183c37b180d846385'
 
 # SESSION
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
