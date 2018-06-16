@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 
 class Respuesta(models.Model):
-    descripcion = models.TextField(db_index=True, null=False, blank=False)
+    descripcion = models.TextField(null=False, blank=False)
     nivel = models.CharField(
         max_length=1, blank=False, default='1', choices=(
             ('1', 'Bajo'),
