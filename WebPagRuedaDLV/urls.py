@@ -5,12 +5,6 @@ from . import views
 
 
 urlpatterns = [
-    
-    # Auth Urls
-    url(r'^login/$', auth_views.login, name='login'),
-    url(r'^logout/$', auth_views.logout, {'next_page': '/WebPagRuedaDLV/login/'}, name='logout'),
-    #url(r'^accounts/',include('allauth.urls')),
-
     # App views    
    	url(r'^$', views.principal, name='principal'),
    	url(r'^psicologica/$', views.psicologica, name='psicologica'),
