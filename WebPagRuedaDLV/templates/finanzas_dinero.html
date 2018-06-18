@@ -2,7 +2,7 @@
 
 {% block main %}
 <br>
-<form action="{% url 'WebPagRuedaDLV:principal' %}" method="post" class="form-inline">
+<form action="{% url 'WebPagRuedaDLV:finanzas_dinero' %}" method="post" class="form-inline">
     {% csrf_token %}
     <div class="container">
         <div class="row">
@@ -20,7 +20,7 @@
         <div class="row">
             <div class="sm-4"><span>INSATISFECHO</span></div>
             <div class="col-sm-4 range-control">
-                <input name="slide1" id="inputRange" type="range" min="1" max="10" step="1" value="1"
+                <input name="slide3" id="inputRange" type="range" min="1" max="10" step="1" value="1"
                 data-thumbwidth="5">
                 <output name="rangeVal">1</output>
             </div>
@@ -33,7 +33,7 @@
             <div class="col-sm text-center">
                 <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
                 <br>
-                <textarea style="width: 65%; height: 60%;" name="text1" id="TArea1" type="multyline" rows="1"
+                <textarea style="width: 65%; height: 60%;" name="text3" id="TArea1" type="multyline" rows="1"
                 maxlength="2000"></textarea>
             </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="row">
             <div class="sm-4"><span>INSATISFECHO</span></div>
             <div class="col-sm-4 range-control">
-                <input name="slide2" id="inputRange" type="range" min="1" max="10" step="1" value="1"
+                <input name="slide4" id="inputRange" type="range" min="1" max="10" step="1" value="1"
                 data-thumbwidth="5">
                 <output name="rangeVal">1</output>
             </div>
@@ -75,7 +75,7 @@
                 <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
                 <br>
 
-                <textarea name="text2" style="width: 65%; height: 60%;"TAre
+                <textarea name="text4" style="width: 65%; height: 60%;"TAre
                 a1" type="multyline" rows="1" maxlength="2000"></textarea>
             </div>
         </div>
@@ -94,7 +94,6 @@
 </form>
 <br>
 <br>
-
   {% endblock %}
 
   {% block script %}

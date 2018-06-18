@@ -5,10 +5,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from .models import Correo
+from .models import Correo, Pregunta, Respuesta
 
 
 def principal(request):
+    #Vista de Carrera|Empresa
+    pregunta1 =Pregunta.objects.get(area='1', posicion='1')
+    pregunta2 =Pregunta.objects.get(area='1', posicion='2')
     if request.method == "POST":
         slide1 = int(request.POST.get('slide1', None))
         slide2 = int(request.POST.get('slide2', None))
@@ -16,13 +19,16 @@ def principal(request):
         text2 = request.POST.get('text2', None)
         if slide1 < slide2:
             request.session['wheel'] = {'slide1': slide1, 'slide2': slide2, 'text1': text1, 'text2': text2}
-            return redirect('WebPagRuedaDLV:psicologica')
+            return redirect('WebPagRuedaDLV:finanzas_dinero')
         else:
             messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
-    return render(request, 'principal.html')
+    return render(request, 'principal.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
 
 
-def psicologica(request):
+def finanzas_dinero(request):
+    #Vista de Finanzas|Dinero
+    pregunta1 =Pregunta.objects.get(area='2', posicion='1')
+    pregunta2 =Pregunta.objects.get(area='2', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
     if request.method == "POST":
@@ -37,13 +43,16 @@ def psicologica(request):
             wheel['text3'] = text3
             wheel['text4'] = text4
             request.session['wheel'] = wheel
-            return redirect('WebPagRuedaDLV:relacionesAmor')
+            return redirect('WebPagRuedaDLV:salud_vitalidad')
         else:
             messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
-    return render(request, 'psicologica.html')
+    return render(request, 'finanzas_dinero.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
 
 
-def relacionesAmor(request):
+def salud_vitalidad(request):
+    #Vista de Salud|Vitalidad
+    pregunta1 =Pregunta.objects.get(area='3', posicion='1')
+    pregunta2 =Pregunta.objects.get(area='3', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
     if request.method == "POST":
@@ -58,13 +67,16 @@ def relacionesAmor(request):
             wheel['text5'] = text5
             wheel['text6'] = text6
             request.session['wheel'] = wheel
-            return redirect('WebPagRuedaDLV:productividadPersonal')
+            return redirect('WebPagRuedaDLV:familia_amigos')
         else:
             messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
-    return render(request, 'relacionesAmor.html')
+    return render(request, 'salud_vitalidad.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
 
 
-def productividadPersonal(request):
+def familia_amigos(request):
+    #Vista de Familia|Amigos
+    pregunta1 =Pregunta.objects.get(area='4', posicion='1')
+    pregunta2 =Pregunta.objects.get(area='4', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
     if request.method == "POST":
@@ -82,7 +94,7 @@ def productividadPersonal(request):
             return redirect('WebPagRuedaDLV:register')
         else:
             messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
-    return render(request, 'productividadPersonal.html')
+    return render(request, 'familia_amigos.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
 
 
 def register(request):
@@ -105,25 +117,29 @@ def register(request):
     return render(request, 'register.html')
 
 
-@login_required()
 def resultados(request):
     slide1 = request.session['wheel']['slide1']
     slide2 = request.session['wheel']['slide2']
-    salud = float(slide1) / float(slide2)
-    salud = (1 - (salud)) * 100
-    salud = int(salud)
+    carrera = float(slide1) / float(slide2)
+    carrera = (1 - (carrera)) * 100
+    carrera = int(carrera)
     slide3 = request.session['wheel']['slide3']
     slide4 = request.session['wheel']['slide4']
-    psicologica = float(slide3) / float(slide4)
-    psicologica = (1 - (psicologica)) * 100
-    psicologica = int(psicologica)
+    finanzas = float(slide3) / float(slide4)
+    finanzas = (1 - (finanzas)) * 100
+    finanzas = int(finanzas)
     slide5 = request.session['wheel']['slide5']
     slide6 = request.session['wheel']['slide6']
-    relaciones = float(slide5) / float(slide6)
-    relaciones = (1 - (relaciones)) * 100
-    relaciones = int(relaciones)
-    gap1 = slide1 + slide3 + slide5
-    gap2 = slide2 + slide4 + slide6
+    salud = float(slide5) / float(slide6)
+    salud = (1 - (salud)) * 100
+    salud = int(salud)
+    slide7 = request.session['wheel']['slide7']
+    slide8 = request.session['wheel']['slide8']
+    familia = float(slide7) / float(slide8)
+    familia = (1 - (familia)) * 100
+    familia = int(familia)
+    gap1 = slide1 + slide3 + slide5 + slide7
+    gap2 = slide2 + slide4 + slide6 + slide8
     gaptotal = float(gap1) / float(gap2)
     gaptotal = (1 - (gaptotal)) * 100
     gaptotal = int(gaptotal)
@@ -131,9 +147,11 @@ def resultados(request):
     return render(
         request, 'resultados.html',
         {
-            'slide1': slide1, 'slide2': slide2, 'salud': salud, 'slide3': slide3,
-            'slide4': slide4, 'psicologica': psicologica, 'slide5': slide5,
-            'slide6': slide6, 'relaciones': relaciones, 'gaptotal': gaptotal
+            'slide1': slide1, 'slide2': slide2, 'carrera': carrera, 
+            'slide3': slide3, 'slide4': slide4, 'finanzas': finanzas, 
+            'slide5': slide5, 'slide6': slide6, 'salud': salud,
+            'slide7': slide7, 'slide8': slide8, 'familia': familia, 
+            'gaptotal': gaptotal
         }
     )
 

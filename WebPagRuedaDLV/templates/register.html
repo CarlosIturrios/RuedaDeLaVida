@@ -1,6 +1,5 @@
 {% extends 'site_base.html' %}
 {% load static %}
-{% load socialaccount %}
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/register-style.css' %}"/>
@@ -27,12 +26,6 @@
                 </div>
 
                 <div class="right">
-                    <span class="loginwith">Sign in with<br/>social network</span>
-
-                    <a class="social-signin facebook" href="{% provider_login_url "facebook" method="js_sdk" %}">
-                        Registrar con facebook
-                    </a>
-                    <button class="social-signin google">Registrar con Google+</button>
                     <a class="btn btn-warning center" style="width: 100%" href="//www.google.com">Salir</a>
                 </div>
                 <div class="or">OR</div>
@@ -42,5 +35,4 @@
 {% endblock %}
 
 {% block script %}
-    {% providers_media_js %}
 {% endblock %}

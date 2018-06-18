@@ -31,11 +31,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'WebPagRuedaDLV',
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -46,8 +41,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
 ]
 
 # DATABASE
@@ -102,11 +95,6 @@ LOGIN_REDIRECT_URL = '/WebPagRuedaDLV/resultados/'
 
 #LOGOUT_REDIRECT_URL = None
 
-AUTHENTICATION_BACKENDS = [
-    'allauth.account.auth_backends.AuthenticationBackend',
-    'django.contrib.auth.backends.ModelBackend',
-]
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -121,40 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-# ALLAUTH
-ACCOUNT_EMAIL_REQUIRED=True
-
-#ACCOUNT_USERNAME_REQURIED=True
-
-SOCIALACCOUNT_PROVIDERS = {
-    'facebook':
-        {
-            'METHOD': 'oauth2',
-            'SCOPE': ['email', 'public_profile'],
-            'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-            'FIELDS': [
-                'id',
-                'email',
-                'name',
-                'first_name',
-                'last_name',
-                'verified',
-                'locale',
-                'timezone',
-                'link',
-                'gender',
-                'updated_time'
-            ],
-            'EXCHANGE_TOKEN': True,
-            'LOCALE_FUNC': lambda request: 'es_MX',
-            'VERIFIED_EMAIL': True,
-            'VERSION': 'v2.4'
-        }
-}
-SOCIAL_AUTH_FACEBOOK_KEY = '255102085037473'
-SOCIAL_AUTH_FACEBOOK_SECRET = '0e07664d558a98f183c37b180d846385'
 
 # SESSION
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False

@@ -15,9 +15,6 @@ urlpatterns = [
     # URLs sitio administracion
     url(r'^admin/', admin.site.urls),
 
-    # URLs allauth
-    url(r'^allauth/',include('allauth.urls')),
-
     # URLs WebPagRuedaDLV
     url(r'^WebPagRuedaDLV/', include('WebPagRuedaDLV.urls', namespace='WebPagRuedaDLV'))
 ]
