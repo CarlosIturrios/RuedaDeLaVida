@@ -91,11 +91,106 @@ def familia_amigos(request):
             wheel['text7'] = text7
             wheel['text8'] = text8
             request.session['wheel'] = wheel
-            return redirect('WebPagRuedaDLV:register')
+            return redirect('WebPagRuedaDLV:amor_relaciones')
         else:
             messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
     return render(request, 'familia_amigos.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
 
+
+def amor_relaciones(request):
+    #Vista de amor|relaciones
+    pregunta1 =Pregunta.objects.get(area='5', posicion='1')
+    pregunta2 =Pregunta.objects.get(area='5', posicion='2')
+    if not 'wheel' in request.session:
+        return redirect('WebPagRuedaDLV:principal')
+    if request.method == "POST":
+        slide9 = int(request.POST.get('slide9', None))
+        slide10 = int(request.POST.get('slide10', None))
+        text9 = request.POST.get('text9', None)
+        text10 = request.POST.get('text10', None)
+        if slide9 < slide10:
+            wheel = request.session['wheel']
+            wheel['slide9'] = slide9
+            wheel['slide10'] = slide10
+            wheel['text9'] = text9
+            wheel['text10'] = text10
+            request.session['wheel'] = wheel
+            return redirect('WebPagRuedaDLV:crecimiento_personal_aprendizaje')
+        else:
+            messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
+    return render(request, 'amor_relaciones.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
+
+
+def crecimiento_personal_aprendizaje(request):
+    #Vista de amor|relaciones
+    pregunta1 =Pregunta.objects.get(area='6', posicion='1')
+    pregunta2 =Pregunta.objects.get(area='6', posicion='2')
+    if not 'wheel' in request.session:
+        return redirect('WebPagRuedaDLV:principal')
+    if request.method == "POST":
+        slide11 = int(request.POST.get('slide11', None))
+        slide12 = int(request.POST.get('slide12', None))
+        text11 = request.POST.get('text11', None)
+        text12 = request.POST.get('text12', None)
+        if slide11 < slide12:
+            wheel = request.session['wheel']
+            wheel['slide11'] = slide11
+            wheel['slide12'] = slide12
+            wheel['text11'] = text11
+            wheel['text12'] = text12
+            request.session['wheel'] = wheel
+            return redirect('WebPagRuedaDLV:diversion_estilo_de_vida')
+        else:
+            messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
+    return render(request, 'crecimiento_personal_aprendizaje.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
+
+
+def diversion_estilo_de_vida(request):
+#Vista de amor|relaciones
+    pregunta1 =Pregunta.objects.get(area='7', posicion='1')
+    pregunta2 =Pregunta.objects.get(area='7', posicion='2')
+    if not 'wheel' in request.session:
+        return redirect('WebPagRuedaDLV:principal')
+    if request.method == "POST":
+        slide13 = int(request.POST.get('slide13', None))
+        slide14 = int(request.POST.get('slide14', None))
+        text13 = request.POST.get('text13', None)
+        text14 = request.POST.get('text14', None)
+        if slide13 < slide14:
+            wheel = request.session['wheel']
+            wheel['slide13'] = slide13
+            wheel['slide14'] = slide14
+            wheel['text13'] = text13
+            wheel['text14'] = text14
+            request.session['wheel'] = wheel
+            return redirect('WebPagRuedaDLV:productividad_personal')
+        else:
+            messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
+    return render(request, 'diversion_estilo_de_vida.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2}) 
+
+
+def productividad_personal(request):
+#Vista de amor|relaciones
+    pregunta1 =Pregunta.objects.get(area='8', posicion='1')
+    pregunta2 =Pregunta.objects.get(area='8', posicion='2')
+    if not 'wheel' in request.session:
+        return redirect('WebPagRuedaDLV:principal')
+    if request.method == "POST":
+        slide15 = int(request.POST.get('slide15', None))
+        slide16 = int(request.POST.get('slide16', None))
+        text15 = request.POST.get('text15', None)
+        text16 = request.POST.get('text16', None)
+        if slide15 < slide16:
+            wheel = request.session['wheel']
+            wheel['slide15'] = slide15
+            wheel['slide16'] = slide16
+            wheel['text15'] = text15
+            wheel['text16'] = text16
+            request.session['wheel'] = wheel
+            return redirect('WebPagRuedaDLV:register')
+        else:
+            messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
+    return render(request, 'productividad_personal.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2}) 
 
 def register(request):
     if not 'wheel' in request.session:
@@ -138,20 +233,49 @@ def resultados(request):
     familia = float(slide7) / float(slide8)
     familia = (1 - (familia)) * 100
     familia = int(familia)
-    gap1 = slide1 + slide3 + slide5 + slide7
-    gap2 = slide2 + slide4 + slide6 + slide8
+    slide9 = request.session['wheel']['slide9']
+    slide10 = request.session['wheel']['slide10']
+    amor = float(slide9) / float(slide10)
+    amor = (1 - (amor)) * 100
+    amor = int(amor)
+    slide11 = request.session['wheel']['slide11']
+    slide12 = request.session['wheel']['slide12']
+    crecimiento = float(slide11) / float(slide12)
+    crecimiento = (1 - (crecimiento)) * 100
+    crecimiento = int(crecimiento)
+    slide13 = request.session['wheel']['slide13']
+    slide14 = request.session['wheel']['slide14']
+    diversion = float(slide13) / float(slide14)
+    diversion = (1 - (diversion)) * 100
+    diversion = int(diversion)
+    slide15 = request.session['wheel']['slide15']
+    slide16 = request.session['wheel']['slide16']
+    productividad = float(slide15) / float(slide16)
+    productividad = (1 - (productividad)) * 100
+    productividad = int(productividad)
+    gap1 = slide1 + slide3 + slide5 + slide7 + slide9 + slide11 + slide13 + slide15
+    gap2 = slide2 + slide4 + slide6 + slide8 + slide10 + slide12 + slide14 + slide16
     gaptotal = float(gap1) / float(gap2)
     gaptotal = (1 - (gaptotal)) * 100
     gaptotal = int(gaptotal)
-
+    if carrera < 40:
+        parrafo_carrera = Respuesta.objects.get(nivel='1',area='1')
+    elif carrera >= 40 and carrera < 70:
+        parrafo_carrera = Respuesta.objects.get(nivel='2',area='1')
+    else:
+        parrafo_carrera = Respuesta.objects.get(nivel='3',area='1')
     return render(
         request, 'resultados.html',
         {
             'slide1': slide1, 'slide2': slide2, 'carrera': carrera, 
             'slide3': slide3, 'slide4': slide4, 'finanzas': finanzas, 
             'slide5': slide5, 'slide6': slide6, 'salud': salud,
-            'slide7': slide7, 'slide8': slide8, 'familia': familia, 
-            'gaptotal': gaptotal
+            'slide7': slide7, 'slide8': slide8, 'familia': familia,
+            'slide9': slide9, 'slide10': slide10, 'amor': amor,
+            'slide11': slide11, 'slide12': slide12, 'crecimiento': crecimiento,
+            'slide13': slide13, 'slide14': slide14, 'diversion': diversion,
+            'slide15': slide15, 'slide16': slide16, 'productividad': productividad,
+            'gaptotal': gaptotal, 'parrafo_carrera':parrafo_carrera
         }
     )
 

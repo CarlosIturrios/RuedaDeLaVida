@@ -1,0 +1,121 @@
+{% extends 'site_base.html' %}
+
+{% block main %}
+<br>
+<form action="{% url 'WebPagRuedaDLV:diversion_estilo_de_vida' %}" method="post" class="form-inline">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                <h4><strong>
+                    ¿{{ pregunta1.pregunta }}
+                </strong></h4>
+                <p>
+                    Mueva los controles deslizantes de abajo para seleccionar su respuesta
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-left: 30%">
+        <div class="row">
+            <div class="sm-4"><span>INSATISFECHO</span></div>
+            <div class="col-sm-4 range-control">
+                <input name="slide13" id="inputRange" type="range" min="1" max="10" step="1" value="1"
+                data-thumbwidth="5">
+                <output name="rangeVal">1</output>
+            </div>
+            <div class="sm-4"><span>SATISFECHO</span></div>
+        </div>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
+                <br>
+                <textarea style="width: 65%; height: 60%;" name="text13" id="TArea1" type="multyline" rows="1"
+                maxlength="2000"></textarea>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br></br><br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                <strong>
+                    ¿{{ pregunta2.pregunta }}
+                </strong>
+                <p>
+                    Mueva los controles deslizantes de abajo para seleccionar su respuesta
+                </p>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+    <div class="container" style="margin-left: 30%">
+        <div class="row">
+            <div class="sm-4"><span>INSATISFECHO</span></div>
+            <div class="col-sm-4 range-control">
+                <input name="slide14" id="inputRange" type="range" min="1" max="10" step="1" value="1"
+                data-thumbwidth="5">
+                <output name="rangeVal">1</output>
+            </div>
+            <div class="sm-4"><span>SATISFECHO</span></div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                <span style="color: grey;">Ahora que te has calificado, ¿cómo esta puntuación te hacen sentir?(opcional).</span>
+                <br>
+
+                <textarea name="text14" style="width: 65%; height: 60%;"TAre
+                a1" type="multyline" rows="1" maxlength="2000"></textarea>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <br>
+    <br></br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                <button type="submit" class="btn btn-success" style="width: 65%;">Siguiente pregunta</button>
+            </div>
+        </div>
+    </div>
+</form>
+<br>
+<br>
+
+  {% endblock %}
+
+  {% block script %}
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type="range"]').on('input', function () {
+            var control = $(this),
+            controlMin = control.attr('min'),
+            controlMax = control.attr('max'),
+            controlVal = control.val(),
+            controlThumbWidth = control.data('thumbwidth');
+            var range = controlMax - controlMin;
+            var position = ((controlVal - controlMin) / range) * 100;
+            var positionOffset = Math.round(controlThumbWidth * position / 100) - (controlThumbWidth / 2);
+            var output = control.next('output');
+            output
+            .css('left', 'calc(' + position + '% - ' + positionOffset + 'px)')
+            .text(controlVal);
+        });
+    });
+</script>
+
+{% endblock %}
