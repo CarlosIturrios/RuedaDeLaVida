@@ -218,52 +218,94 @@ def resultados(request):
     carrera = float(slide1) / float(slide2)
     carrera = (1 - (carrera)) * 100
     carrera = int(carrera)
-    slide3 = request.session['wheel']['slide3']
-    slide4 = request.session['wheel']['slide4']
-    finanzas = float(slide3) / float(slide4)
-    finanzas = (1 - (finanzas)) * 100
-    finanzas = int(finanzas)
-    slide5 = request.session['wheel']['slide5']
-    slide6 = request.session['wheel']['slide6']
-    salud = float(slide5) / float(slide6)
-    salud = (1 - (salud)) * 100
-    salud = int(salud)
-    slide7 = request.session['wheel']['slide7']
-    slide8 = request.session['wheel']['slide8']
-    familia = float(slide7) / float(slide8)
-    familia = (1 - (familia)) * 100
-    familia = int(familia)
-    slide9 = request.session['wheel']['slide9']
-    slide10 = request.session['wheel']['slide10']
-    amor = float(slide9) / float(slide10)
-    amor = (1 - (amor)) * 100
-    amor = int(amor)
-    slide11 = request.session['wheel']['slide11']
-    slide12 = request.session['wheel']['slide12']
-    crecimiento = float(slide11) / float(slide12)
-    crecimiento = (1 - (crecimiento)) * 100
-    crecimiento = int(crecimiento)
-    slide13 = request.session['wheel']['slide13']
-    slide14 = request.session['wheel']['slide14']
-    diversion = float(slide13) / float(slide14)
-    diversion = (1 - (diversion)) * 100
-    diversion = int(diversion)
-    slide15 = request.session['wheel']['slide15']
-    slide16 = request.session['wheel']['slide16']
-    productividad = float(slide15) / float(slide16)
-    productividad = (1 - (productividad)) * 100
-    productividad = int(productividad)
-    gap1 = slide1 + slide3 + slide5 + slide7 + slide9 + slide11 + slide13 + slide15
-    gap2 = slide2 + slide4 + slide6 + slide8 + slide10 + slide12 + slide14 + slide16
-    gaptotal = float(gap1) / float(gap2)
-    gaptotal = (1 - (gaptotal)) * 100
-    gaptotal = int(gaptotal)
     if carrera < 40:
         parrafo_carrera = Respuesta.objects.get(nivel='1',area='1')
     elif carrera >= 40 and carrera < 70:
         parrafo_carrera = Respuesta.objects.get(nivel='2',area='1')
     else:
         parrafo_carrera = Respuesta.objects.get(nivel='3',area='1')
+    slide3 = request.session['wheel']['slide3']
+    slide4 = request.session['wheel']['slide4']
+    finanzas = float(slide3) / float(slide4)
+    finanzas = (1 - (finanzas)) * 100
+    finanzas = int(finanzas)
+    if finanzas < 40:
+        parrafo_finanzas = Respuesta.objects.get(nivel='1',area='2')
+    elif finanzas >= 40 and finanzas < 70:
+        parrafo_finanzas = Respuesta.objects.get(nivel='2',area='2')
+    else:
+        parrafo_finanzas = Respuesta.objects.get(nivel='3',area='2')
+    slide5 = request.session['wheel']['slide5']
+    slide6 = request.session['wheel']['slide6']
+    salud = float(slide5) / float(slide6)
+    salud = (1 - (salud)) * 100
+    salud = int(salud)
+    if salud < 40:
+        parrafo_salud = Respuesta.objects.get(nivel='1',area='3')
+    elif salud >= 40 and salud < 70:
+        parrafo_salud = Respuesta.objects.get(nivel='2',area='3')
+    else:
+        parrafo_salud = Respuesta.objects.get(nivel='3',area='3')
+    slide7 = request.session['wheel']['slide7']
+    slide8 = request.session['wheel']['slide8']
+    familia = float(slide7) / float(slide8)
+    familia = (1 - (familia)) * 100
+    familia = int(familia)
+    if familia < 40:
+        parrafo_familia = Respuesta.objects.get(nivel='1',area='4')
+    elif familia >= 40 and familia < 70:
+        parrafo_familia = Respuesta.objects.get(nivel='2',area='4')
+    else:
+        parrafo_familia = Respuesta.objects.get(nivel='3',area='4')
+    slide9 = request.session['wheel']['slide9']
+    slide10 = request.session['wheel']['slide10']
+    amor = float(slide9) / float(slide10)
+    amor = (1 - (amor)) * 100
+    amor = int(amor)
+    if amor < 40:
+        parrafo_amor = Respuesta.objects.get(nivel='1',area='5')
+    elif amor >= 40 and amor < 70:
+        parrafo_amor = Respuesta.objects.get(nivel='2',area='5')
+    else:
+        parrafo_amor = Respuesta.objects.get(nivel='3',area='5')
+    slide11 = request.session['wheel']['slide11']
+    slide12 = request.session['wheel']['slide12']
+    crecimiento = float(slide11) / float(slide12)
+    crecimiento = (1 - (crecimiento)) * 100
+    crecimiento = int(crecimiento)
+    if crecimiento < 40:
+        parrafo_crecimiento = Respuesta.objects.get(nivel='1',area='6')
+    elif crecimiento >= 40 and crecimiento < 70:
+        parrafo_crecimiento = Respuesta.objects.get(nivel='2',area='6')
+    else:
+        parrafo_crecimiento = Respuesta.objects.get(nivel='3',area='6')
+    slide13 = request.session['wheel']['slide13']
+    slide14 = request.session['wheel']['slide14']
+    diversion = float(slide13) / float(slide14)
+    diversion = (1 - (diversion)) * 100
+    diversion = int(diversion)
+    if diversion < 40:
+        parrafo_diversion = Respuesta.objects.get(nivel='1',area='7')
+    elif diversion >= 40 and diversion < 70:
+        parrafo_diversion = Respuesta.objects.get(nivel='2',area='7')
+    else:
+        parrafo_diversion = Respuesta.objects.get(nivel='3',area='7')
+    slide15 = request.session['wheel']['slide15']
+    slide16 = request.session['wheel']['slide16']
+    productividad = float(slide15) / float(slide16)
+    productividad = (1 - (productividad)) * 100
+    productividad = int(productividad)
+    if productividad < 40:
+        parrafo_productividad = Respuesta.objects.get(nivel='1',area='8')
+    elif diversion >= 40 and diversion < 70:
+        parrafo_productividad = Respuesta.objects.get(nivel='2',area='8')
+    else:
+        parrafo_productividad = Respuesta.objects.get(nivel='3',area='8')
+    gap1 = slide1 + slide3 + slide5 + slide7 + slide9 + slide11 + slide13 + slide15
+    gap2 = slide2 + slide4 + slide6 + slide8 + slide10 + slide12 + slide14 + slide16
+    gaptotal = float(gap1) / float(gap2)
+    gaptotal = (1 - (gaptotal)) * 100
+    gaptotal = int(gaptotal)    
     return render(
         request, 'resultados.html',
         {
@@ -275,7 +317,10 @@ def resultados(request):
             'slide11': slide11, 'slide12': slide12, 'crecimiento': crecimiento,
             'slide13': slide13, 'slide14': slide14, 'diversion': diversion,
             'slide15': slide15, 'slide16': slide16, 'productividad': productividad,
-            'gaptotal': gaptotal, 'parrafo_carrera':parrafo_carrera
+            'gaptotal': gaptotal, 'parrafo_carrera':parrafo_carrera, 'parrafo_finanzas':parrafo_finanzas,
+            'parrafo_salud':parrafo_salud, 'parrafo_familia':parrafo_familia, 'parrafo_amor':parrafo_amor,
+            'parrafo_crecimiento':parrafo_crecimiento, 'parrafo_diversion':parrafo_diversion,
+            'parrafo_productividad':parrafo_productividad
         }
     )
 
