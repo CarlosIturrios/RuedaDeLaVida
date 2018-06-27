@@ -16,15 +16,15 @@
             </div>
         </div>
     </div>
-    <div class="container" style="margin-left: 30%">
+    <div class="container" style="margin-left: 24%">
         <div class="row">
-            <div class="sm-4"><span>INSATISFECHO</span></div>
-            <div class="col-sm-4 range-control">
+            <div class="sm-3"><span>INSATISFECHO</span></div>
+            <div class="col-sm-6 range-control">
                 <input name="slide3" id="inputRange" type="range" min="1" max="10" step="1" value="1"
                 data-thumbwidth="5">
                 <output name="rangeVal">1</output>
             </div>
-            <div class="sm-4"><span>SATISFECHO</span></div>
+            <div class="sm-3"><span>SATISFECHO</span></div>
         </div>
     </div>
     <br><br>
@@ -33,7 +33,7 @@
             <div class="col-sm text-center">
                 <span style="color: grey;">¿Como se siente con la puntacion que se puso? ( Opcional. )</span>
                 <br>
-                <textarea style="width: 65%; height: 60%;" name="text3" id="TArea1" type="multyline" rows="1"
+                <textarea class="TArea1" style="width: 75%; height: 60%;" name="text3" id="TArea1" type="multyline" rows="1"
                 maxlength="2000"></textarea>
             </div>
         </div>
@@ -54,16 +54,15 @@
             </div>
         </div>
     </div>
-    <br><br><br><br>
-    <div class="container" style="margin-left: 30%">
+    <div class="container" style="margin-left: 24%">
         <div class="row">
-            <div class="sm-4"><span>INSATISFECHO</span></div>
-            <div class="col-sm-4 range-control">
+            <div class="sm-3"><span>INSATISFECHO</span></div>
+            <div class="col-sm-6 range-control">
                 <input name="slide4" id="inputRange" type="range" min="1" max="10" step="1" value="1"
                 data-thumbwidth="5">
                 <output name="rangeVal">1</output>
             </div>
-            <div class="sm-4"><span>SATISFECHO</span></div>
+            <div class="sm-3"><span>SATISFECHO</span></div>
         </div>
     </div>
     <br>
@@ -75,7 +74,7 @@
                 <span style="color: grey;">¿Como se siente con la puntacion que se puso? ( Opcional. )</span>
                 <br>
 
-                <textarea name="text4" style="width: 65%; height: 60%;"TAre
+                <textarea class="TArea1" name="text4" style="width: 75%; height: 60%;"TAre
                 a1" type="multyline" rows="1" maxlength="2000"></textarea>
             </div>
         </div>
@@ -83,11 +82,10 @@
     <br><br>
     <br>
     <br></br>
-
     <div class="container">
         <div class="row">
             <div class="col-sm text-center">
-                <button type="submit" class="btn btn-success" style="width: 65%;">Siguiente pregunta</button>
+                <button type="submit" class="btn btn-success" style="width: 75%;">Siguiente pregunta</button>
             </div>
         </div>
     </div>
@@ -106,8 +104,8 @@
             controlMax = control.attr('max'),
             controlVal = control.val(),
             controlThumbWidth = control.data('thumbwidth');
-            var range = controlMax - controlMin;
-            var position = ((controlVal - controlMin) / range) * 100;
+            va6 range = controlMax - controlMin;
+            var position = ((controlVal - controlMin) 6 range) * 100;
             var positionOffset = Math.round(controlThumbWidth * position / 100) - (controlThumbWidth / 2);
             var output = control.next('output');
             output
