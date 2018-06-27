@@ -1,5 +1,5 @@
 {% extends 'site_base.html' %}
-
+{% load static %}
 {% block main %}
 
     <br>
@@ -327,13 +327,14 @@
             <div class="container" align="center">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="text-center" style="background-color: #ededef; width: 67%">
+                        <div class="text-center" align="center" style="background-color: #ededef; width: 67%">
                             <br>
                             <h4>Aprenda cómo puede tomar de inmediato, la acción masiva para fortalecer sus áreas más
                                 débiles.</h4>
-                            <br>
-                            <h4>Contacta a los expertos: <a href="//www.co2liderazgo.com"><img src="{% static 'img/33824f_14b73e3085d64c54b8009d3a898be3bc_mv2.png' %}" style="border: 0; float: left; margin-right: 15px" /> </a> </h4>
-                            <br>
+                            <a href="//www.co2liderazgo.com">
+                            	<img src="{% static 'img/33824f_14b73e3085d64c54b8009d3a898be3bc_mv2.png' %}" style="border: 0; float: left; margin-right: 15px" /> 
+                            </a>
+                            <br><br><br>
                             <br>
                         </div>
                     </div>
