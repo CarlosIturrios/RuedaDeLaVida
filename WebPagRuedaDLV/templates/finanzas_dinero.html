@@ -96,7 +96,7 @@
 
   {% block script %}
 
-  <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         $('input[type="range"]').on('input', function () {
             var control = $(this),
@@ -104,8 +104,8 @@
             controlMax = control.attr('max'),
             controlVal = control.val(),
             controlThumbWidth = control.data('thumbwidth');
-            va6 range = controlMax - controlMin;
-            var position = ((controlVal - controlMin) 6 range) * 100;
+            var range = controlMax - controlMin;
+            var position = ((controlVal - controlMin) / range) * 100;
             var positionOffset = Math.round(controlThumbWidth * position / 100) - (controlThumbWidth / 2);
             var output = control.next('output');
             output
