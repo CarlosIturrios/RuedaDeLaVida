@@ -10,13 +10,16 @@ from django.contrib import admin
 
 urlpatterns = [
     # Redirect / to WebPagRuedaDLV
-    url(r'^$', RedirectView.as_view(url='WebPagRuedaDLV/'), name='index'),
+    url(r'^$', RedirectView.as_view(url='Rueda-de-la-vida/'), name='index'),
 
     # URLs sitio administracion
     url(r'^admin/', admin.site.urls),
 
+    #Urls login
+    url(r'^Rueda-de-la-vida/', include('django.contrib.auth.urls')),
+
     # URLs WebPagRuedaDLV
-    url(r'^WebPagRuedaDLV/', include('WebPagRuedaDLV.urls', namespace='WebPagRuedaDLV'))
+    url(r'^Rueda-de-la-vida/', include('WebPagRuedaDLV.urls', namespace='WebPagRuedaDLV'))
 ]
 
 if settings.DEBUG is True:
