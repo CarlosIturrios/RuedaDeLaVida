@@ -1,0 +1,387 @@
+{% extends 'site_base.html' %}
+{% load static %}
+{% block main %}
+
+    <br>
+    <!-- chart-->
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm" align="center">
+                <canvas id="birdsChart" style="width: 100%; height: 100%;"></canvas>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm">
+                <div class="text-center">
+                    <strong>Oportunidad de mejora.</strong>
+
+                    <h2>{{ gaptotal }}%</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <hr style="background-color: black;" width="100%">
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center"  style="background-color: rgba(255, 0, 0, 0.5);">
+                    <br>
+
+                    <h3 style="color:white;">Carrera|Empresa</h3>
+                        <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm text-center">
+                <h3>Tu estas:</h3>
+
+                <h3 style="color:black;">{{ slide1 }}</h3>
+            </div>
+            <div class="col-sm text-center">
+                <h3>Te gustaria estar:</h3>
+
+                <h3 style="color:black;">{{ slide2 }}</h3>
+            </div>
+            <div class="col-sm text-center">
+                <h3>Oportunidad de mejora:</h3>
+
+                <h3 style="color:black;">{{ carrera }}%</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>{{ parrafo_carrera.descripcion }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center"  style="background-color: rgba(52, 0, 0, 0.5);">
+                    <br>
+
+                    <h3 style="color:white;">Finanzas|Dinero</h3>
+                        <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Tu estas:</h3>
+
+                <h3 style="color:black;">{{ slide3 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Te gustaria estar:</h3>
+
+                <h3 style="color:black;">{{ slide4 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Oportunidad de mejora:</h3>
+
+                <h3 style="color:black;">{{ finanzas }}%</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>{{ parrafo_finanzas.descripcion }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center"  style="background-color: rgba(100, 255, 0, 0.5);">
+                    <br>
+
+                    <h3 style="color:white;">Salud|Vitalidad</h3>
+                        <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Tu estas:</h3>
+
+                <h3 style="color:black;">{{ slide5 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Te gustaria estar:</h3>
+
+                <h3 style="color:black;">{{ slide6 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Oportunidad de mejora:</h3>
+
+                <h3 style="color:black;">{{ salud }}%</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>{{ parrafo_salud.descripcion }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center"  style="background-color: rgba(144, 2, 45, 0.5);">
+                    <br>
+
+                    <h3 style="color:white;">Familia|Amigos</h3>
+                        <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Tu estas:</h3>
+
+                <h3 style="color:black;">{{ slide7 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Te gustaria estar:</h3>
+
+                <h3 style="color:black;">{{ slide8 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Oportunidad de mejora:</h3>
+
+                <h3 style="color:black;">{{ familia }}%</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>{{ parrafo_familia.descripcion }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center"  style="background-color: rgba(220, 255, 0, 0.5);">
+                    <br>
+
+                    <h3 style="color:white;">Amor|Relaciones</h3>
+                        <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Tu estas:</h3>
+
+                <h3 style="color:black;">{{ slide9 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Te gustaria estar:</h3>
+
+                <h3 style="color:black;">{{ slide10 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Oportunidad de mejora:</h3>
+
+                <h3 style="color:black;">{{ amor }}%</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>{{ parrafo_amor.descripcion }}</p>
+            </div>
+        </div>
+    </div>
+   
+   <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center"  style="background-color: rgba(0, 0, 255, 0.5);">
+                    <br>
+
+                    <h3 style="color:white;">Crecimiento personal|Aprendizaje</h3>
+                        <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Tu estas:</h3>
+
+                <h3 style="color:black;">{{ slide11 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Te gustaria estar:</h3>
+
+                <h3 style="color:black;">{{ slide12 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Oportunidad de mejora:</h3>
+
+                <h3 style="color:black;">{{ crecimiento }}%</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>{{ parrafo_crecimiento.descripcion }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center"  style="background-color: rgba(192, 192, 192, 0.5);">
+                    <br>
+
+                    <h3 style="color:white;">Diversion|Estilo de vida</h3>
+                        <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Tu estas:</h3>
+
+                <h3 style="color:black;">{{ slide13 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Te gustaria estar:</h3>
+
+                <h3 style="color:black;">{{ slide14 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Oportunidad de mejora:</h3>
+
+                <h3 style="color:black;">{{ diversion }}%</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>{{ parrafo_diversion.descripcion }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center"  style="background-color: rgba(255, 100, 255, 0.5);">
+                    <br>
+
+                    <h3 style="color:white;">Productividad personal</h3>
+                        <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 50%;">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Tu estas:</h3>
+
+                <h3 style="color:black;">{{ slide15 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Te gustaria estar:</h3>
+
+                <h3 style="color:black;">{{ slide16 }}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+                <h3>Oportunidad de mejora:</h3>
+
+                <h3 style="color:black;">{{ productividad }}%</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>{{ parrafo_productividad.descripcion }}</p>
+            </div>
+        </div>
+    </div>
+
+    <form>
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="container" align="center">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="text-center" align="center" style="background-color: #ededef; width: 67%">
+                            <br>
+                            <h4>Aprenda cómo puede tomar de inmediato, la acción masiva para fortalecer sus áreas más
+                                débiles.</h4>
+                            <a href="//www.co2liderazgo.com">
+                            	<img src="{% static 'img/33824f_14b73e3085d64c54b8009d3a898be3bc_mv2.png' %}" style="border: 0; float: left; margin-right: 15px" /> 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block script %}
+
+    <script type="text/javascript">
+        $(function () {
+            var birdsCanvas = document.getElementById("birdsChart");
+            var birdsData = {
+                labels: ["Carrera|Empresa", "Finanzas|Dinero", "Salud|Vitalidad", "Familia|Amigos", "Amor|relaciones", "Crecimiento personal|Aprendizaje", "Diversion|Estilo de vida", "Productividad personal",],
+                datasets: [{
+                    data: [{{ slide1 }}, {{ slide3 }}, {{ slide5 }}, {{ slide7 }}, {{ slide9 }}, {{ slide11 }}, {{ slide13 }}, {{ slide15 }}],
+                    backgroundColor: [
+                        "rgba(255, 0, 0, 0.5)",
+                        "rgba(52, 0, 0, 0.5)",
+                        "rgba(100, 255, 0, 0.5)",
+                        "rgba(144, 2, 45, 0.5)",
+                        "rgba(220, 255, 0, 0.5)",
+                        "rgba(0, 0, 255, 0.5)",
+                        "rgba(192, 192, 192, 0.5)",
+                        "rgba(255, 100, 255, 0.5)",
+                    ]
+                }]
+            };
+            var chartOptions = {
+                scale: {
+                    ticks: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 10,
+                        stepSize: 2
+                    }
+                }
+            };
+
+            var polarAreaChart = new Chart(birdsCanvas, {
+                type: 'polarArea',
+                data: birdsData,
+                options: chartOptions
+            });
+        });
+
+    </script>
+
+{% endblock %}
