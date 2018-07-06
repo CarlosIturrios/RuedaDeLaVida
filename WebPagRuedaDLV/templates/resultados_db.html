@@ -1,5 +1,17 @@
 {% extends 'site_base.html' %}
 {% load static %}
+{% block coverimage %}
+    <div class="home_background img-responsive" style="background-image: url({% static 'img/escuelas-de-coaching.jpg' %});"></div>
+    <div class="home_content">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <h1 class="home_title" style="color: #002d5d ;">{{ correo.usuario }} {{ correo.apellidos }}.</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 {% block main %}
 
     <br>

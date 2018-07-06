@@ -1,4 +1,17 @@
 {% extends 'site_base.html' %}
+{% load static %}
+{% block coverimage %}
+    <div class="home_background img-responsive" style="background-image: url({% static 'img/diversion.jpg' %});"></div>
+    <div class="home_content">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <h1 class="home_title" style="color: #002d5d ;">Diversion y Estilo de vida.</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
 {% block main %}
 <br>
@@ -93,7 +106,33 @@
 </form>
 <br>
 <br>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-center">
+                <a href="{% url 'WebPagRuedaDLV:principal' %}">
+                    <i class="fa fa-circle" style="color: black;"></i>
+                </a>
+                <a href="{% url 'WebPagRuedaDLV:finanzas_dinero' %}">
+                    <i class="fa fa-circle" style="color: black;"></i>
+                </a>
+                <a href="{% url 'WebPagRuedaDLV:salud_vitalidad' %}">
+                    <i class="fa fa-circle" style="color: black;"></i>
+                </a>
+                <a href="{% url 'WebPagRuedaDLV:familia_amigos' %}">
+                    <i class="fa fa-circle" style="color: black;"></i>
+                </a><a href="{% url 'WebPagRuedaDLV:amor_relaciones' %}">
+                    <i class="fa fa-circle" style="color: black;"></i>
+                </a><a href="{% url 'WebPagRuedaDLV:crecimiento_personal_aprendizaje' %}">
+                    <i class="fa fa-circle" style="color: black;"></i>
+                </a><a href="{% url 'WebPagRuedaDLV:diversion_estilo_de_vida' %}">
+                    <i class="fa fa-circle-o" style="color: black;"></i>
+                </a>
+                <a href="{% url 'WebPagRuedaDLV:productividad_personal' %}">
+                    <i class="fa fa-circle" style="color: black;"></i>
+                </a>
+            </div>
+        </div>
+    </div>
   {% endblock %}
 
   {% block script %}

@@ -37,6 +37,10 @@ def finanzas_dinero(request):
     pregunta2 =Pregunta.objects.get(area='2', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
+    if not 'slide1' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:principal')
+    if not 'slide2' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:principal')
     if request.method == "POST":
         slide3 = int(request.POST.get('slide3', None))
         slide4 = int(request.POST.get('slide4', None))
@@ -61,6 +65,10 @@ def salud_vitalidad(request):
     pregunta2 =Pregunta.objects.get(area='3', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
+    if not 'slide3' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:finanzas_dinero')
+    if not 'slide4' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:finanzas_dinero')
     if request.method == "POST":
         slide5 = int(request.POST.get('slide5', None))
         slide6 = int(request.POST.get('slide6', None))
@@ -85,6 +93,10 @@ def familia_amigos(request):
     pregunta2 =Pregunta.objects.get(area='4', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
+    if not 'slide5' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:salud_vitalidad')
+    if not 'slide6' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:salud_vitalidad')
     if request.method == "POST":
         slide7 = int(request.POST.get('slide7', None))
         slide8 = int(request.POST.get('slide8', None))
@@ -109,6 +121,10 @@ def amor_relaciones(request):
     pregunta2 =Pregunta.objects.get(area='5', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
+    if not 'slide7' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:familia_amigos')
+    if not 'slide8' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:familia_amigos')
     if request.method == "POST":
         slide9 = int(request.POST.get('slide9', None))
         slide10 = int(request.POST.get('slide10', None))
@@ -133,6 +149,10 @@ def crecimiento_personal_aprendizaje(request):
     pregunta2 =Pregunta.objects.get(area='6', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
+    if not 'slide9' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:amor_relaciones')
+    if not 'slide10' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:amor_relaciones')
     if request.method == "POST":
         slide11 = int(request.POST.get('slide11', None))
         slide12 = int(request.POST.get('slide12', None))
@@ -157,6 +177,10 @@ def diversion_estilo_de_vida(request):
     pregunta2 =Pregunta.objects.get(area='7', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
+    if not 'slide11' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:crecimiento_personal_aprendizaje')
+    if not 'slide12' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:crecimiento_personal_aprendizaje')
     if request.method == "POST":
         slide13 = int(request.POST.get('slide13', None))
         slide14 = int(request.POST.get('slide14', None))
@@ -181,6 +205,10 @@ def productividad_personal(request):
     pregunta2 =Pregunta.objects.get(area='8', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
+    if not 'slide13' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:diversion_estilo_de_vida')
+    if not 'slide14' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:diversion_estilo_de_vida')
     if request.method == "POST":
         slide15 = int(request.POST.get('slide15', None))
         slide16 = int(request.POST.get('slide16', None))
@@ -201,7 +229,10 @@ def productividad_personal(request):
 def register(request):
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
-
+    if not 'slide15' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:productividad_personal')
+    if not 'slide16' in request.session['wheel']:
+        return redirect('WebPagRuedaDLV:productividad_personal')
     if request.method == "POST":
         #obtener todos los datos del usuario.
         nombre = request.POST.get('username', None)
@@ -537,7 +568,8 @@ def resultados_db(request, pk):
             'gaptotal': gaptotal, 'parrafo_carrera':parrafo_carrera, 'parrafo_finanzas':parrafo_finanzas,
             'parrafo_salud':parrafo_salud, 'parrafo_familia':parrafo_familia, 'parrafo_amor':parrafo_amor,
             'parrafo_crecimiento':parrafo_crecimiento, 'parrafo_diversion':parrafo_diversion,
-            'parrafo_productividad':parrafo_productividad
+            'parrafo_productividad':parrafo_productividad,
+            'correo':correo
         }
     )
 
