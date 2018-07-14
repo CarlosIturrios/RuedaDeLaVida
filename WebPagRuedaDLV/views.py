@@ -27,7 +27,7 @@ def principal(request):
             request.session['wheel'] = {'slide1': slide1, 'slide2': slide2, 'text1': text1, 'text2': text2}
             return redirect('WebPagRuedaDLV:finanzas_dinero')
         else:
-            messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
+            messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
     return render(request, 'principal.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
 
 
@@ -55,7 +55,7 @@ def finanzas_dinero(request):
             request.session['wheel'] = wheel
             return redirect('WebPagRuedaDLV:salud_vitalidad')
         else:
-            messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
+            messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
     return render(request, 'finanzas_dinero.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
 
 
@@ -83,7 +83,7 @@ def salud_vitalidad(request):
             request.session['wheel'] = wheel
             return redirect('WebPagRuedaDLV:familia_amigos')
         else:
-            messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
+            messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
     return render(request, 'salud_vitalidad.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
 
 
@@ -111,7 +111,7 @@ def familia_amigos(request):
             request.session['wheel'] = wheel
             return redirect('WebPagRuedaDLV:amor_relaciones')
         else:
-            messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
+            messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
     return render(request, 'familia_amigos.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
 
 
@@ -139,7 +139,7 @@ def amor_relaciones(request):
             request.session['wheel'] = wheel
             return redirect('WebPagRuedaDLV:crecimiento_personal_aprendizaje')
         else:
-            messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
+            messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
     return render(request, 'amor_relaciones.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
 
 
@@ -167,7 +167,7 @@ def crecimiento_personal_aprendizaje(request):
             request.session['wheel'] = wheel
             return redirect('WebPagRuedaDLV:diversion_estilo_de_vida')
         else:
-            messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
+            messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
     return render(request, 'crecimiento_personal_aprendizaje.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
 
 
@@ -195,7 +195,7 @@ def diversion_estilo_de_vida(request):
             request.session['wheel'] = wheel
             return redirect('WebPagRuedaDLV:productividad_personal')
         else:
-            messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
+            messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
     return render(request, 'diversion_estilo_de_vida.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2}) 
 
 
@@ -223,7 +223,7 @@ def productividad_personal(request):
             request.session['wheel'] = wheel
             return redirect('WebPagRuedaDLV:register')
         else:
-            messages.error(request, 'El primer controlador tiene que ser mayor al segundo!')
+            messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
     return render(request, 'productividad_personal.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2}) 
 
 def register(request):
