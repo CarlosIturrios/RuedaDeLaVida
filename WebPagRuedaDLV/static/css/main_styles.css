@@ -2259,7 +2259,6 @@ input[type=range]::-webkit-slider-thumb {
 output {
   position: relative;
   top: 8px;
-  
   width: 24px;
   height: 28px;
   border: 1px solid #e2e2e2;

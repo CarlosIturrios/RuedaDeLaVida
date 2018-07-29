@@ -1,11 +1,15 @@
 {% extends 'site_base.html' %}
 {% load static %}
 {% block coverimage %}
-    <div class="home_background img-responsive" style="background-image: url({% static 'img/Relaciones.png' %});"></div>
+    <div class="home_background img-responsive text-center" style="background-image: url({% static 'img/Relaciones.png' %}); height: 120%;">
+        <img src="{% static 'img/IconoRueda.gif' %}">
+    </div>
     <div class="home_content">
         <div class="container">
             <div class="row">
                 <div class="col text-center">
+                    <br><br><br>
+                    <h1 class="home_title" style="color: white ;">Rueda de la vida.</h1>
                     <h1 class="home_title" style="color: #002d5d ;">Amor y relaciones.</h1>
                 </div>
             </div>
@@ -13,7 +17,7 @@
     </div>
 {% endblock %}
 {% block main %}
-<br>
+<br><br><br><br>
 <form action="{% url 'WebPagRuedaDLV:amor_relaciones' %}" method="post" class="form-inline">
     {% csrf_token %}
     <div class="container">
@@ -43,7 +47,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm text-center">
-                <span style="color: grey;">¿Cómo se siente con la puntacion que se puso? ( Opcional. )</span>
+                <span style="color: grey;">¿Cómo se siente con la puntuación que se puso? ( Opcional ).</span>
                 <br>
                 <textarea class="TArea1" style="width: 75%; height: 60%;" name="text9" id="TArea1" type="multyline" rows="1"
                 maxlength="2000"></textarea>
@@ -83,7 +87,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm text-center">
-                <span style="color: grey;">¿Cómo se siente con la puntacion que se puso? ( Opcional. )</span>
+                <span style="color: grey;">¿Cómo se siente con la puntuación que se puso? ( Opcional ).</span>
                 <br>
 
                 <textarea class="TArea1" name="text10" style="width: 75%; height: 60%;" type="multyline" rows="1" maxlength="2000"></textarea>
