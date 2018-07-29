@@ -1,10 +1,6 @@
 {% extends 'site_base.html' %}
 {% load static %}
 
-{% block style %}
-    <link rel="stylesheet" href="{% static 'css/register-style.css' %}"/>
-{% endblock %}
-
 {% block coverimage %}
     <div class="home_background img-responsive" style="background-image: url({% static 'img/escuelas-de-coaching.jpg' %});"></div>
     <div class="home_content">
@@ -43,7 +39,7 @@
                             </div>
                             <div class="col-lg-12 register_col">
                                 <input type="checkbox" name="check" value="check" checked required="True"> <strong> Acepto recibir
-                                informacion y publicidad de CO2 coaching & liderazgo </strong>
+                                información y publicidad de CO2 coaching & liderazgo </strong>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -55,7 +51,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block script %}
 {% endblock %}
