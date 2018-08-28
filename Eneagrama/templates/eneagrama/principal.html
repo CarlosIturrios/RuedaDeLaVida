@@ -1,0 +1,80 @@
+{% extends 'eneagrama/principal-base.html' %}
+{% load static %}
+<!-- Estructura basica para diseño -->
+
+{% block main %}
+<div class="oz-body-wrap">
+	<!-- Start Header Area -->
+	<header class="default-header">
+		<div class="container-fluid">
+			<div class="header-wrap">
+				<div class="header-top d-flex justify-content-between align-items-center">
+					<div class="logo">
+						<a href="https://www.co2liderazgo.com/"><img src="{% static 'img/logo.png' %}" width="20%" height="20%"></a>
+					</div>
+					<div class="main-menubar d-flex align-items-center">
+						<nav class="hide">
+							<a href="https://www.co2liderazgo.com/">Regresar a Co2Liderazgo</a>
+						</nav>
+						<div class="menu-bar"><span class="lnr lnr-menu"></span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- End Header Area -->
+	<!-- Comienza parte de iniciacion al eneagrama -->
+	<section class="banner-area relative" style="background-color: #2c7db7;">
+		<div class="container">
+			<div class="row fullscreen align-items-center justify-content-center">
+				<div class="banner-left col-lg-6">
+					<img class="d-flex mx-auto img-fluid" src="{% static 'img/header-img.png' %}" alt="">
+				</div>
+				<div class="col-lg-6">
+					<div class="story-content">
+						<h6 class="text-uppercase">Copia de eneagrama.</h6>
+						<h2>Evaluación de Personalidad.</h2><br><h1><span class="sp-1">¡Bienvenido! </span>
+							al Taller de Inteligencia Emocional en el Trabajo y <span class="sp-2">Eneagrama.</span></h1>
+							<a href="{% url 'Eneagrama:register' %}" class="genric-btn primary circle arrow">Comenzar.<span class="lnr lnr-arrow-right"></span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+		<!-- Finaliza banner de eneagrama -->
+		<!-- Comienza el about sobre el eneagrama y/o curso-->
+	<section class="about-area pt-100 pb-100">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-8">
+					<div class="story-content">
+						<h3>De parte del equipo de CO2 Liderazgo<br>
+						te damos la más cordial bienvenida a nuestro taller: </h3><h2><span style="color: #002e5d;">"Inteligencia Emocional en el Trabajo y Eneagrama"</span></h2>
+						<p class="mt-30" style="font-size: 13pt; text-align: justify;">Para realizar esta evaluación es importante que usted esté cómodo y disponga del tiempo suficiente (aproximadamente 45 minutos), analice cada pareja de frases e identifique aquella que MEJOR describa su personalidad de manera general, no en este preciso momento, si no en su vida en general. Es muy importante no dejar de contestar ninguna serie. Son un total de 144 reactivos. <br> 
+							Los resultados de esta evaluación se te entregarán en un reporte impreso el día 28 de Abril durante el evento, y al finalizar el taller se te enviará en formato PDF a tu email junto con el enlace para descargar los libros: "La Sabiduría del Eneagrama" y "La Inteligencia Emocional".
+							<br>
+							Cualquier duda que tengas favor de contactarnos a través del correo: info@co2liderazgo.com y/o berenice.alfonzo@co2liderazgo.com
+						</p>
+						<a href="{% url 'Eneagrama:register' %}" class="genric-btn primary circle arrow">Comenzar.<span class="lnr lnr-arrow-right"></span></a>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<img class="img-fluid d-flex mx-auto" src="{% static 'img/about.png' %}" alt="">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Finaliza el about sobre el eneagrama y/o curso -->
+	<!-- Strat Footer Area -->
+	<footer class="section-gap">
+		<div class="container">
+			<div class="footer-bottom d-flex justify-content-between align-items-center flex-wrap">
+				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				<p class="footer-text m-0">Copyright All rights reserved | CO2 Coaching & Consultoria.</p>
+				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+			</div>
+		</div>
+	</footer>
+	<!-- End Footer Area -->
+</div>
+{% endblock %}

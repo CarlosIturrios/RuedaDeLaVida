@@ -1,0 +1,129 @@
+{% extends 'eneagrama/app-base.html' %}
+{% block main %}
+    <div class="right_col" role="main">
+        <br>
+
+        <div class="row">
+            <div class="col-md-3 col-sm-3"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Datos personales.</h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+
+                        <form method="post" id="demo-form2" data-parsley-validate
+                              class="form-horizontal form-label-left"
+                              action="{% url 'Eneagrama:register' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre:
+                                </label>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" name="nombre"
+                                           class="form-control col-md-7 col-xs-12" placeholder="Escribe tu nombre.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Apellidos:
+                                </label>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="last-name" required="required"
+                                           class="form-control col-md-7 col-xs-12" name="apellidos"
+                                           placeholder="Escribe tus apellidos.">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email:
+                                </label>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="email" id="email" name="email"
+                                           placeholder="Escribe tu correo electronico." required="required"
+                                           class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Edad:
+                                </label>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" id="number" name="edad" required="required"
+                                           data-validate-minmax="0,100" class="form-control col-md-7 col-xs-12"
+                                           placeholder="Escribe tu edad (solo se permiten numeros).">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Empresa:
+                                </label>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="empresa" class="form-control col-md-7 col-xs-12"
+                                           name="empresa"
+                                           placeholder="Escribe el nombre de la empresa a la que perteneces (opcional).">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">País:
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select name="pais" class="form-control" required>
+                                        <option value="">Selecciona el pais</option>
+                                        <option value="Argentina">Argentina</option>
+                                        <option value="Bolivia">Bolivia</option>
+                                        <option value="Brasil">Brasil</option>
+                                        <option value="Chile">Chile</option>
+                                        <option value="Costa Rica">Costa Rica</option>
+                                        <option value="Cuba">Cuba</option>
+                                        <option value="El Salvador">El Salvador</option>
+                                        <option value="España">España</option>
+                                        <option value="Estados Unidos de América">Estados Unidos de América</option>
+                                        <option value="Guayana Francesa">Guayana Francesa</option>
+                                        <option value="Granada">Granada</option>
+                                        <option value="Guatemala">Guatemala</option>
+                                        <option value="Guayana">Guayana</option>
+                                        <option value="Haití">Haití</option>
+                                        <option value="Honduras">Honduras</option>
+                                        <option value="Jamaica">Jamaica</option>
+                                        <option value="México">México</option>
+                                        <option value="Nicaragua">Nicaragua</option>
+                                        <option value="Paraguay">Paraguay</option>
+                                        <option value="Panamá">Panamá</option>
+                                        <option value="Perú">Perú</option>
+                                        <option value="Puerto Rico">Puerto Rico</option>
+                                        <option value="República Dominicana">República Dominicana</option>
+                                        <option value="Surinam">Surinam</option>
+                                        <option value="Uruguay">Uruguay</option>
+                                        <option value="Venezuela">Venezuela</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Ciudad y Estado:
+                                </label>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="ciudad-estado" class="form-control col-md-7 col-xs-12"
+                                           name="ciudad" placeholder="Escribe la ciudad y el estado (opcional).">
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <button type="submit" class="btn btn-primary">Cancel</button>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}

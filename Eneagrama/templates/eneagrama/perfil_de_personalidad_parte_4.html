@@ -1,0 +1,514 @@
+{% extends 'eneagrama/app-base.html' %}
+{% block main %}
+    <div class="right_col" role="main">
+        <br>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4" align="right">
+                <strong>Progreso</strong>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-8">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" data-transitiongoal="56">56%</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-3"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Perfil de Personalidad - Eneagrama</h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br/>
+
+                        <form class="form-horizontal" method="post" action="{% url 'Eneagrama:parteCuatro' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 21. He sido... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="E" name="preguntaUno">
+                                                Romántico e imaginativo
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="B" name="preguntaUno"> Práctico
+                                                y realista
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 22. Tengo tendencia a... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="G" name="preguntaDos">
+                                                Tener confrontaciones
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="A" name="preguntaDos"> Evitar
+                                                confrontaciones
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 23. Típicamente he sido...</h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="C" name="preguntaTres">
+                                                Diplomático, simpático y ambicioso
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="D" name="preguntaTres"> Directo,
+                                                formal e idealista
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 24. Tengo tendencia a ser... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="H"
+                                                       name="preguntaCuatro"> Enfocado e intenso
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="I" name="preguntaCuatro">
+                                                Espontáneo y amante de la diversión
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 25. He sido... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="F" name="preguntaCinco">
+                                                Una persona hospitalaria y disfruto nuevos amigos en mi vida
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="E" name="preguntaCinco"> Una
+                                                persona privada y no me relaciono mucho con otros
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 26. Ha sido difícil para mi... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="B" name="preguntaSeis">
+                                                Relajarme y dejar de preocuparme por problemas potenciales
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="A" name="preguntaSeis"> Ponerme
+                                                nervioso por problemas potenciales
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 27. He sido... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="G" name="preguntaSiete">
+                                                Un sobreviviente astuto
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="D" name="preguntaSiete"> Un
+                                                idealista con altos estándares
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 28. He necesitado o preferido... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="F" name="preguntaOcho">
+                                                Mostrar afecto a la gente
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="H" name="preguntaOcho"> Mantener
+                                                algo de distancia con la gente
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 29. Cuando tengo nuevas experiencias, usualmente me pregunto... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="C" name="preguntaNueve">
+                                                Si hubiera sido útil para mi
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="I" name="preguntaNueve"> Si
+                                                hubiera sido agradable para mi
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 30. He tendido a enfocarme demasiado... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="E" name="preguntaDiez">
+                                                En mi mismo
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="A" name="preguntaDiez"> En los
+                                                demás
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 31. Otras personas han dependido de... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="H" name="preguntaOnce">
+                                                Mis conocimientos e intuición
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="G" name="preguntaOnce"> Mi fortaleza y determinación
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 32. He dado la impresión de... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="B" name="preguntaDoce">
+                                                No ser muy seguro de mi mismo
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="D" name="preguntaDoce"> Ser demasiado seguro de mi mismo
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 33. He estado más orientado a... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="F" name="preguntaTrece">
+                                                Las relaciones que a las metas
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="C" name="preguntaTrece">Las metas que a las relaciones
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 34. Cuando se trata de defender mi punto de vista... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="E"
+                                                       name="preguntaCatorce"> He sido débil
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="I" name="preguntaCatorce">
+                                                He sido fuerte
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 35. Me ha sido difícil... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="H" name="preguntaQuince">
+                                                Dejar de considerar alternativas y hacer algo concreto
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="D" name="preguntaQuince"> Una
+                                                Tomar las cosas con calma y ser más flexible
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 36. He tendido la tendencia a ser... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="B" name="preguntaDieciseis">
+                                                Cuidadoso e indeciso
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="G" name="preguntaDieciseis"> Atrevido y dominante
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 37. He tenido problemas con la gente por... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="A" name="preguntaDiecisiete">
+                                                Mi resistencia a comprometerme
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="F" name="preguntaDiecisiete"> Hacer que dependan de mi
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 38. Cuando se trata de mis sentimientos... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="C" name="preguntaDieciocho">
+                                                Los he tenido que hacer a un lado para realizar mi trabajo
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="E" name="preguntaDieciocho"> Los he tenido que analizar para seguir adelante
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 39. Generalmente he sido... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="B" name="preguntaDiecinueve">
+                                                Metódico y precavido
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="I" name="preguntaDiecinueve"> Aventurero y he tomado riesgos
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3> 40. He sido una persona... </h3>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" checked value="F" name="preguntaVeinte">
+                                                Generosa, que da apoyo y busca intimidad con otros
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br>
+
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 radio">
+                                            <label>
+                                                <input type="radio" class="flat" value="D" name="preguntaVeinte"> Seria y reservada que le gustaría discutir sobre cualquier tema
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-12 col-xs-12" align="center">
+                                        <button type="submit" style="width: 80%" class="btn btn-success">Siguiente</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
