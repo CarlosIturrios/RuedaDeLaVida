@@ -16,8 +16,6 @@ from .models import Correo, Pregunta, Respuesta
 
 def principal(request):
     #Vista de Carrera|Empresa
-    pregunta1 =Pregunta.objects.get(area='1', posicion='1')
-    pregunta2 =Pregunta.objects.get(area='1', posicion='2')
     if request.method == "POST":
         slide1 = int(request.POST.get('slide1', None))
         slide2 = int(request.POST.get('slide2', None))
@@ -28,13 +26,11 @@ def principal(request):
             return redirect('WebPagRuedaDLV:finanzas_dinero')
         else:
             messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
-    return render(request, 'principal.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
+    return render(request, 'principal.html')
 
 
 def finanzas_dinero(request):
     #Vista de Finanzas|Dinero
-    pregunta1 =Pregunta.objects.get(area='2', posicion='1')
-    pregunta2 =Pregunta.objects.get(area='2', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
     if not 'slide1' in request.session['wheel']:
@@ -56,13 +52,11 @@ def finanzas_dinero(request):
             return redirect('WebPagRuedaDLV:salud_vitalidad')
         else:
             messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
-    return render(request, 'finanzas_dinero.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
+    return render(request, 'finanzas_dinero.html')
 
 
 def salud_vitalidad(request):
     #Vista de Salud|Vitalidad
-    pregunta1 =Pregunta.objects.get(area='3', posicion='1')
-    pregunta2 =Pregunta.objects.get(area='3', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
     if not 'slide3' in request.session['wheel']:
@@ -84,13 +78,11 @@ def salud_vitalidad(request):
             return redirect('WebPagRuedaDLV:familia_amigos')
         else:
             messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
-    return render(request, 'salud_vitalidad.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
+    return render(request, 'salud_vitalidad.html')
 
 
 def familia_amigos(request):
     #Vista de Familia|Amigos
-    pregunta1 =Pregunta.objects.get(area='4', posicion='1')
-    pregunta2 =Pregunta.objects.get(area='4', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
     if not 'slide5' in request.session['wheel']:
@@ -112,13 +104,11 @@ def familia_amigos(request):
             return redirect('WebPagRuedaDLV:amor_relaciones')
         else:
             messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
-    return render(request, 'familia_amigos.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
+    return render(request, 'familia_amigos.html')
 
 
 def amor_relaciones(request):
     #Vista de amor|relaciones
-    pregunta1 =Pregunta.objects.get(area='5', posicion='1')
-    pregunta2 =Pregunta.objects.get(area='5', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
     if not 'slide7' in request.session['wheel']:
@@ -140,13 +130,11 @@ def amor_relaciones(request):
             return redirect('WebPagRuedaDLV:crecimiento_personal_aprendizaje')
         else:
             messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
-    return render(request, 'amor_relaciones.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
+    return render(request, 'amor_relaciones.html')
 
 
 def crecimiento_personal_aprendizaje(request):
     #Vista de amor|relaciones
-    pregunta1 =Pregunta.objects.get(area='6', posicion='1')
-    pregunta2 =Pregunta.objects.get(area='6', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
     if not 'slide9' in request.session['wheel']:
@@ -168,13 +156,11 @@ def crecimiento_personal_aprendizaje(request):
             return redirect('WebPagRuedaDLV:diversion_estilo_de_vida')
         else:
             messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
-    return render(request, 'crecimiento_personal_aprendizaje.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2})
+    return render(request, 'crecimiento_personal_aprendizaje.html')
 
 
 def diversion_estilo_de_vida(request):
 #Vista de amor|relaciones
-    pregunta1 =Pregunta.objects.get(area='7', posicion='1')
-    pregunta2 =Pregunta.objects.get(area='7', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
     if not 'slide11' in request.session['wheel']:
@@ -196,13 +182,11 @@ def diversion_estilo_de_vida(request):
             return redirect('WebPagRuedaDLV:productividad_personal')
         else:
             messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
-    return render(request, 'diversion_estilo_de_vida.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2}) 
+    return render(request, 'diversion_estilo_de_vida.html')
 
 
 def productividad_personal(request):
 #Vista de amor|relaciones
-    pregunta1 =Pregunta.objects.get(area='8', posicion='1')
-    pregunta2 =Pregunta.objects.get(area='8', posicion='2')
     if not 'wheel' in request.session:
         return redirect('WebPagRuedaDLV:principal')
     if not 'slide13' in request.session['wheel']:
@@ -224,7 +208,7 @@ def productividad_personal(request):
             return redirect('WebPagRuedaDLV:register')
         else:
             messages.error(request, 'El segundo controlador tiene que ser mayor al primero!')
-    return render(request, 'productividad_personal.html', {'pregunta1':pregunta1, 'pregunta2':pregunta2}) 
+    return render(request, 'productividad_personal.html')
 
 def register(request):
     if not 'wheel' in request.session:
