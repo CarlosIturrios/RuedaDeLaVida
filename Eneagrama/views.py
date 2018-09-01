@@ -33,7 +33,7 @@ def register(request):
         pais = request.POST.get('pais', None)
         ciudad = request.POST.get('ciudad', None)
         request.session['nombre'] = nombre
-        check_email = Usuario.objects.get(email=email)
+        check_email = Usuario.objects.filter(email=email).first()
         if check_email:
             messages.success(request, '¡Bienvenido de nuevo!')
             request.session['id_user'] = check_email.id
