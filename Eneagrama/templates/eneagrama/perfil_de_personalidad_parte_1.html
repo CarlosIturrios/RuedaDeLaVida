@@ -25,7 +25,7 @@
                     <div class="x_content">
                         <br/>
 
-                        <form class="form-horizontal" method="post" action="{% url 'Eneagrama:parteDos' %}">
+                        <form class="form-horizontal" method="post" action="{% url 'Eneagrama:parteUno' %}">
                             {% csrf_token %}
                             <div class="form-group">
                                 <div class="form-group">
@@ -35,7 +35,7 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="E" name="preguntaUno">
+                                                <input type="radio" class="flat" required value="E" name="preguntaUno">
                                                 Romántico e imaginativo
                                             </label>
                                         </div>
@@ -59,7 +59,7 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="G" name="preguntaDos">
+                                                <input type="radio" class="flat" value="G" name="preguntaDos">
                                                 Tener confrontaciones
                                             </label>
                                         </div>
@@ -83,7 +83,7 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="C" name="preguntaTres">
+                                                <input type="radio" class="flat" required value="C" name="preguntaTres">
                                                 Diplomático, simpático y ambicioso
                                             </label>
                                         </div>
@@ -107,7 +107,7 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="H"
+                                                <input type="radio" class="flat" required value="H"
                                                        name="preguntaCuatro"> Enfocado e intenso
                                             </label>
                                         </div>
@@ -131,7 +131,8 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="F" name="preguntaCinco">
+                                                <input type="radio" class="flat" required value="F"
+                                                       name="preguntaCinco">
                                                 Una persona hospitalaria y disfruto nuevos amigos en mi vida
                                             </label>
                                         </div>
@@ -155,7 +156,7 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="B" name="preguntaSeis">
+                                                <input type="radio" class="flat" required value="B" name="preguntaSeis">
                                                 Relajarme y dejar de preocuparme por problemas potenciales
                                             </label>
                                         </div>
@@ -179,7 +180,8 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="G" name="preguntaSiete">
+                                                <input type="radio" class="flat" required value="G"
+                                                       name="preguntaSiete">
                                                 Un sobreviviente astuto
                                             </label>
                                         </div>
@@ -203,7 +205,7 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="F" name="preguntaOcho">
+                                                <input type="radio" class="flat" required value="F" name="preguntaOcho">
                                                 Mostrar afecto a la gente
                                             </label>
                                         </div>
@@ -227,7 +229,8 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="C" name="preguntaNueve">
+                                                <input type="radio" class="flat" required value="C"
+                                                       name="preguntaNueve">
                                                 Si hubiera sido útil para mi
                                             </label>
                                         </div>
@@ -251,7 +254,7 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="E" name="preguntaDiez">
+                                                <input type="radio" class="flat" required value="E" name="preguntaDiez">
                                                 En mi mismo
                                             </label>
                                         </div>
@@ -275,7 +278,7 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="H" name="preguntaOnce">
+                                                <input type="radio" class="flat" required value="H" name="preguntaOnce">
                                                 Mis conocimientos e intuición
                                             </label>
                                         </div>
@@ -285,7 +288,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="G" name="preguntaOnce"> Mi fortaleza y determinación
+                                                <input type="radio" class="flat" value="G" name="preguntaOnce"> Mi
+                                                fortaleza y determinación
                                             </label>
                                         </div>
                                     </div>
@@ -298,7 +302,7 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="B" name="preguntaDoce">
+                                                <input type="radio" class="flat" required value="B" name="preguntaDoce">
                                                 No ser muy seguro de mi mismo
                                             </label>
                                         </div>
@@ -308,7 +312,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="D" name="preguntaDoce"> Ser demasiado seguro de mi mismo
+                                                <input type="radio" class="flat" value="D" name="preguntaDoce"> Ser
+                                                demasiado seguro de mi mismo
                                             </label>
                                         </div>
                                     </div>
@@ -321,7 +326,8 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="F" name="preguntaTrece">
+                                                <input type="radio" class="flat" required value="F"
+                                                       name="preguntaTrece">
                                                 Las relaciones que a las metas
                                             </label>
                                         </div>
@@ -331,7 +337,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="C" name="preguntaTrece">Las metas que a las relaciones
+                                                <input type="radio" class="flat" value="C" name="preguntaTrece">Las
+                                                metas que a las relaciones
                                             </label>
                                         </div>
                                     </div>
@@ -344,7 +351,7 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="E"
+                                                <input type="radio" class="flat" required value="E"
                                                        name="preguntaCatorce"> He sido débil
                                             </label>
                                         </div>
@@ -368,7 +375,8 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="H" name="preguntaQuince">
+                                                <input type="radio" class="flat" required value="H"
+                                                       name="preguntaQuince">
                                                 Dejar de considerar alternativas y hacer algo concreto
                                             </label>
                                         </div>
@@ -392,7 +400,8 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="B" name="preguntaDieciseis">
+                                                <input type="radio" class="flat" required value="B"
+                                                       name="preguntaDieciseis">
                                                 Cuidadoso e indeciso
                                             </label>
                                         </div>
@@ -402,7 +411,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="G" name="preguntaDieciseis"> Atrevido y dominante
+                                                <input type="radio" class="flat" value="G" name="preguntaDieciseis">
+                                                Atrevido y dominante
                                             </label>
                                         </div>
                                     </div>
@@ -415,7 +425,8 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="A" name="preguntaDiecisiete">
+                                                <input type="radio" class="flat" required value="A"
+                                                       name="preguntaDiecisiete">
                                                 Mi resistencia a comprometerme
                                             </label>
                                         </div>
@@ -425,7 +436,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="F" name="preguntaDiecisiete"> Hacer que dependan de mi
+                                                <input type="radio" class="flat" value="F" name="preguntaDiecisiete">
+                                                Hacer que dependan de mi
                                             </label>
                                         </div>
                                     </div>
@@ -438,7 +450,8 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="C" name="preguntaDieciocho">
+                                                <input type="radio" class="flat" required value="C"
+                                                       name="preguntaDieciocho">
                                                 Los he tenido que hacer a un lado para realizar mi trabajo
                                             </label>
                                         </div>
@@ -448,7 +461,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="E" name="preguntaDieciocho"> Los he tenido que analizar para seguir adelante
+                                                <input type="radio" class="flat" value="E" name="preguntaDieciocho"> Los
+                                                he tenido que analizar para seguir adelante
                                             </label>
                                         </div>
                                     </div>
@@ -461,7 +475,8 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="B" name="preguntaDiecinueve">
+                                                <input type="radio" class="flat" required value="B"
+                                                       name="preguntaDiecinueve">
                                                 Metódico y precavido
                                             </label>
                                         </div>
@@ -471,7 +486,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="I" name="preguntaDiecinueve"> Aventurero y he tomado riesgos
+                                                <input type="radio" class="flat" value="I" name="preguntaDiecinueve">
+                                                Aventurero y he tomado riesgos
                                             </label>
                                         </div>
                                     </div>
@@ -484,7 +500,8 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" checked value="F" name="preguntaVeinte">
+                                                <input type="radio" class="flat" required value="F"
+                                                       name="preguntaVeinte">
                                                 Generosa, que da apoyo y busca intimidad con otros
                                             </label>
                                         </div>
@@ -494,7 +511,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="D" name="preguntaVeinte"> Seria y reservada que le gustaría discutir sobre cualquier tema
+                                                <input type="radio" class="flat" value="D" name="preguntaVeinte"> Seria
+                                                y reservada que le gustaría discutir sobre cualquier tema
                                             </label>
                                         </div>
                                     </div>
@@ -502,7 +520,8 @@
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-12 col-sm-12 col-xs-12" align="center">
-                                        <button type="submit" style="width: 80%" class="btn btn-success">Siguiente</button>
+                                        <button type="submit" style="width: 80%" class="btn btn-success">Siguiente
+                                        </button>
                                     </div>
                                 </div>
                             </div>
