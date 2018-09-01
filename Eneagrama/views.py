@@ -87,83 +87,83 @@ def parteUno(request):
         preguntaDiecinueve = request.POST.get('preguntaDiecinueve', None)
         preguntaVeinte = request.POST.get('preguntaVeinte', None)
         evaluacion = Evaluacion.objects.get(id=request.session['id_evaluacion'])
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='1')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='1')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='2')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='2')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaDos
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='3')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='3')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='4')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='4')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCuatro
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='5')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='5')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCinco
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='6')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='6')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSeis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='7')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='7')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='8')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='8')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaOcho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='9')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='9')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaNueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='10')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='10')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaDiez
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='11')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='11')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaOnce
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='12')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='12')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaDoce
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='13')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='13')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaTrece
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='14')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='14')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCatorce
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='15')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='15')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaQuince
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='16')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='16')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaDieciseis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='17')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='17')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaDiecisiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='18')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='18')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaDieciocho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='19')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='19')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaDiecinueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='20')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='20')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaVeinte
         respuesta.save()
@@ -200,83 +200,83 @@ def parteDos(request):
         preguntaTreintayNueve = request.POST.get('preguntaTreintayNueve', None)
         preguntaCuarenta = request.POST.get('preguntaCuarenta', None)
         evaluacion = Evaluacion.objects.get(id=request.session['id_evaluacion'])
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='21')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='21')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaVeintiUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='22')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='22')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaVeintiDos
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='23')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='23')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaVeintiTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='24')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='24')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaVeintiCuatro
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='25')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='25')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaVeintiCinco
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='26')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='26')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaVeintiSeis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='27')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='27')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaVeintiSiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='28')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='28')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaVeintiOcho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='29')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='29')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaVeintiNueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='30')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='30')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaTreinta
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='31')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='31')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaTreintayUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='32')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='32')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaTreintayDos
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='33')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='33')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaTreintayTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='34')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='34')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaTreintayCuatro
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='35')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='35')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaTreintayCinco
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='36')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='36')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaTreintaySeis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='37')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='37')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaTreintaySiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='38')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='38')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaTreintayOcho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='39')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='39')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaTreintayNueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='40')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='40')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCuarenta
         respuesta.save()
@@ -312,83 +312,83 @@ def parteTres(request):
         preguntaCincuentayNueve = request.POST.get('preguntaCincuentayNueve', None)
         preguntaSesenta = request.POST.get('preguntaSesenta', None)
         evaluacion = Evaluacion.objects.get(id=request.session['id_evaluacion'])
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='41')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='41')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCuarentayUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='42')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='42')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCuarentayDos
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='43')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='43')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCuarentayTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='44')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='44')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCuarentayCuatro
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='45')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='45')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCuarentayCinco
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='46')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='46')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCuarentaySeis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='47')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='47')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCuarentaySiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='48')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='48')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCuarentayOcho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='49')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='49')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCuarentayNueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='50')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='50')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCincuenta
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='51')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='51')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCincuentayUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='52')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='52')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCincuentayDos
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='53')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='53')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCincuentayTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='54')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='54')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCincuentayCuatro
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='55')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='55')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCincuentayCinco
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='56')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='56')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCincuentaySeis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='57')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='57')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCincuentaySiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='58')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='58')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCincuentayOcho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='59')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='59')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCincuentayNueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='60')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='60')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSesenta
         respuesta.save()
@@ -424,83 +424,83 @@ def parteCuatro(request):
         preguntaSetentayNueve = request.POST.get('preguntaSetentayNueve', None)
         preguntaOchenta = request.POST.get('preguntaOchenta', None)
         evaluacion = Evaluacion.objects.get(id=request.session['id_evaluacion'])
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='61')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='61')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSesentayUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='62')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='62')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSesentayDos
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='63')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='63')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSesentayTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='64')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='64')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSesentayCuatro
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='65')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='65')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSesentayCinco
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='66')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='66')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSesentaySeis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='67')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='67')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSesentaySiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='68')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='68')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSesentayOcho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='69')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='69')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSesentayNueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='70')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='70')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSetenta
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='71')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='71')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSetentayUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='72')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='72')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSetentayDos
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='73')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='73')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSetentayTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='74')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='74')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSetentayCuatro
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='75')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='75')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSetentayCinco
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='76')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='76')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSetentaySeis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='77')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='77')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSetentaySiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='78')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='78')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSetentayOcho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='79')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='79')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaSetentayNueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='80')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='80')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaOchenta
         respuesta.save()
@@ -536,83 +536,83 @@ def parteCinco(request):
         preguntaNoventayNueve = request.POST.get('preguntaNoventayNueve', None)
         preguntaCien = request.POST.get('preguntaCien', None)
         evaluacion = Evaluacion.objects.get(id=request.session['id_evaluacion'])
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='81')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='81')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaOchentayUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='82')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='82')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaOchentayDos
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='83')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='83')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaOchentayTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='84')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='84')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaOchentayCuatro
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='85')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='85')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaOchentayCinco
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='86')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='86')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaOchentaySeis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='87')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='87')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaOchentaySiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='88')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='88')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaOchentayOcho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='89')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='89')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaOchentayNueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='90')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='90')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaNoventa
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='91')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='91')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaNoventayUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='92')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='92')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaNoventayDos
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='93')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='93')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaNoventayTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='94')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='94')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaNoventayCuatro
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='95')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='95')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaNoventayCinco
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='96')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='96')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaNoventaySeis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='97')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='97')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaNoventaySiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='98')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='98')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaNoventayOcho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='99')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='99')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaNoventayNueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='100')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='100')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCien
         respuesta.save()
@@ -650,91 +650,91 @@ def parteSeis(request):
         preguntaCientoVeinteyUno = request.POST.get('preguntaCientoVeinteyUno', None)
         preguntaCientoVeinteyDos = request.POST.get('preguntaCientoVeinteyDos', None)
         evaluacion = Evaluacion.objects.get(id=request.session['id_evaluacion'])
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='101')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='101')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='102')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='102')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoDos
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='103')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='103')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='104')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='104')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoCuatro
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='105')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='105')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoCinco
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='106')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='106')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoSeis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='107')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='107')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoSiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='108')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='108')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoOcho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='109')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='109')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoNueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='110')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='110')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoDiez
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='111')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='111')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoOnce
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='112')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='112')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoDoce
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='113')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='113')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoTrece
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='114')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='114')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoCatorce
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='115')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='115')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoQuince
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='116')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='116')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoDieciseis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='117')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='117')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoDiecisiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='118')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='118')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoDieciocho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='119')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='119')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoDiecinueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='120')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='120')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoVeinte
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='121')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='121')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoVeinteyUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='122')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='122')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoVeinteyDos
         respuesta.save()
@@ -772,91 +772,91 @@ def parteSiete(request):
         preguntaCientoCuarentayTres = request.POST.get('preguntaCientoCuarentayTres', None)
         preguntaCientoCuarentayCuatro = request.POST.get('preguntaCientoCuarentayCuatro', None)
         evaluacion = Evaluacion.objects.get(id=request.session['id_evaluacion'])
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='123')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='123')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoVeintiTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='124')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='124')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoVeintiCuatro
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='125')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='125')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoVeintiCinco
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='126')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='126')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoVeintiSeis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='127')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='127')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoVeintiSiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='128')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='128')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoVeintiOcho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='129')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='129')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoVeintiNueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='130')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='130')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoTreinta
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='131')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='131')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoTreintayUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='132')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='132')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoTreintayDos
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='133')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='133')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoTreintayTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='134')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='134')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoTreintayCuatro
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='135')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='135')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoTreintayCinco
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='136')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='136')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoTreintaySeis
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='137')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='137')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoTreintaySiete
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='138')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='138')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoTreintayOcho
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='139')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='139')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoTreintayNueve
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='140')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='140')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoCuarenta
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='141')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='141')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoCuarentayUno
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='142')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='142')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoCuarentayDos
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='143')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='143')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoCuarentayTres
         respuesta.save()
-        respuesta, created = Respuesta.objects.get_or_create(pregunta='144')
+        respuesta, created = Respuesta.objects.get_or_create(evaluacion = evaluacion, pregunta='144')
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoCuarentayCuatro
         respuesta.save()
