@@ -860,6 +860,7 @@ def parteSiete(request):
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoCuarentayCuatro
         respuesta.save()
+        messages.success(request, '¡Enhorabuena has compleatado la evaluacion con exito!')
         return redirect('Eneagrama:principal')
 
     nombreMostrar = request.session['nombre']
