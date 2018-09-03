@@ -55,7 +55,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="number" id="number" name="edad" required="required"
                                            data-validate-minmax="0,100" class="form-control col-md-7 col-xs-12"
-                                           placeholder="Escribe tu edad (solo se permiten numeros).">
+                                           placeholder="Escribe tu edad (solo se permiten numeros)." min="18">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -65,7 +65,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" id="empresa" class="form-control col-md-7 col-xs-12"
                                            name="empresa"
-                                           placeholder="Escribe el nombre de la empresa a la que perteneces (opcional).">
+                                           placeholder="Escribe el nombre de la empresa a la que perteneces." required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -104,12 +104,21 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado o Provincia:
+                                </label>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="estado" class="form-control col-md-7 col-xs-12"
+                                           name="estado" placeholder="Escribe el estado." required>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Ciudad y Estado:
                                 </label>
 
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" id="ciudad-estado" class="form-control col-md-7 col-xs-12"
-                                           name="ciudad" placeholder="Escribe la ciudad y el estado (opcional).">
+                                           name="ciudad" placeholder="Escribe la ciudad." required>
                                 </div>
                             </div>
                             <div class="ln_solid"></div>

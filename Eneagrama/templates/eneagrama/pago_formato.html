@@ -1,0 +1,90 @@
+{% extends 'eneagrama/app-base.html' %}
+{% load static %}
+{% block main %}
+    <div class="right_col" role="main">
+        <br>
+
+        <div class="row">
+            <div class="col-md-1 col-sm-1 col-xs-12 text-center">
+            </div>
+            <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Pertenezco a un curso.</h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+
+                        <form method="post" id="demo-form2" data-parsley-validate
+                              class="form-horizontal form-label-left"
+                              action="{% url 'Eneagrama:pago_formato' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h3>Tu eneotipo principal es:</h3> <strong>{{ evaluacion.get_eneatipoPrincipal_display }}</strong>
+                                        </div>
+                                    </div>
+                                 </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h2>¿Quieres conocer mas sobre tu personalidad?</h2><h1>Obten tu reporte dando click y en el boton!</h1>
+                                        </div>
+                                    </div>
+                                 </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <button type="submit" class="btn btn-primary">Cancel</button>
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Pagar mi reporte eneagrama.</h2>
+
+                        <h2 style="color: black;"><b> (PROXIMAMENTE)</b></h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+
+                        <form method="post" id="demo-form2" data-parsley-validate
+                              class="form-horizontal form-label-left"
+                              action="{% url 'Eneagrama:pago_formato' %}">
+
+                            {% csrf_token %}
+                            <div class="form-group" align="center">
+                                <img src="{% static 'img/paypal.png' %}" width="30%" height="30%">
+
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <!--<button type="submit" class="btn btn-primary">Cancel</button>
+                                        <button type="submit" class="btn btn-success">Submit</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 col-sm-1 col-xs-12">
+
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}

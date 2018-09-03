@@ -31,6 +31,7 @@ def register(request):
         edad = request.POST.get('edad', None)
         empresa = request.POST.get('empresa', None)
         pais = request.POST.get('pais', None)
+        estado = request.POST.get('estado', None)
         ciudad = request.POST.get('ciudad', None)
         request.session['nombre'] = nombre
         check_email = Usuario.objects.filter(email=email).first()
@@ -48,6 +49,7 @@ def register(request):
             usuario.edad = edad
             usuario.empresa = empresa
             usuario.pais = pais
+            usuario.estado = estado
             usuario.ciudad = ciudad
             usuario.save()
             evaluacion = Evaluacion()
@@ -861,7 +863,173 @@ def parteSiete(request):
         respuesta.valor = preguntaCientoCuarentayCuatro
         respuesta.save()
         messages.success(request, '¡Enhorabuena has compleatado la evaluacion con exito!')
-        return redirect('Eneagrama:principal')
+        return redirect('Eneagrama:pago_formato')
 
     nombreMostrar = request.session['nombre']
     return render(request, 'eneagrama/perfil_de_personalidad_parte_7.html', {'nombreMostrar': nombreMostrar})
+
+
+def pago_formato(request):
+    if not 'nombre' in request.session:
+        messages.warning(request, '¡Antes de obtener tu formato debes de identificarte!')
+        return redirect('Eneagrama:register')
+    else:
+        evaluacion = Evaluacion.objects.get(id=request.session['id_evaluacion'])
+        tipoUno = Respuesta.objects.filter(evaluacion = evaluacion, valor='D').count()
+        tipoDos = Respuesta.objects.filter(evaluacion = evaluacion, valor='F').count()
+        tipoTres = Respuesta.objects.filter(evaluacion = evaluacion, valor='C').count()
+        tipoCuatro = Respuesta.objects.filter(evaluacion = evaluacion, valor='E').count()
+        tipoCinco = Respuesta.objects.filter(evaluacion = evaluacion, valor='H').count()
+        tipoSeis = Respuesta.objects.filter(evaluacion = evaluacion, valor='B').count()
+        tipoSiete = Respuesta.objects.filter(evaluacion = evaluacion, valor='I').count()
+        tipoOcho = Respuesta.objects.filter(evaluacion = evaluacion, valor='G').count()
+        tipoNueve = Respuesta.objects.filter(evaluacion = evaluacion, valor='A').count()
+        if tipoUno == 0 or tipoDos == 0 or tipoTres == 0 or tipoCuatro == 0 or tipoCinco == 0 or tipoSeis == 0 or tipoSiete == 0 or tipoOcho == 0 or tipoNueve == 0:
+            messages.error(request,'¡Antes de obtener tu formato debes llenar la encuesta!')
+            return redirect('Eneagrama:parteUno')
+        else:
+            evaluacion.tipoUno = tipoUno
+            evaluacion.tipoDos = tipoDos
+            evaluacion.tipoTres = tipoTres
+            evaluacion.tipoCuatro = tipoCuatro
+            evaluacion.tipoCinco = tipoCinco
+            evaluacion.tipoSeis = tipoSeis
+            evaluacion.tipoSiete = tipoSiete
+            evaluacion.tipoOcho = tipoOcho
+            evaluacion.tipoNueve = tipoNueve
+            evaluacion.save()
+            tipos = [tipoUno, tipoDos, tipoTres, tipoCuatro, tipoCinco, tipoSeis, tipoSiete ,tipoOcho, tipoNueve]
+            eneatipoPrincipal = None
+            eneatipoSecundario = None
+            eneatipoTerciario = None
+#***********inicia ciclo para obtener el eneatipo************************************************************
+            i = 0
+            j = 1
+            valor2 = 0
+            valor3 = 0
+            while j <= 8:
+                if tipos[i] > tipos[j]:
+                    eneatipoPrincipal = i + 1
+                    if valor2 > tipos[j]:
+                        if valor3 < tipos[j]:
+                            eneatipoTerciario = j+1
+                            valor3 = tipos[j]
+                    else:
+                        valor3 = valor2
+                        eneatipoTerciario = eneatipoSecundario
+                        valor2 = tipos[j]
+                        eneatipoSecundario = j+1
+                    i = i
+                    j += 1
+                else:
+                    if valor2 > tipos[i]:
+                        eneatipoTerciario = i+1
+                        valor3 = tipos[i]
+                    else:
+                        valor3 = valor2
+                        eneatipoTerciario = eneatipoSecundario
+                        valor2 = tipos[i]
+                        eneatipoSecundario = i+1
+                    i = j
+                    j += 1
+                    eneatipoPrincipal = j
+#*******************finaliza ciclo para obtener el eneatipos**************************************************
+            evaluacion.eneatipoPrincipal = str(eneatipoPrincipal)
+            evaluacion.eneatipoSecundario = str(eneatipoSecundario)
+            evaluacion.eneatipoTerciario = str(eneatipoTerciario)
+            evaluacion.save()
+            centroFisico = tipoNueve + tipoUno + tipoOcho
+            centroEmocional = tipoDos + tipoTres + tipoCuatro
+            centroIntelectual = tipoCinco +tipoSeis + tipoSiete
+            energiaInterna = tipoUno + tipoCuatro + tipoCinco
+            energiaExterna = tipoDos + tipoSiete + tipoOcho
+            energiaEquilibrio = tipoNueve + tipoTres + tipoSeis
+            evaluacion.centroFisico = centroFisico
+            evaluacion.centroEmocional = centroEmocional
+            evaluacion.centroIntelectual = centroIntelectual
+            evaluacion.energiaInterna = energiaInterna
+            evaluacion.energiaExterna = energiaExterna
+            evaluacion.energiaEquilibrio = energiaEquilibrio
+            evaluacion.save()
+            tipos = [centroEmocional, centroFisico, centroIntelectual]
+            centroPrimario = None
+            centroSecundario = None
+            centroTerciario = None
+#***********inicia ciclo para obtener el centros************************************************************
+            i = 0
+            j = 1
+            valor2 = 0
+            valor3 = 0
+            while j <= 2:
+                if tipos[i] > tipos[j]:
+                    centroPrimario = i + 1
+                    if valor2 > tipos[j]:
+                        if valor3 < tipos[j]:
+                            centroTerciario = j+1
+                            valor3 = tipos[j]
+                    else:
+                        valor3 = valor2
+                        centroTerciario = centroSecundario
+                        valor2 = tipos[j]
+                        centroSecundario = j+1
+                    i = i
+                    j += 1
+                else:
+                    if valor2 > tipos[i]:
+                        centroTerciario = i+1
+                        valor3 = tipos[i]
+                    else:
+                        valor3 = valor2
+                        centroTerciario = centroSecundario
+                        valor2 = tipos[i]
+                        centroSecundario = i+1
+                    i = j
+                    j += 1
+                    centroPrimario = j
+#*******************finaliza ciclo para obtener el centros**************************************************
+            evaluacion.centroPrimario = str(centroPrimario)
+            evaluacion.centroSecundario = str(centroSecundario)
+            evaluacion.centroTerciario = str(centroTerciario)
+            evaluacion.save()
+            tipos = [energiaInterna, energiaExterna, energiaEquilibrio]
+            energiaPrimaria = None
+            energiaSecundaria = None
+            energiaTerciaria = None
+#***********inicia ciclo para obtener el centros************************************************************
+            i = 0
+            j = 1
+            valor2 = 0
+            valor3 = 0
+            while j <= 2:
+                if tipos[i] > tipos[j]:
+                    energiaPrimaria = i + 1
+                    if valor2 > tipos[j]:
+                        if valor3 < tipos[j]:
+                            energiaTerciaria = j+1
+                            valor3 = tipos[j]
+                    else:
+                        valor3 = valor2
+                        energiaTerciaria = energiaSecundaria
+                        valor2 = tipos[j]
+                        energiaSecundaria = j+1
+                    i = i
+                    j += 1
+                else:
+                    if valor2 > tipos[i]:
+                        energiaTerciaria = i+1
+                        valor3 = tipos[i]
+                    else:
+                        valor3 = valor2
+                        energiaTerciaria = energiaSecundaria
+                        valor2 = tipos[i]
+                        energiaSecundaria = i+1
+                    i = j
+                    j += 1
+                    energiaPrimaria = j
+#*******************finaliza ciclo para obtener el centros**************************************************
+            evaluacion.energiaPrimaria = str(energiaPrimaria)
+            evaluacion.energiaSecundaria = str(energiaSecundaria)
+            evaluacion.energiaTerciaria = str(energiaTerciaria)
+            evaluacion.save()
+    nombreMostrar = request.session['nombre']
+    return render(request, 'eneagrama/pago_formato.html', {'nombreMostrar': nombreMostrar, 'evaluacion':evaluacion})
