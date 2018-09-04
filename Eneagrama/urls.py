@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^perfil-de-personalidad-parte-6/$', views.parteSeis, name='parteSeis'),
     url(r'^perfil-de-personalidad-parte-7/$', views.parteSiete, name='parteSiete'),
     url(r'^pago-formato/$', views.pago_formato, name='pago_formato'),
+    url(r'^obtencion-de-valores/$', views.obtencion_de_valores, name='obtencion_de_valores'),
 ]

@@ -90,9 +90,9 @@ TEMPLATES = [
 ]
 
 # AUTHENTICATION
-LOGIN_URL = '/Rueda-de-la-vida/login/'
+LOGIN_URL = '/rueda-de-la-vida/login/'
 
-LOGIN_REDIRECT_URL = '/Rueda-de-la-vida/resultados/'
+LOGIN_REDIRECT_URL = '/rueda-de-la-vida/resultados/'
 
 #LOGOUT_REDIRECT_URL = None
 

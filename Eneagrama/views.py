@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect, get_object_or_404
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 # from django.http import HttpResponse #email sender
 # from django.template import Context #email sender
 # from django.template.loader import render_to_string, get_template #email sender
@@ -1033,3 +1033,17 @@ def pago_formato(request):
             evaluacion.save()
     nombreMostrar = request.session['nombre']
     return render(request, 'eneagrama/pago_formato.html', {'nombreMostrar': nombreMostrar, 'evaluacion':evaluacion})
+
+
+@login_required()
+def obtencion_de_valores(request):
+    usuario = None
+    evaluacion = None
+    usuariosSelect = Usuario.objects.all()
+    evaluaciones = Evaluacion.objects.all()
+    if request.method == "POST":
+        usuario = request.POST.get('usuario', None)
+        usuario = Usuario.objects.get(id=usuario)
+        evaluacion = Evaluacion.objects.get(usuario=usuario)
+
+    return render(request, 'eneagrama/obtencion_de_valores.html', {'evaluaciones':evaluaciones, 'usuariosSelect':usuariosSelect, 'evaluacion':evaluacion})

@@ -1,0 +1,217 @@
+{% extends 'eneagrama/app-base.html' %}
+{% load static %}
+{% block main %}
+    <div class="right_col" role="main">
+        <br>
+        <div class="row">
+            <div class="col-md-2 col-sm-2"></div>
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Usuarios<strong> que han realizado la evaluacion.</strong></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Usuario</th>
+                                <th>Encuesta numero</th>
+                                <th>Eneatipo principal</th>
+                                <th>Centro princpal</th>
+                                <th>Energia principal</th>
+                                <th>Correo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for evaluacion in evaluaciones %}
+                                <tr>
+                                    <td>
+                                        {{ evaluacion.usuario.id }}
+                                    </td>
+                                    <td>
+                                        {{ evaluacion.usuario.nombre }} {{ evaluacion.usuario.apellidos }}
+                                    </td>
+                                    <td>{{ evaluacion.id }}</td>
+                                    <td>{{ evaluacion.get_eneatipoPrincipal_display }}</td>
+                                    <td>
+                                        {{ evaluacion.get_centroPrimario_display }}
+                                    </td>
+                                    <td>{{ evaluacion.get_energiaPrimaria_display }}</td>
+                                    <td>{{ evaluacion.usuario.email }}</td>
+                                </tr>
+                            {% empty %}
+                                <h2> No hay usuarios para mostrar. </h2>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2"></div>
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Obtener<strong> Valores de la evaluacion.</strong></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form class="form" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="col-md-4 col-sm-4 col-xs-6">
+                                <select name="usuario" class="form-control" required>
+                                <option value="">Selecciona a un usuario</option></option>
+                                    {% for usuarioSelect in usuariosSelect %}
+                                        <option value="{{ usuarioSelect.id }}">{{ usuarioSelect.nombre }} {{ usuarioSelect.apellidos }}</option></option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-6">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
+				    </div>
+                    {% if evaluacion %}
+                    <div class="x_content">
+                        <table id="datatable-buttons" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Eneatipos</th>
+                                <th>Total</th>
+                                <th>Centros</th>
+                                <th>Total</th>
+                                <th>Energias</th>
+                                <th>Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        1. Perfeccionista
+                                    </td>
+                                    <td>
+                                        {{ evaluacion.tipoUno }}
+                                    </td>
+                                    <td>
+                                        1. Emocional
+                                    </td>
+                                    <td>{{ evaluacion.centroEmocional }}</td>
+                                    <td>
+                                        1. Interna
+                                    </td>
+                                    <td>{{ evaluacion.energiaInterna }}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        2. Colaborador
+                                    </td>
+                                    <td>
+                                        {{ evaluacion.tipoDos }}
+                                    </td>
+                                    <td>
+                                        2. Físico
+                                    </td>
+                                    <td>{{ evaluacion.centroFisico }}</td>
+                                    <td>
+                                        2. Externa
+                                    </td>
+                                    <td>{{ evaluacion.energiaExterna }}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        3. Competitivo
+                                    </td>
+                                    <td>
+                                        {{ evaluacion.tipoTres }}
+                                    </td>
+                                    <td>
+                                        3. Intelectual
+                                    </td>
+                                    <td>{{ evaluacion.centroIntelectual }}</td>
+                                    <td>
+                                        3. Equilibrio
+                                    </td>
+                                    <td>{{ evaluacion.energiaEquilibrio }}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        4. Creativo
+                                    </td>
+                                    <td>
+                                        {{ evaluacion.tipoCuatro }}
+                                    </td>
+                                    <td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        5. Analítico
+                                    </td>
+                                    <td>
+                                        {{ evaluacion.tipoCinco }}
+                                    </td>
+                                    <td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        6. Comprometido
+                                    </td>
+                                    <td>
+                                        {{ evaluacion.tipoSeis }}
+                                    </td>
+                                    <td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        7. Dinámico
+                                    </td>
+                                    <td>
+                                        {{ evaluacion.tipoSiete }}
+                                    </td>
+                                    <td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        8. Líder
+                                    </td>
+                                    <td>
+                                        {{ evaluacion.tipoOcho }}
+                                    </td>
+                                    <td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        9. Conciliador
+                                    </td>
+                                    <td>
+                                        {{ evaluacion.tipoNueve }}
+                                    </td>
+                                    <td></td><td></td><td></td>
+                                    <td>
+                                        {{ evaluacion.usuario.nombre }} {{ evaluacion.usuario.apellidos }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}
