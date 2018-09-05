@@ -7,3 +7,6 @@ from . import models
 admin.site.register(models.Usuario)
 admin.site.register(models.Evaluacion)
 admin.site.register(models.Respuesta)
+admin.site.register(models.Eneatipo)
+admin.site.register(models.Centro)
+admin.site.register(models.Energia)

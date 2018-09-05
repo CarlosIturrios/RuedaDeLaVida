@@ -3,13 +3,16 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-# from django.http import HttpResponse #email sender
-# from django.template import Context #email sender
-# from django.template.loader import render_to_string, get_template #email sender
-# from django.core.mail import EmailMessage, EmailMultiAlternatives #email sender
-from django.conf import settings
-from django.core import signing
 from django.contrib import messages
+from django.http import HttpResponse #email sender
+from django.template import Context #email sender
+from django.template.loader import render_to_string, get_template #email sender
+from django.core.mail import EmailMessage, EmailMultiAlternatives #email sender
+from django.core import signing
+from django.conf import settings
+from django.views.generic import View
+from io import BytesIO
+from reportlab.pdfgen import canvas
 
 from .models import Usuario, Evaluacion, Respuesta
 
