@@ -23,6 +23,8 @@ urlpatterns = [
 
     # URLs WebPagRuedaDLV
     url(r'^rueda-de-la-vida/', include('WebPagRuedaDLV.urls', namespace='WebPagRuedaDLV')),
+
+
 ]
 
 if settings.DEBUG is True:

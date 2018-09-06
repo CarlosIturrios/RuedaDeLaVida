@@ -4,3 +4,4 @@ Pillow==5.1.0
 django-bootstrap3==9.1.0
 django-allauth==0.36.0
 reportlab==3.4.0
+openpyxl==2.5.6

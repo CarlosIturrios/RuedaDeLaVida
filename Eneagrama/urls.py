@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
 from . import views
-
+from .views import  ReporteExcel
 
 urlpatterns = [
     # App views    
@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'^perfil-de-personalidad-parte-7/$', views.parteSiete, name='parteSiete'),
     url(r'^pago-formato/$', views.pago_formato, name='pago_formato'),
     url(r'^obtencion-de-valores/$', views.obtencion_de_valores, name='obtencion_de_valores'),
+    url(r'^reporte_excel/$', ReporteExcel.as_view(), name="reporte_excel"),
 ]

@@ -154,7 +154,7 @@ class Eneatipo(models.Model):
 		)
 	)
     def __str__(self):
-        return 'eneatipo: '.format(self.get_eneatipo_display())
+        return 'eneatipo: {0}'.format(self.get_eneatipo_display())
 
 
 class Centro(models.Model):
@@ -167,7 +167,7 @@ class Centro(models.Model):
 		)
 	)
     def __str__(self):
-        return 'Centro: '.format(self.get_centro_display())
+        return 'Centro: {0}'.format(self.get_centro_display())
 
 
 class Energia(models.Model):
