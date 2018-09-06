@@ -30,19 +30,19 @@ class ReporteExcel(TemplateView):
         eneatipoTerciario = Eneatipo.objects.get(eneatipo=evaluacion.eneatipoTerciario)
         centro = Centro.objects.get(centro=evaluacion.centroPrimario)
         energia = Energia.objects.get(energia=evaluacion.eneatipoPrincipal)
-        diccionarioUno= {'tipo':'1. Perfeccionista', 'total':evaluacion.tipoUno}
-        diccionarioDos = {'tipo':'2. Colaborador', 'total':evaluacion.tipoDos}
-        diccionarioTres = {'tipo':'3. Competitivo', 'total':evaluacion.tipoTres}
-        diccionarioCuatro = {'tipo':'4. Creativo', 'total':evaluacion.tipoCuatro}
-        diccionarioCinco = {'tipo':'5. Analítico', 'total':evaluacion.tipoCinco}
-        diccionarioSeis = {'tipo':'6. Comprometido', 'total':evaluacion.tipoSeis}
-        diccionarioSiete = {'tipo':'7. Dinámico', 'total':evaluacion.tipoSiete}
-        diccionarioOcho = {'tipo':'8. Líder', 'total':evaluacion.tipoOcho}
-        diccionarioNueve = {'tipo':'9. Conciliador', 'total':evaluacion.tipoNueve}
+        diccionarioUno = {'tipo': '1. Perfeccionista', 'total': evaluacion.tipoUno}
+        diccionarioDos = {'tipo': '2. Colaborador', 'total': evaluacion.tipoDos}
+        diccionarioTres = {'tipo': '3. Competitivo', 'total': evaluacion.tipoTres}
+        diccionarioCuatro = {'tipo': '4. Creativo', 'total': evaluacion.tipoCuatro}
+        diccionarioCinco = {'tipo': '5. Analítico', 'total': evaluacion.tipoCinco}
+        diccionarioSeis = {'tipo': '6. Comprometido', 'total': evaluacion.tipoSeis}
+        diccionarioSiete = {'tipo': '7. Dinámico', 'total': evaluacion.tipoSiete}
+        diccionarioOcho = {'tipo': '8. Líder', 'total': evaluacion.tipoOcho}
+        diccionarioNueve = {'tipo': '9. Conciliador', 'total': evaluacion.tipoNueve}
         lista = [diccionarioUno, diccionarioDos, diccionarioTres, diccionarioCuatro, diccionarioCinco,
                  diccionarioSeis, diccionarioSiete, diccionarioOcho, diccionarioNueve]
-        newList = sorted(lista,key=lambda k: k['total'])
-        wb = load_workbook(settings.MEDIA_ROOT+'/excel/Template_Eneagrama.xlsx')
+        newList = sorted(lista, key=lambda k: k['total'])
+        wb = load_workbook(settings.MEDIA_ROOT + '/excel/Template_Eneagrama.xlsx')
         ws = wb.active
         ws['B2'] = evaluacion.usuario.nombre + ' ' + evaluacion.usuario.apellidos
         ws['B5'] = newList[0]['tipo']
@@ -113,13 +113,14 @@ class ReporteExcel(TemplateView):
         elif evaluacion.energiaTerciaria == '3':
             ws['Q36'] = evaluacion.energiaEquilibrio
 
-        nombre_archivo = "ReporteUsuarios.xlsx"
-        response = HttpResponse(content_type= "application/ms-excel")
+        nombre_archivo = "ReporteEneagrama.xlsx"
+        response = HttpResponse(content_type="application/ms-excel")
         content = "attachment; filename = {0}".format(nombre_archivo)
         response['Content-Disposition'] = content
         wb.save(response)
 
         return response
+
 
 def principal(request):
     return render(request, 'eneagrama/principal.html')
@@ -1039,7 +1040,7 @@ def pago_formato(request):
                     i = j
                     j += 1
                     eneatipoPrincipal = j
-                # *******************finaliza ciclo para obtener el eneatipos**************************************************
+                    # *******************finaliza ciclo para obtener el eneatipos**************************************************
             evaluacion.eneatipoPrincipal = str(eneatipoPrincipal)
             evaluacion.eneatipoSecundario = str(eneatipoSecundario)
             evaluacion.eneatipoTerciario = str(eneatipoTerciario)
@@ -1092,7 +1093,7 @@ def pago_formato(request):
                     i = j
                     j += 1
                     centroPrimario = j
-                # *******************finaliza ciclo para obtener el centros**************************************************
+                    # *******************finaliza ciclo para obtener el centros**************************************************
             evaluacion.centroPrimario = str(centroPrimario)
             evaluacion.centroSecundario = str(centroSecundario)
             evaluacion.centroTerciario = str(centroTerciario)
@@ -1132,7 +1133,7 @@ def pago_formato(request):
                     i = j
                     j += 1
                     energiaPrimaria = j
-                # *******************finaliza ciclo para obtener el centros**************************************************
+                    # *******************finaliza ciclo para obtener el centros**************************************************
             evaluacion.energiaPrimaria = str(energiaPrimaria)
             evaluacion.energiaSecundaria = str(energiaSecundaria)
             evaluacion.energiaTerciaria = str(energiaTerciaria)
