@@ -18,6 +18,7 @@ from openpyxl.writer.excel import save_virtual_workbook
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Font
 from openpyxl.drawing.image import Image
 from datetime import date
+from io import BytesIO
 
 from .models import Usuario, Evaluacion, Respuesta, Energia, Centro, Eneatipo
 
@@ -118,8 +119,24 @@ class ReporteExcel(TemplateView):
         content = "attachment; filename = {0}".format(nombre_archivo)
         response['Content-Disposition'] = content
         wb.save(response)
+        workbook = wb
+        output = BytesIO()
+        workbook.save(output)
 
-        return response
+        subject = 'Eneagrama, resultados para: {0}'.format(evaluacion.usuario.nombre)
+        html_content = get_template('eneagrama/email/formato_email.html').render({'evaluacion': evaluacion})
+
+        msg = EmailMessage(
+            subject=subject,
+            body=html_content,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=['c.iturriosalcaraz@gmail.com',],
+        )
+        msg.content_subtype = "html"
+        msg.attach("ReporteEneagrama.xlsx", output.getvalue(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        msg.send(fail_silently= not settings.DEBUG)
+
+        return redirect('Eneagrama:principal')
 
 
 def principal(request):
