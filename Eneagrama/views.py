@@ -114,6 +114,9 @@ class ReporteExcel(TemplateView):
         elif evaluacion.energiaTerciaria == '3':
             ws['Q36'] = evaluacion.energiaEquilibrio
 
+        img = Image(settings.MEDIA_ROOT + '/excel/LOGO_EXCEL.png')
+        ws.add_image(img,'R50')
+
         nombre_archivo = "ReporteEneagrama.xlsx"
         response = HttpResponse(content_type="application/ms-excel")
         content = "attachment; filename = {0}".format(nombre_archivo)
@@ -135,7 +138,7 @@ class ReporteExcel(TemplateView):
         msg.content_subtype = "html"
         msg.attach("ReporteEneagrama.xlsx", output.getvalue(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         msg.send(fail_silently= not settings.DEBUG)
-
+        messages.success(request, '¡{0} {1}, Tu reporte te llegara a tu correo en unos momentos!'.format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         return redirect('Eneagrama:principal')
 
 
@@ -145,7 +148,8 @@ def principal(request):
 
 def register(request):
     if 'nombre' in request.session:
-        messages.success(request, '¡Bienvenido de nuevo!')
+        evaluacion = Evaluacion.objects.get(id=request.session['id_evaluacion'])
+        messages.success(request, '¡Bienvenido de nuevo {0} {1}!'.format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         return redirect('Eneagrama:parteUno')
     nombreMostrar = None
     if request.method == "POST":
