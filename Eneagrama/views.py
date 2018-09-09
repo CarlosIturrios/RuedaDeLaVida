@@ -133,7 +133,7 @@ class ReporteExcel(TemplateView):
             subject=subject,
             body=html_content,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            to=['c.iturriosalcaraz@gmail.com',],
+            to=['manuel.chavez.carrillo@gmail.com',],
         )
         msg.content_subtype = "html"
         msg.attach("ReporteEneagrama.xlsx", output.getvalue(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
