@@ -221,7 +221,7 @@ class ReporteExcel(TemplateView):
             cc=['c.iturriosalcaraz@gmail.com',],
         )
         msg.content_subtype = "html"
-        msg.attach(nombre_archivo, evaluacion.usuario.apellidos), output.getvalue(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        msg.attach("ReporteEneagrama.xlsx", evaluacion.usuario.apellidos), output.getvalue(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         msg.send(fail_silently= not settings.DEBUG)
         messages.success(request, '¡{0} {1}, Tu reporte te llegara a tu correo en unos momentos!'.format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         return redirect('Eneagrama:principal')
