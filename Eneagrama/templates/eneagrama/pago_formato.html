@@ -5,12 +5,11 @@
         <br>
 
         <div class="row">
-            <div class="col-md-1 col-sm-1 col-xs-12 text-center">
-            </div>
-            <div class="col-md-5 col-sm-5 col-xs-12">
+            <div class="col-md-3 col-sm-3"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Pertenezco a un curso.</h2>
+                        <h2>Obtener reporte eneagrama.</h2>
 
                         <div class="clearfix"></div>
                     </div>
@@ -25,22 +24,25 @@
                                 <div class="form-group">
                                     <div>
                                         <div class="col-md-12">
-                                            <h3>Tu eneotipo principal es:</h3> <strong>{{ evaluacion.get_eneatipoPrincipal_display }}</strong>
+                                            <h3>Tu eneatipo principal es: <strong>{{ evaluacion.get_eneatipoPrincipal_display }}</strong></h3>
                                         </div>
                                     </div>
                                  </div>
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div>
-                                        <div class="col-md-12">
-                                            <h2>¿Quieres conocer mas sobre tu personalidad?</h2><h1>Obten tu reporte dando click y en el boton!</h1>
+                                        <div class="col-md-12" align="center">
+                                            <h2>Cuando envies tus respuestas ya no podras regresar a modificarlas.</h2>
                                         </div>
                                     </div>
                                  </div>
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
-                                    <div class="col-md-6 col-md-offset-3">
-                                        <a class="btn btn-primary" href="{% url 'Eneagrama:reporte_excel' %}">reporte</a>
+                                    <div class="col-md-12 col-sm-12 col-xs-12" align="center">
+                                        <a class="btn btn-info"
+                                           href="{% url 'Eneagrama:parteSiete' %}">Regresar
+                                        </a>
+                                        <a class="btn btn-primary" href="{% url 'Eneagrama:reporte_excel' %}">Obtener Reporte</a>
                                     </div>
                                 </div>
                             </div>
@@ -48,6 +50,8 @@
                     </div>
                 </div>
             </div>
+
+<!--
             <div class="col-md-5 col-sm-5 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
@@ -72,7 +76,7 @@
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-3">
                                         <!--<button type="submit" class="btn btn-primary">Cancel</button>
-                                        <button type="submit" class="btn btn-success">Submit</button> -->
+                                        <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -80,9 +84,11 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-1 col-sm-1 col-xs-12">
 
             </div>
+-->
         </div>
     </div>
     <!-- /page content -->

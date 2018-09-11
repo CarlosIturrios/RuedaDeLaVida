@@ -42,28 +42,102 @@ class ReporteExcel(TemplateView):
         diccionarioNueve = {'tipo': '9. Conciliador', 'total': evaluacion.tipoNueve}
         lista = [diccionarioUno, diccionarioDos, diccionarioTres, diccionarioCuatro, diccionarioCinco,
                  diccionarioSeis, diccionarioSiete, diccionarioOcho, diccionarioNueve]
-        newList = sorted(lista, key=lambda k: k['total'])
+        newList = lista
+        listaOrdenada  = sorted(lista, key=lambda k: k['total'])
         wb = load_workbook(settings.MEDIA_ROOT + '/excel/Template_Eneagrama.xlsx')
         ws = wb.active
         ws['B2'] = evaluacion.usuario.nombre + ' ' + evaluacion.usuario.apellidos
+        ws['R2'] = evaluacion.fecha_creacion
         ws['B5'] = newList[0]['tipo']
         ws['C5'] = newList[0]['total']
+        if newList[0]['tipo'] == listaOrdenada[8]['tipo']:
+            B5 = ws['B5']
+            C5 = ws['C5']
+            ft = Font(bold=True)
+            B5.font = ft
+            C5.font = ft
+            ws['B5'].fill = PatternFill(bgColor="d9d9d9", fill_type = "lightGray")
+            ws['C5'].fill = PatternFill(bgColor="d9d9d9", fill_type = "lightGray")
         ws['B6'] = newList[1]['tipo']
         ws['C6'] = newList[1]['total']
+        if newList[1]['tipo'] == listaOrdenada[8]['tipo']:
+            B6 = ws['B6']
+            C6 = ws['C6']
+            ft = Font(bold=True)
+            B6.font = ft
+            C6.font = ft
+            ws['B6'].fill = PatternFill(bgColor="d9d9d9", fill_type = "lightGray")
+            ws['C6'].fill = PatternFill(bgColor="d9d9d9", fill_type = "lightGray")
         ws['B7'] = newList[2]['tipo']
         ws['C7'] = newList[2]['total']
+        if newList[2]['tipo'] == listaOrdenada[8]['tipo']:
+            B7 = ws['B7']
+            C7 = ws['C7']
+            ft = Font(bold=True)
+            B7.font = ft
+            C7.font = ft
+            ws['B7'].fill = PatternFill(bgColor="d9d9d9", fill_type = "lightGray")
+            ws['C7'].fill = PatternFill(bgColor="d9d9d9", fill_type = "lightGray")
         ws['B8'] = newList[3]['tipo']
         ws['C8'] = newList[3]['total']
+        if newList[3]['tipo'] == listaOrdenada[8]['tipo']:
+            B8 = ws['B8']
+            C8 = ws['C8']
+            ft = Font(bold=True)
+            B8.font = ft
+            C8.font = ft
+            ws['B8'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
+            ws['C8'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
         ws['B9'] = newList[4]['tipo']
         ws['C9'] = newList[4]['total']
+        if newList[4]['tipo'] == listaOrdenada[8]['tipo']:
+            B9 = ws['B9']
+            C9 = ws['C9']
+            ft = Font(bold=True)
+            B9.font = ft
+            C9.font = ft
+            ws['B9'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
+            ws['C9'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
         ws['B10'] = newList[5]['tipo']
         ws['C10'] = newList[5]['total']
+        if newList[5]['tipo'] == listaOrdenada[8]['tipo']:
+            B10 = ws['B10']
+            C10 = ws['C10']
+            ft = Font(bold=True)
+            B10.font = ft
+            C10.font = ft
+            ws['B10'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
+            ws['C10'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
         ws['B11'] = newList[6]['tipo']
         ws['C11'] = newList[6]['total']
+        if newList[6]['tipo'] == listaOrdenada[8]['tipo']:
+            B11 = ws['B11']
+            C11 = ws['C11']
+            ft = Font(bold=True)
+            B11.font = ft
+            C11.font = ft
+            ws['B11'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
+            ws['C11'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
         ws['B12'] = newList[7]['tipo']
         ws['C12'] = newList[7]['total']
+        if newList[7]['tipo'] == listaOrdenada[8]['tipo']:
+            B12 = ws['B12']
+            C12 = ws['C12']
+            ft = Font(bold=True)
+            B12.font = ft
+            C12.font = ft
+            ws['B12'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
+            ws['C12'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
         ws['B13'] = newList[8]['tipo']
         ws['C13'] = newList[8]['total']
+        if newList[8]['tipo'] == listaOrdenada[8]['tipo']:
+            B13 = ws['B13']
+            C13 = ws['C13']
+            ft = Font(bold=True)
+            B13.font = ft
+            C13.font = ft
+            ws['B13'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
+            ws['C13'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
         ws['O21'] = evaluacion.get_centroPrimario_display()
         ws['O22'] = evaluacion.get_centroSecundario_display()
         ws['O23'] = evaluacion.get_centroTerciario_display()
@@ -89,6 +163,16 @@ class ReporteExcel(TemplateView):
             ws['Q23'] = evaluacion.centroFisico
         elif evaluacion.centroTerciario == '3':
             ws['Q23'] = evaluacion.centroIntelectual
+        ws['B20'] = listaOrdenada[8]['tipo']
+        ws['B29'] = listaOrdenada[7]['tipo']
+        ws['B38'] = listaOrdenada[6]['tipo']
+
+        ws['K7'] = listaOrdenada[8]['tipo']
+        ws['L7'] = listaOrdenada[8]['total']
+        ws['K8'] = listaOrdenada[7]['tipo']
+        ws['L8'] = listaOrdenada[7]['total']
+        ws['K9'] = listaOrdenada[6]['tipo']
+        ws['L9'] = listaOrdenada[6]['total']
 
         ws['O34'] = evaluacion.get_energiaPrimaria_display()
         ws['O35'] = evaluacion.get_energiaSecundaria_display()
@@ -117,7 +201,7 @@ class ReporteExcel(TemplateView):
         img = Image(settings.MEDIA_ROOT + '/excel/LOGO_EXCEL.png')
         ws.add_image(img,'R50')
 
-        nombre_archivo = "ReporteEneagrama.xlsx"
+        nombre_archivo = "Reporte_Eneagrama {0} {1}.xlsx".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos)
         response = HttpResponse(content_type="application/ms-excel")
         content = "attachment; filename = {0}".format(nombre_archivo)
         response['Content-Disposition'] = content
@@ -134,9 +218,10 @@ class ReporteExcel(TemplateView):
             body=html_content,
             from_email=settings.DEFAULT_FROM_EMAIL,
             to=['manuel.chavez.carrillo@gmail.com',],
+            cc=['c.iturriosalcaraz@gmail.com',],
         )
         msg.content_subtype = "html"
-        msg.attach("ReporteEneagrama.xlsx", output.getvalue(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        msg.attach("Reporte Eneagrama {0} {1}.xlsx".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos), output.getvalue(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         msg.send(fail_silently= not settings.DEBUG)
         messages.success(request, '¡{0} {1}, Tu reporte te llegara a tu correo en unos momentos!'.format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         return redirect('Eneagrama:principal')
@@ -161,31 +246,34 @@ def register(request):
         pais = request.POST.get('pais', None)
         estado = request.POST.get('estado', None)
         ciudad = request.POST.get('ciudad', None)
-        request.session['nombre'] = nombre
         check_email = Usuario.objects.filter(email=email).first()
         if check_email:
-            messages.success(request, '¡Bienvenido de nuevo!')
             request.session['id_user'] = check_email.id
+            check_email.nombre = nombre
+            check_email.apellidos = apellidos
+            check_email.email = email
+            check_email.edad = edad
+            check_email.empresa = empresa
+            check_email.pais = pais
+            check_email.estado = estado
+            check_email.ciudad = ciudad
+            check_email.save()
+            request.session['nombre'] = nombre
             evaluacion = Evaluacion.objects.get(usuario=check_email)
-            request.session['id_evaluacion'] = evaluacion.id
+            if evaluacion:
+                evaluacion.usuario = check_email
+                evaluacion.save()
+                request.session['id_evaluacion'] = evaluacion.id
+            else:
+                evaluacion = Evaluacion()
+                evaluacion.usuario = check_email
+                evaluacion.save()
+                request.session['id_evaluacion'] = evaluacion.id
+            messages.success(request, '¡Bienvenido {0} {1}'.format(check_email.nombre, check_email.apellidos))
             return redirect('Eneagrama:parteUno')
         else:
-            usuario = Usuario()
-            usuario.nombre = nombre
-            usuario.apellidos = apellidos
-            usuario.email = email
-            usuario.edad = edad
-            usuario.empresa = empresa
-            usuario.pais = pais
-            usuario.estado = estado
-            usuario.ciudad = ciudad
-            usuario.save()
-            evaluacion = Evaluacion()
-            evaluacion.usuario = usuario
-            evaluacion.save()
-            request.session['id_user'] = usuario.id
-            request.session['id_evaluacion'] = evaluacion.id
-            return redirect('Eneagrama:parteUno')
+            messages.warning(request, 'Contacta al administrador para que puedas iniciarlizar en la aplicación.')
+            return redirect('Eneagrama:register')
 
     return render(request, 'eneagrama/register.html', {'nombreMostrar': nombreMostrar})
 
@@ -1176,3 +1264,9 @@ def obtencion_de_valores(request):
 
     return render(request, 'eneagrama/obtencion_de_valores.html',
                   {'evaluaciones': evaluaciones, 'usuariosSelect': usuariosSelect, 'evaluacion': evaluacion})
+
+class Borrar_sesion(TemplateView):
+    def get(self, request, *args, **kwargs):
+        del request.session['nombre']
+        del request.session['id_evaluacion']
+        return redirect('Eneagrama:register')

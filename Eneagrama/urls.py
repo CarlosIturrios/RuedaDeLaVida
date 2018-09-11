@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
 from . import views
-from .views import  ReporteExcel
+from .views import  ReporteExcel, Borrar_sesion
 
 urlpatterns = [
     # App views    
@@ -18,4 +18,5 @@ urlpatterns = [
     url(r'^pago-formato/$', views.pago_formato, name='pago_formato'),
     url(r'^obtencion-de-valores/$', views.obtencion_de_valores, name='obtencion_de_valores'),
     url(r'^reporte_excel/$', ReporteExcel.as_view(), name="reporte_excel"),
+    url(r'^borrar-sesion/$', Borrar_sesion.as_view(), name="borrar_sesion"),
 ]

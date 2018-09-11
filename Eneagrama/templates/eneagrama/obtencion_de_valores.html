@@ -4,8 +4,8 @@
     <div class="right_col" role="main">
         <br>
         <div class="row">
-            <div class="col-md-2 col-sm-2"></div>
-            <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="col-md-1 col-sm-1"></div>
+            <div class="col-md-10 col-sm-10 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Usuarios<strong> que han realizado la evaluacion.</strong></h2>
@@ -27,6 +27,9 @@
                                 <th>Eneatipo principal</th>
                                 <th>Centro princpal</th>
                                 <th>Energia principal</th>
+                                <th>Estado</th>
+                                <th>Ciudad</th>
+                                <th>Empresa</th>
                                 <th>Correo</th>
                             </tr>
                             </thead>
@@ -45,6 +48,9 @@
                                         {{ evaluacion.get_centroPrimario_display }}
                                     </td>
                                     <td>{{ evaluacion.get_energiaPrimaria_display }}</td>
+                                    <td>{{ evaluacion.usuario.estado }}</td>
+                                    <td>{{ evaluacion.usuario.ciudad }}</td>
+                                    <td>{{ evaluacion.usuario.empresa }}</td>
                                     <td>{{ evaluacion.usuario.email }}</td>
                                 </tr>
                             {% empty %}
@@ -57,8 +63,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2 col-sm-2"></div>
-            <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="col-md-1 col-sm-1"></div>
+            <div class="col-md-10 col-sm-10 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Obtener<strong> Valores de la evaluacion.</strong></h2>
