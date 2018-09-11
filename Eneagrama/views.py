@@ -221,7 +221,7 @@ class ReporteExcel(TemplateView):
             cc=['c.iturriosalcaraz@gmail.com',],
         )
         msg.content_subtype = "html"
-        msg.attach("Reporte Eneagrama {0} {1}.xlsx".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos), output.getvalue(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        msg.attach('Reporte Eneagrama {0} {1}.xlsx'.format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos), output.getvalue(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         msg.send(fail_silently= not settings.DEBUG)
         messages.success(request, '¡{0} {1}, Tu reporte te llegara a tu correo en unos momentos!'.format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         return redirect('Eneagrama:principal')
@@ -272,7 +272,7 @@ def register(request):
             messages.success(request, '¡Bienvenido {0} {1}'.format(check_email.nombre, check_email.apellidos))
             return redirect('Eneagrama:parteUno')
         else:
-            messages.warning(request, 'Contacta al administrador para que puedas iniciarlizar en la aplicación.')
+            messages.warning(request, 'Contacta al administrador para que puedas inicializar en la aplicación.')
             return redirect('Eneagrama:register')
 
     return render(request, 'eneagrama/register.html', {'nombreMostrar': nombreMostrar})
