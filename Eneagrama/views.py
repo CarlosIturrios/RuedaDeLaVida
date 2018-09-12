@@ -43,7 +43,7 @@ class ReporteExcel(TemplateView):
         lista = [diccionarioUno, diccionarioDos, diccionarioTres, diccionarioCuatro, diccionarioCinco,
                  diccionarioSeis, diccionarioSiete, diccionarioOcho, diccionarioNueve]
         newList = lista
-        listaOrdenada  = sorted(lista, key=lambda k: k['total'])
+        listaOrdenada = sorted(lista, key=lambda k: k['total'])
         wb = load_workbook(settings.MEDIA_ROOT + '/excel/Template_Eneagrama.xlsx')
         ws = wb.active
         ws['B2'] = evaluacion.usuario.nombre + ' ' + evaluacion.usuario.apellidos
@@ -56,8 +56,8 @@ class ReporteExcel(TemplateView):
             ft = Font(bold=True)
             B5.font = ft
             C5.font = ft
-            ws['B5'].fill = PatternFill(bgColor="d9d9d9", fill_type = "lightGray")
-            ws['C5'].fill = PatternFill(bgColor="d9d9d9", fill_type = "lightGray")
+            ws['B5'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+            ws['C5'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
         ws['B6'] = newList[0]['tipo']
         ws['C6'] = newList[0]['total']
         if newList[0]['tipo'] == listaOrdenada[8]['tipo']:
@@ -66,8 +66,8 @@ class ReporteExcel(TemplateView):
             ft = Font(bold=True)
             B6.font = ft
             C6.font = ft
-            ws['B6'].fill = PatternFill(bgColor="d9d9d9", fill_type = "lightGray")
-            ws['C6'].fill = PatternFill(bgColor="d9d9d9", fill_type = "lightGray")
+            ws['B6'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+            ws['C6'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
         ws['B7'] = newList[1]['tipo']
         ws['C7'] = newList[1]['total']
         if newList[1]['tipo'] == listaOrdenada[8]['tipo']:
@@ -76,8 +76,8 @@ class ReporteExcel(TemplateView):
             ft = Font(bold=True)
             B7.font = ft
             C7.font = ft
-            ws['B7'].fill = PatternFill(bgColor="d9d9d9", fill_type = "lightGray")
-            ws['C7'].fill = PatternFill(bgColor="d9d9d9", fill_type = "lightGray")
+            ws['B7'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+            ws['C7'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
         ws['B8'] = newList[2]['tipo']
         ws['C8'] = newList[2]['total']
         if newList[2]['tipo'] == listaOrdenada[8]['tipo']:
@@ -86,8 +86,8 @@ class ReporteExcel(TemplateView):
             ft = Font(bold=True)
             B8.font = ft
             C8.font = ft
-            ws['B8'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
-            ws['C8'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
+            ws['B8'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+            ws['C8'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
         ws['B9'] = newList[3]['tipo']
         ws['C9'] = newList[3]['total']
         if newList[3]['tipo'] == listaOrdenada[8]['tipo']:
@@ -96,8 +96,8 @@ class ReporteExcel(TemplateView):
             ft = Font(bold=True)
             B9.font = ft
             C9.font = ft
-            ws['B9'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
-            ws['C9'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
+            ws['B9'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+            ws['C9'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
         ws['B10'] = newList[4]['tipo']
         ws['C10'] = newList[4]['total']
         if newList[4]['tipo'] == listaOrdenada[8]['tipo']:
@@ -106,8 +106,8 @@ class ReporteExcel(TemplateView):
             ft = Font(bold=True)
             B10.font = ft
             C10.font = ft
-            ws['B10'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
-            ws['C10'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
+            ws['B10'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+            ws['C10'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
         ws['B11'] = newList[5]['tipo']
         ws['C11'] = newList[5]['total']
         if newList[5]['tipo'] == listaOrdenada[8]['tipo']:
@@ -116,8 +116,8 @@ class ReporteExcel(TemplateView):
             ft = Font(bold=True)
             B11.font = ft
             C11.font = ft
-            ws['B11'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
-            ws['C11'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
+            ws['B11'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+            ws['C11'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
         ws['B12'] = newList[6]['tipo']
         ws['C12'] = newList[6]['total']
         if newList[6]['tipo'] == listaOrdenada[8]['tipo']:
@@ -126,8 +126,8 @@ class ReporteExcel(TemplateView):
             ft = Font(bold=True)
             B12.font = ft
             C12.font = ft
-            ws['B12'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
-            ws['C12'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
+            ws['B12'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+            ws['C12'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
         ws['B13'] = newList[7]['tipo']
         ws['C13'] = newList[7]['total']
         if newList[7]['tipo'] == listaOrdenada[8]['tipo']:
@@ -136,8 +136,16 @@ class ReporteExcel(TemplateView):
             ft = Font(bold=True)
             B13.font = ft
             C13.font = ft
-            ws['B13'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
-            ws['C13'].fill = PatternFill(bgColor="D9D9D9", fill_type = "lightGray")
+            ws['B13'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+            ws['C13'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+        ws['O21'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+        ws['P21'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+        ws['Q21'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+        ws['O34'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+        ws['P34'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+        ws['Q34'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+        ws['K7'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
+        ws['L7'].fill = PatternFill(bgColor="D9D9D9", fill_type="lightGray")
         ws['O21'] = evaluacion.get_centroPrimario_display()
         ws['O22'] = evaluacion.get_centroSecundario_display()
         ws['O23'] = evaluacion.get_centroTerciario_display()
@@ -166,7 +174,6 @@ class ReporteExcel(TemplateView):
         ws['B20'] = listaOrdenada[8]['tipo']
         ws['B29'] = listaOrdenada[7]['tipo']
         ws['B38'] = listaOrdenada[6]['tipo']
-
         ws['K7'] = listaOrdenada[8]['tipo']
         ws['L7'] = listaOrdenada[8]['total']
         ws['K8'] = listaOrdenada[7]['tipo']
@@ -229,9 +236,10 @@ class ReporteExcel(TemplateView):
         ws['Q36'].border = border
 
         img = Image(settings.MEDIA_ROOT + '/excel/LOGO_EXCEL.png')
-        ws.add_image(img,'R50')
+        ws.add_image(img, 'R50')
 
-        nombre_archivo = "Reporte_Eneagrama {0} {1}.xlsx".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos)
+        nombre_archivo = "Reporte_Eneagrama {0} {1}.xlsx".format(evaluacion.usuario.nombre,
+                                                                 evaluacion.usuario.apellidos)
         response = HttpResponse(content_type="application/ms-excel")
         content = "attachment; filename = {0}".format(nombre_archivo)
         response['Content-Disposition'] = content
@@ -247,14 +255,15 @@ class ReporteExcel(TemplateView):
             subject=subject,
             body=html_content,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            to=['c.iturriosalcaraz@gmail.com',],
-            #to=['manuel.chavez.carrillo@gmail.com',],
-            #cc=['c.iturriosalcaraz@gmail.com',],
+            to=['manuel.chavez.carrillo@gmail.com',],
+            cc=['c.iturriosalcaraz@gmail.com',],
         )
         msg.content_subtype = "html"
-        msg.attach('ReporteEneagrama_{0}_{1}.xlsx'.format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos), output.getvalue(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        msg.send(fail_silently= not settings.DEBUG)
-        messages.success(request, '¡{0} {1}, Tu reporte te llegara a tu correo en unos momentos!'.format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
+        msg.attach('ReporteEneagrama_{0}_{1}.xlsx'.format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos),
+                   output.getvalue(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        msg.send(fail_silently=not settings.DEBUG)
+        messages.success(request, '¡{0} {1}, Tu reporte te llegara a tu correo en unos momentos!'.format(
+            evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         return redirect('Eneagrama:principal')
 
 
@@ -265,7 +274,8 @@ def principal(request):
 def register(request):
     if 'nombre' in request.session:
         evaluacion = Evaluacion.objects.get(id=request.session['id_evaluacion'])
-        messages.success(request, '¡Bienvenido de nuevo {0} {1}!'.format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
+        messages.success(request, '¡Bienvenido de nuevo {0} {1}!'.format(evaluacion.usuario.nombre,
+                                                                         evaluacion.usuario.apellidos))
         return redirect('Eneagrama:parteUno')
     nombreMostrar = None
     if request.method == "POST":
@@ -1295,6 +1305,7 @@ def obtencion_de_valores(request):
 
     return render(request, 'eneagrama/obtencion_de_valores.html',
                   {'evaluaciones': evaluaciones, 'usuariosSelect': usuariosSelect, 'evaluacion': evaluacion})
+
 
 class Borrar_sesion(TemplateView):
     def get(self, request, *args, **kwargs):
