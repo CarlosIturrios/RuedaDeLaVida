@@ -1,0 +1,160 @@
+{% extends 'eneagrama/app-base.html' %}
+{% load static %}
+{% block main %}
+
+    <div class="right_col" role="main">
+        <br>
+
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-12"></div>
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Comprar reporte Eneagrama.</h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <!-- price element -->
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="pricing">
+                                        <div class="title" style="background-color: #2c7db7">
+                                            <h1>Gratis</h1>
+                                        </div>
+                                        <div class="x_content">
+                                            <div class="">
+                                                <div class="pricing_features">
+                                                    <ul class="list-unstyled text-left">
+                                                        <li><i class="fa fa-check text-success"></i> obten tu <strong>
+                                                            Eneatipo principal.</strong></li>
+                                                        <li><i class="fa fa-times text-danger"></i>
+                                                            <strong>Unlimited</strong> storage
+                                                        </li>
+                                                        <li><i class="fa fa-times text-danger"></i> Limited <strong>
+                                                            download quota</strong></li>
+                                                        <li><i class="fa fa-times text-danger"></i> <strong>Cash on
+                                                            Delivery</strong></li>
+                                                        <li><i class="fa fa-times text-danger"></i> All time <strong>
+                                                            updates</strong></li>
+                                                        <li><i class="fa fa-times text-danger"></i>
+                                                            <strong>Unlimited</strong> access to all files
+                                                        </li>
+                                                        <li><i class="fa fa-times text-danger"></i>
+                                                            <strong>Allowed</strong>
+                                                            to be exclusing per sale
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="pricing_footer">
+                                                <a class="btn btn-success btn-block"
+                                                   href="{% url 'Eneagrama:register' 1 %}"
+                                                   role="button" style="background-color: #2c7db7">
+                                                    ¡Realizar <span> evaluacion!</span></a>
+                                            </div>
+                                            <div class="text-left">
+                                                <h2>Resultado:</h2>
+                                                <table class="table table-bordered">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th scope="row">Resultado del test:</th>
+                                                        <td>Eneatipo principal y su descripción.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Formato de los resultados:</th>
+                                                        <td>Texto en pagina web.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Preguntas a responder:</th>
+                                                        <td>144</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Tiempo aproximado para completar el test:</th>
+                                                        <td>45 minutos.</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="pricing ui-ribbon-container">
+                                        <div class="ui-ribbon-wrapper">
+                                            <div class="ui-ribbon" style="background-color: #2c7db7">-30%</div>
+                                        </div>
+                                        <div class="title" style="background-color: #0b5184">
+                                            <h1>Reporte estandar</h1>
+
+                                            <h1>$190 MXN</h1>
+                                        </div>
+                                        <div class="x_content">
+                                            <div class="">
+                                                <div class="pricing_features">
+                                                    <ul class="list-unstyled text-left">
+                                                        <li><i class="fa fa-times text-danger"></i> 2 years access
+                                                            <strong>
+                                                                to all storage locations</strong></li>
+                                                        <li><i class="fa fa-times text-danger"></i>
+                                                            <strong>Unlimited</strong> storage
+                                                        </li>
+                                                        <li><i class="fa fa-check text-success"></i> Limited <strong>
+                                                            download quota</strong></li>
+                                                        <li><i class="fa fa-check text-success"></i> <strong>Cash on
+                                                            Delivery</strong></li>
+                                                        <li><i class="fa fa-check text-success"></i> All time <strong>
+                                                            updates</strong></li>
+                                                        <li><i class="fa fa-times text-danger"></i>
+                                                            <strong>Unlimited</strong> access to all files
+                                                        </li>
+                                                        <li><i class="fa fa-times text-danger"></i>
+                                                            <strong>Allowed</strong>
+                                                            to be exclusing per sale
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="pricing_footer">
+                                                <a href="{% url 'Eneagrama:register' 2 %}"
+                                                   class="btn btn-success btn-block"
+                                                   role="button" style="background-color: #0b5184">
+                                                    ¡Comprar <span> evaluacion!</span></a>
+                                            </div>
+                                            <div class="text-left">
+                                                <h2>Resultado:</h2>
+                                                <table class="table table-bordered">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th scope="row">Resultado del test:</th>
+                                                        <td>Puntuaciones de los nueve tipos, además de las tres
+                                                            descripciones de tus eneatipos principales.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Formato de los resultados:</th>
+                                                        <td>Documento PDF.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Preguntas a responder:</th>
+                                                        <td>144</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Tiempo aproximado para completar el test:</th>
+                                                        <td>45 minutos.</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}

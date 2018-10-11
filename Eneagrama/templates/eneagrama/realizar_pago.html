@@ -1,0 +1,107 @@
+{% extends 'eneagrama/app-base.html' %}
+{% load static %}
+{% block main %}
+    <div class="right_col" role="main">
+        <br>
+
+        <div class="row">
+            <div class="col-md-1 col-sm-1"></div>
+            <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Realizar pago por Paypal.</h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+
+                        <form method="post" id="demo-form2" data-parsley-validate
+                              class="form-horizontal form-label-left"
+                              action="{% url 'Eneagrama:pago_formato' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12 col-xs-12 text-center">
+                                            <h3>Pago por: <img src="{% static 'img/paypal.png' %}" width="20%" height="20%"></h3>
+                                        </div>
+                                    </div>
+                                 </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12 col-xs-12 text-center">
+                                            <h1>$190 MXN</h1>
+                                        </div>
+                                    </div>
+                                 </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-12 col-xs-12" align="center">
+                                        <a class="btn btn-info"
+                                           href="{% url 'Eneagrama:borrar_sesion' %}">Regresar
+                                        </a>
+                                        <a class="btn btn-primary" href="{% url 'Eneagrama:parteUno' %}"> Realizar pago.</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Pagar por deposito o transferencia bancaria.</h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+
+                        <form method="post" id="demo-form2" data-parsley-validate
+                              class="form-horizontal form-label-left"
+                              action="{% url 'Eneagrama:pago_formato' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12 col-xs-12 text-left">
+                                            <h3><i class="fa fa-money"></i> Realizar deposito al numero de cuenta: </h3>
+                                            <strong>0000 0000 0000 0000</strong>
+                                            <h3><i class="fa fa-bank"></i> Realizar transferencia bancaria a la clave
+                                            interbancaria: </h3>
+                                            <strong>0000 0000 0000 0000</strong>
+                                        </div>
+                                    </div>
+                                 </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12 col-xs-12 text-center">
+                                            <h1>$190 MXN</h1>
+                                            <a class="btn btn-primary"
+                                               href="{% static 'eneagrama/template_ficha.pdf' %}"
+                                               download="Eneagrama_Metodo_Pago">Imprimir ficha de pago.</a>
+                                        </div>
+                                    </div>
+                                 </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-12 col-xs-12" align="center">
+                                        <a class="btn btn-info"
+                                           href="{% url 'Eneagrama:borrar_sesion' %}">Regresar
+                                        </a>
+                                        <a class="btn btn-primary" href="{% url 'Eneagrama:registrar_comprobante' %}">Registrar comprobante.</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}

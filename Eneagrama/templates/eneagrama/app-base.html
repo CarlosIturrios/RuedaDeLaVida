@@ -48,14 +48,17 @@
                                                              height="5%"></a>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="">
-                        <a class="user-profile" aria-expanded="false">
+                        <a class="user-profile" aria-expanded="false"
+                                {% if user.is_authenticated %}href="{% url 'logout' %}" {% endif %}>
                             <i class="fa fa-user" style="color: white;"></i>
                             <strong style="color: white;">
-                                {% if nombreMostrar %}
+                                {% if user.is_authenticated %}
+                                    ¡Hola {{ request.user.get_full_name }}!
+                                {% elif nombreMostrar %}
                                     ¡Hola {{ nombreMostrar }}!
                                 {% else %} ¡Bienvenido registrate para comenzar la encuesta!
                                 {% endif %}
-                            </strong>
+                            </strong>{% if user.is_authenticated %}LogOut {%endif  %}
                         </a>
                     </li>
                 </ul>
@@ -138,6 +141,7 @@
         toastr.{{ message.tags }}("{{ message }}");
     {% endfor %}
 </script>
-
+{% block script %}
+{% endblock %}
 </body>
 </html>

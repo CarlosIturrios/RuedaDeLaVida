@@ -94,6 +94,7 @@ LOGIN_URL = '/rueda-de-la-vida/login/'
 
 LOGIN_REDIRECT_URL = '/rueda-de-la-vida/resultados/'
 
+LOGOUT_REDIRECT_URL = '/evaluacion-eneagrama/'
 #LOGOUT_REDIRECT_URL = None
 
 AUTH_PASSWORD_VALIDATORS = [

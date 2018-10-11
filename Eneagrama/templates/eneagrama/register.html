@@ -17,7 +17,7 @@
 
                         <form method="post" id="demo-form2" data-parsley-validate
                               class="form-horizontal form-label-left"
-                              action="{% url 'Eneagrama:register' %}">
+                              action="{% url 'Eneagrama:register' metodoPago %}">
                             {% csrf_token %}
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre:
@@ -69,8 +69,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Puesto:
+                                </label>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="puesto" class="form-control col-md-7 col-xs-12"
+                                           name="puesto"
+                                           placeholder="Escribe el nombre del puesto que desempeñas." required>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">País:
                                 </label>
+
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select name="pais" class="form-control" required>
                                         <option value="">Selecciona el pais</option>
@@ -121,6 +132,36 @@
                                            name="ciudad" placeholder="Escribe la ciudad." required>
                                 </div>
                             </div>
+                            {% if metodoPago != '0' %}
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Evaluación:
+                                    </label>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select name="metodoPago" class="form-control" required>
+                                            <option {% if metodoPago == '1' %} selected {% endif %} value="1">Gratuita
+                                            </option>
+                                            <option {% if metodoPago == '2' %} selected {% endif %} value="2">Estandar
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if metodoPago == '0' %}
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Codigo del taller:
+                                    </label>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select name="codigo" class="form-control" required>
+                                            {% for codigo in codigos %}
+                                                <option value="{{ codigo.codigo }}">{{ codigo.codigo }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            {% endif %}
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">

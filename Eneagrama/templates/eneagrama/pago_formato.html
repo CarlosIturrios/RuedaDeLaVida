@@ -5,6 +5,38 @@
         <br>
 
         <div class="row">
+            {% if pago == False %}
+                <div id="Modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="false">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span
+                                        aria-hidden="true">x</span>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">Obtener reporte eneagrama.</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h4>Te gustaria obtener mas informacion sobre tu personalidad</h4>
+
+                                <p>Obten tu reporte eneagrama y mejora tu vida utilizando la informacion obtenida en el
+                                    reporte.
+                                    Con el reporte eneagrama podras conocer tus 3 fortalezas mostrandote cuales son tus
+                                    3 eneatipos principales.
+                                    .</p>
+
+                                <p>Obten beneficios con el reporte eneagrama y cambia tu vida con esta valiosa
+                                    informacion.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <a type="button" class="btn btn-primary"
+                                   href="{% url 'Eneagrama:metodo_pago' %}">Pagar mi reporte.</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
             <div class="col-md-3 col-sm-3"></div>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel">
@@ -24,10 +56,11 @@
                                 <div class="form-group">
                                     <div>
                                         <div class="col-md-12">
-                                            <h3>Tu eneatipo principal es: <strong>{{ evaluacion.get_eneatipoPrincipal_display }}</strong></h3>
+                                            <h3>Tu eneatipo principal es:
+                                                <strong>{{ evaluacion.get_eneatipoPrincipal_display }}</strong></h3>
                                         </div>
                                     </div>
-                                 </div>
+                                </div>
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div>
@@ -35,14 +68,17 @@
                                             <h2>Cuando envies tus respuestas ya no podras regresar a modificarlas.</h2>
                                         </div>
                                     </div>
-                                 </div>
+                                </div>
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-12 col-sm-12 col-xs-12" align="center">
                                         <a class="btn btn-info"
                                            href="{% url 'Eneagrama:parteSiete' %}">Regresar
                                         </a>
-                                        <a class="btn btn-primary" href="{% url 'Eneagrama:reporte_excel' %}">Obtener Reporte</a>
+                                        {% if pago %}
+                                            <a class="btn btn-primary" href="{% url 'Eneagrama:reporte_excel' %}">Obtener
+                                                Reporte</a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -50,46 +86,17 @@
                     </div>
                 </div>
             </div>
-
-<!--
-            <div class="col-md-5 col-sm-5 col-xs-12">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Pagar mi reporte eneagrama.</h2>
-
-                        <h2 style="color: black;"><b> (PROXIMAMENTE)</b></h2>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        <br>
-
-                        <form method="post" id="demo-form2" data-parsley-validate
-                              class="form-horizontal form-label-left"
-                              action="{% url 'Eneagrama:pago_formato' %}">
-
-                            {% csrf_token %}
-                            <div class="form-group" align="center">
-                                <img src="{% static 'img/paypal.png' %}" width="30%" height="30%">
-
-                                <div class="ln_solid"></div>
-                                <div class="form-group">
-                                    <div class="col-md-6 col-md-offset-3">
-                                        <!--<button type="submit" class="btn btn-primary">Cancel</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-1 col-sm-1 col-xs-12">
-
-            </div>
--->
         </div>
     </div>
     <!-- /page content -->
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            if (document.cookie.indexOf('visited=true') == -1) {
+                // load the overlay
+                $('#Modal').modal({show: true});
+            }
+        });
+    </script>
 {% endblock %}

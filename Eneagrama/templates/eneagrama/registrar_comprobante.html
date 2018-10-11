@@ -1,0 +1,96 @@
+{% extends 'eneagrama/app-base.html' %}
+{% load static %}
+{% block main %}
+    <div class="right_col" role="main">
+        <br>
+
+        <div class="row">
+            <div class="col-md-3 col-sm-3"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Registro del comprobante de pago.</h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+
+                        <form method="post" id="demo-form2" data-parsley-validate
+                              class="form-horizontal form-label-left"
+                              action="{% url 'Eneagrama:registrar_comprobante' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-12">
+                                            <h2><i class="fa fa-institution"></i> <b>Sube el comprobante de pago.</b>
+                                            </h2>
+
+                                            <p>Toma una fotografia del comprobante de pago y realiza el llenado
+                                                del formulario para la verificacion del comprobante.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-6">Fecha:
+                                        </label>
+                                        <div class="col-md-9 col-sm-9 col-xs-6">
+                                            <input class="form-control" type="date"
+                                                   name="fecha" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-6">Importe:
+                                        </label>
+
+                                        <div class="col-md-9 col-sm-9 col-xs-6">
+                                            <input class="form-control" type="number"
+                                                   name="importe" placeholder="Importe pagado." required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-6">Metodo de pago:
+                                        </label>
+
+                                        <div class="col-md-9 col-sm-9 col-xs-6">
+                                            <select name="metodo" class="form-control" required>
+                                                <option>Selecciona una opcion.</option>
+                                                <option value="01">01 - Efectivo</option>
+                                                <option value="02">02 - Cheque</option>
+                                                <option value="03">03 - Transferencia electronica
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-6">Ficha bancaria:
+                                        </label>
+
+                                        <div class="col-md-9 col-sm-9 col-xs-6">
+                                            <input class="form-control" type="file" name="ficha" required>
+
+                                            <p>Archivo con extencion jpg o png.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-12 col-xs-12" align="center">
+                                        <a class="btn btn-info" href="{% url 'Eneagrama:realizar_pago' %}">Regresar
+                                        </a>
+                                        <button type="submit" class="btn btn-success">Pagar eneagrama
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}

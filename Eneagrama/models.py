@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from os import path
 
 from django.db import models
+
+
+def unique_file_path(instance, filename):
+    base, ext = path.splitext(filename)
+    newname = "%s%s" % (instance.num_part, ext)
+    return path.join('parts_img', newname)
 
 
 # Create your models here.
@@ -11,13 +18,15 @@ class Usuario(models.Model):
     email = models.CharField(max_length=200, null=True, blank=False, unique=True)
     edad = models.IntegerField(null=False, blank=False)
     empresa = models.CharField(max_length=200, null=True, blank=True)
+    puesto = models.CharField(max_length=200, null=True, blank=True)
     pais = models.CharField(max_length=200, null=True, blank=False)
     estado = models.CharField(max_length=200, null=True, blank=True)
     ciudad = models.CharField(max_length=200, null=True, blank=True)
+    codigo = models.CharField(max_length=200, null=True, blank=True)
     pago = models.BooleanField(null=False, blank=False, default=False)
 
     def __str__(self):
-        return '{0} con email: {1} y con ID: {2}'.format(self.nombre, self.email, self.id)
+        return 'Email: {0} y con ID: {1}'.format( self.email, self.id)
 
 
 class Evaluacion(models.Model):
@@ -127,7 +136,7 @@ class Evaluacion(models.Model):
     fecha_creacion = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 
     def __str__(self):
-        return 'Evaluacion # {0} del usuario: {1}'.format(self.id, self.usuario.nombre)
+        return 'Evaluacion # {0} del usuario: {1}'.format(self.id, self.usuario.email)
 
 
 class Respuesta(models.Model):
@@ -193,3 +202,36 @@ class Energia(models.Model):
 
     def __str__(self):
         return 'Energia: '.format(self.get_energia_display())
+
+
+class Comprobante(models.Model):
+    fecha = models.DateTimeField(null=True, blank=False)
+    importe = models.DecimalField(max_digits=15,decimal_places=3, null=True, blank=True)
+    tipo_pago = models.CharField(
+		max_length = 1, blank=False, default='1', choices =(
+			('0','Taller.'),
+			('1','Gratis.'),
+			('2','PayPal.'),
+			('3','Deposito o Transferencia bancaria.')
+		)
+	)
+    imagen_comprobante = models.ImageField(upload_to=unique_file_path, null=True, blank=True)
+    metodo_pago = models.CharField(
+		max_length = 1, blank=True, default='0', choices =(
+			('0','No es deposito a bancos no necesita comprobante.'),
+			('01','Efectivo.'),
+			('02','Cheque.'),
+			('03','Transferencia Electronica.')
+		)
+	)
+    usuario = models.ForeignKey(
+        Usuario, null=False, blank=False, related_name='comprobante_user_set', on_delete=models.PROTECT
+    )
+    def __str__(self):
+        return 'Comprobante con metodo de pago: {0}'.format(self.get_tipo_pago_display())
+
+
+class Codigo(models.Model):
+    codigo = models.CharField(max_length=200, null=True, blank=False)
+    def __str__(self):
+        return 'Codigo: {0}'.format(self.codigo)
