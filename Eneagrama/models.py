@@ -7,8 +7,8 @@ from django.db import models
 
 def unique_file_path(instance, filename):
     base, ext = path.splitext(filename)
-    newname = "%s%s" % (instance.num_part, ext)
-    return path.join('parts_img', newname)
+    newname = "%s%s" % (instance.usuario.nombre, ext)
+    return path.join('comprobantes', newname)
 
 
 # Create your models here.
@@ -217,7 +217,7 @@ class Comprobante(models.Model):
 	)
     imagen_comprobante = models.ImageField(upload_to=unique_file_path, null=True, blank=True)
     metodo_pago = models.CharField(
-		max_length = 1, blank=True, default='0', choices =(
+		max_length = 2, blank=True, default='0', choices =(
 			('0','No es deposito a bancos no necesita comprobante.'),
 			('01','Efectivo.'),
 			('02','Cheque.'),
@@ -233,5 +233,6 @@ class Comprobante(models.Model):
 
 class Codigo(models.Model):
     codigo = models.CharField(max_length=200, null=True, blank=False)
+    activo = models.BooleanField(null=False, blank=False, default=True)
     def __str__(self):
         return 'Codigo: {0}'.format(self.codigo)

@@ -1,0 +1,189 @@
+{% extends 'eneagrama/app-base.html' %}
+{% load static %}
+{% block main %}
+
+    <div class="right_col" role="main">
+        <div class="row">
+            <div class="col-md-1 col-sm-1 col-xs-12"></div>
+            <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h1><strong>Panel de codigos para talleres.</strong></h1>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+
+                        <form id="demo-form2" data-parsley-validate
+                              class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div>
+                                        <h3>Selecciona una de las opciones para modificar el codigo o crea uno nuevo.
+                                        </h3>
+
+                                        <div class="ln_solid"></div>
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Codigo</th>
+                                                <th>Estatus</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for codigo in codigos %}
+                                                <tr>
+                                                    <td>
+                                                        <a class="btn btn-warning"
+                                                           href="{% url 'Eneagrama:Modificar_codigo' codigo.id %}">
+                                                            {{ codigo.id }}</a>
+                                                    </td>
+                                                    <td>
+                                                        {{ codigo.codigo }}
+                                                    </td>
+                                                    <td>{% if codigo.activo == True %}Activo{% else %}
+                                                        Inactivo{% endif %}</td>
+                                                </tr>
+                                            {% empty %}
+                                                <h2> No hay Codigos para mostrar. </h2>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group text-center">
+                                    <a class="btn btn-success" href="{% url 'Eneagrama:Crear_codigo' %}">Crear un nuevo
+                                        codigo.</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h1><strong>Panel de comprobantes de pago.</strong></h1>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+
+                        <form id="demo-form2" data-parsley-validate
+                              class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div>
+                                        <h3>Selecciona una de las opciones para visualizar el comprobante y acreditarlo.
+                                        </h3>
+
+                                        <div class="ln_solid"></div>
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Usuario</th>
+                                                <th>Fecha</th>
+                                                <th>Estatus</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for comprobante in comprobantes %}
+                                                <tr>
+                                                    <td>
+                                                        <a class="btn btn-warning"
+                                                           href="
+                                                           {% url 'Eneagrama:Comprobante_deposito' comprobante.id %}">
+                                                            {{ comprobante.id }}</a>
+                                                    </td>
+                                                    <td>
+                                                        {{ comprobante.usuario.nombre }}
+                                                        {{ comprobante.usuario.apellidos }}
+                                                    </td>
+                                                    <td>
+                                                        {{ comprobante.fecha }}
+                                                    </td>
+                                                    <td>{{ comprobante.get_metodo_pago_display }}</td>
+                                                </tr>
+                                            {% empty %}
+                                                <h2> No hay Codigos para mostrar. </h2>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-12"></div>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h1><strong>Panel de visualizacion de reporte eneagrama.</strong><small>
+                            <a type="button" class="btn btn-info"
+                               href="{% url 'Eneagrama:obtencion_de_valores' %}">Ir a obtencion de datos.</a>
+                        </small></h1>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+
+                        <form id="demo-form2" data-parsley-validate
+                              class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div>
+                                        <h3>Selecciona una de las opciones para visualizar el reporte en PDF.
+                                        </h3>
+
+                                        <div class="ln_solid"></div>
+                                        <table id="datatable-responsive"
+                                               class="table table-striped table-bordered dt-responsive nowrap"
+                                               cellspacing="0" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nombre</th>
+                                                <th>Estatus</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for evaluacion in evaluaciones %}
+                                                <tr>
+                                                    <td>
+                                                        <a class="btn btn-warning" target="_blank"
+                                                           href="{% url 'Eneagrama:write_pdf_view' evaluacion.id %}">
+                                                            {{ evaluacion.id }}</a>
+                                                    </td>
+                                                    <td>
+                                                        {{ evaluacion.usuario.nombre }}
+                                                        {{ evaluacion.usuario.apellidos }}
+                                                    </td>
+                                                    <td>{% if evaluacion.evaluacion_resuesta_set.count == 144 %}
+                                                        Completa{% else %}
+                                                        Incompleta{% endif %}</td>
+                                                </tr>
+                                            {% empty %}
+                                                <h2> No hay evaluaciones para mostrar. </h2>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

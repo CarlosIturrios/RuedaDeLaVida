@@ -9,7 +9,9 @@
             </div>
             <div class="col-md-4 col-sm-4 col-xs-8">
                 <div class="progress">
-                    <div class="progress-bar progress-bar-success" data-transitiongoal="14">14%</div>
+                    {% if preguntas == 0 %} &nbsp; 0% {% else %}
+                    <div class="progress-bar progress-bar-success" data-transitiongoal="{{ preguntas }}" style="color: black">{{ preguntas }}%</div>
+                    {% endif %}
                 </div>
             </div>
         </div>
