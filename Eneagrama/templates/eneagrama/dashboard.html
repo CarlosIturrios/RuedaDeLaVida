@@ -4,8 +4,69 @@
 
     <div class="right_col" role="main">
         <div class="row">
-            <div class="col-md-1 col-sm-1 col-xs-12"></div>
-            <div class="col-md-5 col-sm-5 col-xs-12">
+        <div class="col-md-2 col-sm-2 col-xs-12"></div>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h1><strong>Panel de visualizacion de reporte eneagrama.</strong><small>
+                            <a type="button" class="btn btn-info"
+                               href="{% url 'Eneagrama:obtencion_de_valores' %}">Ir a obtencion de datos.</a>
+                        </small></h1>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+
+                        <form id="demo-form2" data-parsley-validate
+                              class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div>
+                                        <h3>Selecciona una de las opciones para visualizar el reporte en PDF.
+                                        </h3>
+
+                                        <div class="ln_solid"></div>
+                                        <table id="datatable-responsive"
+                                               class="table table-striped table-bordered dt-responsive nowrap"
+                                               cellspacing="0" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nombre</th>
+                                                <th>Estatus</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for evaluacion in evaluaciones %}
+                                                <tr>
+                                                    <td>
+                                                        <a class="btn btn-warning" target="_blank"
+                                                           href="{% url 'Eneagrama:write_pdf_view' evaluacion.id %}">
+                                                            {{ evaluacion.id }}</a>
+                                                    </td>
+                                                    <td>
+                                                        {{ evaluacion.usuario.nombre }}
+                                                        {{ evaluacion.usuario.apellidos }}
+                                                    </td>
+                                                    <td>{% if evaluacion.evaluacion_resuesta_set.count == 144 %}
+                                                        Completa{% else %}
+                                                        Incompleta{% endif %}</td>
+                                                </tr>
+                                            {% empty %}
+                                                <h2> No hay evaluaciones para mostrar. </h2>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-12"></div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
                         <h1><strong>Panel de codigos para talleres.</strong></h1>
@@ -112,67 +173,6 @@
                                                 </tr>
                                             {% empty %}
                                                 <h2> No hay Codigos para mostrar. </h2>
-                                            {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="ln_solid"></div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-12"></div>
-            <div class="col-md-9 col-sm-9 col-xs-12">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h1><strong>Panel de visualizacion de reporte eneagrama.</strong><small>
-                            <a type="button" class="btn btn-info"
-                               href="{% url 'Eneagrama:obtencion_de_valores' %}">Ir a obtencion de datos.</a>
-                        </small></h1>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        <br>
-
-                        <form id="demo-form2" data-parsley-validate
-                              class="form-horizontal form-label-left">
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <div>
-                                        <h3>Selecciona una de las opciones para visualizar el reporte en PDF.
-                                        </h3>
-
-                                        <div class="ln_solid"></div>
-                                        <table id="datatable-responsive"
-                                               class="table table-striped table-bordered dt-responsive nowrap"
-                                               cellspacing="0" width="100%">
-                                            <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Nombre</th>
-                                                <th>Estatus</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for evaluacion in evaluaciones %}
-                                                <tr>
-                                                    <td>
-                                                        <a class="btn btn-warning" target="_blank"
-                                                           href="{% url 'Eneagrama:write_pdf_view' evaluacion.id %}">
-                                                            {{ evaluacion.id }}</a>
-                                                    </td>
-                                                    <td>
-                                                        {{ evaluacion.usuario.nombre }}
-                                                        {{ evaluacion.usuario.apellidos }}
-                                                    </td>
-                                                    <td>{% if evaluacion.evaluacion_resuesta_set.count == 144 %}
-                                                        Completa{% else %}
-                                                        Incompleta{% endif %}</td>
-                                                </tr>
-                                            {% empty %}
-                                                <h2> No hay evaluaciones para mostrar. </h2>
                                             {% endfor %}
                                             </tbody>
                                         </table>
