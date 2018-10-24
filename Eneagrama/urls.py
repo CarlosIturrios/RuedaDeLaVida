@@ -7,7 +7,7 @@ from .views import Borrar_sesion
 urlpatterns = [
     # App views    
     url(r'^$', views.principal, name='principal'),
-    url(r'^taller$', views.taller, name='taller'),
+    url(r'^taller/$', views.taller, name='taller'),
     url(r'^register/(?P<metodo_pago>[0-9]+)/$', views.register, name='register'),
     url(r'^perfil-de-personalidad-parte-1/$', views.parteUno, name='parteUno'),
     url(r'^perfil-de-personalidad-parte-2/$', views.parteDos, name='parteDos'),
