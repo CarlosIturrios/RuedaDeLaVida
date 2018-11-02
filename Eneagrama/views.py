@@ -13,10 +13,10 @@ from django.conf import settings
 from django.views.generic import View, TemplateView
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Font
-from datetime import date
+from datetime import date, datetime
 from io import BytesIO
 from reportlab.pdfgen import canvas, textobject
-from reportlab.lib.pagesizes import A4
+from reportlab.lib.pagesizes import A4, letter
 from reportlab.lib.utils import ImageReader
 from reportlab.lib import colors
 from reportlab.graphics.shapes import Drawing
@@ -59,7 +59,7 @@ def register(request, metodo_pago):
         else:
             return redirect('Eneagrama:realizar_pago')
     nombreMostrar = None
-    codigos = Codigo.objects.all()
+    codigos = Codigo.objects.filter(activo=True)
     if request.method == "POST":
         metPago = request.POST.get('metodoPago', None)
         if metPago:
@@ -107,11 +107,13 @@ def register(request, metodo_pago):
                 if comprobante:
                     comprobante.tipo_pago = '0'
                     comprobante.usuario = check_email
+                    comprobante.evaluacion = evaluacion
                     comprobante.save()
                 else:
                     comprobante = Comprobante()
                     comprobante.tipo_pago = '0'
                     comprobante.usuario = check_email
+                    comprobante.evaluacion = evaluacion
                     comprobante.save()
                 messages.success(request, '¡Bienvenido {0} {1}'.format(check_email.nombre, check_email.apellidos))
                 return redirect('Eneagrama:parteUno')
@@ -136,6 +138,8 @@ def register(request, metodo_pago):
                 comprobante = Comprobante()
                 comprobante.tipo_pago = '0'
                 comprobante.usuario = usuario
+                comprobante.evaluacion = evaluacion
+                comprobante.save()
                 request.session['id_evaluacion'] = evaluacion.id
                 return redirect('Eneagrama:parteUno')
     elif metodoPago == '1':
@@ -177,11 +181,13 @@ def register(request, metodo_pago):
                 if comprobante:
                     comprobante.tipo_pago = '1'
                     comprobante.usuario = check_email
+                    comprobante.evaluacion = evaluacion
                     comprobante.save()
                 else:
                     comprobante = Comprobante()
                     comprobante.tipo_pago = '1'
                     comprobante.usuario = check_email
+                    comprobante.evaluacion = evaluacion
                     comprobante.save()
                 messages.success(request, '¡Bienvenido {0} {1}'.format(check_email.nombre, check_email.apellidos))
                 return redirect('Eneagrama:parteUno')
@@ -204,6 +210,7 @@ def register(request, metodo_pago):
                 comprobante = Comprobante()
                 comprobante.tipo_pago = '1'
                 comprobante.usuario = usuario
+                comprobante.evaluacion = evaluacion
                 comprobante.save()
                 request.session['id_evaluacion'] = evaluacion.id
                 return redirect('Eneagrama:parteUno')
@@ -1097,6 +1104,8 @@ def parteSiete(request):
         respuesta.evaluacion = evaluacion
         respuesta.valor = preguntaCientoCuarentayCuatro
         respuesta.save()
+        evaluacion.fecha_creacion = datetime.now()
+        evaluacion.save()
         messages.success(request, '¡Enhorabuena has compleatado la evaluacion con exito!')
         return redirect('Eneagrama:pago_formato')
 
@@ -1291,9 +1300,27 @@ def pago_formato(request):
             evaluacion.energiaSecundaria = str(energiaSecundaria)
             evaluacion.energiaTerciaria = str(energiaTerciaria)
             evaluacion.save()
-            comprobante = Comprobante.objects.filter(usuario=evaluacion.usuario).first()
+            comprobante = Comprobante.objects.filter(usuario=evaluacion.usuario).last()
             if comprobante.tipo_pago == '0':
-                return redirect('Eneagrama:reporte_excel')
+                return redirect('Eneagrama:Reporte_eneagrama')
+            if comprobante.tipo_pago == '1':
+                subject = 'Eneagrama, resultados para: {0}'.format(evaluacion.usuario.nombre)
+                html_content = get_template('eneagrama/email/formato_email.html').render({'evaluacion': evaluacion,
+                                                                                          'comprobante':comprobante})
+
+                msg = EmailMessage(
+                    subject=subject,
+                    body=html_content,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    to=['manuel.chavez.carrillo@gmail.com', ],
+                    cc=['c.iturriosalcaraz@gmail.com', ],
+                )
+                msg.content_subtype = "html"
+                msg.send(fail_silently=not settings.DEBUG)
+
+                messages.success(request, '¡{0} {1}, Imprime o guarda tu reporte!'.format(
+                    evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
+
     nombreMostrar = request.session['nombre']
     return render(request, 'eneagrama/pago_formato.html',
                   {'nombreMostrar': nombreMostrar, 'evaluacion': evaluacion, 'pago': pago, 'comprobante': comprobante})
@@ -1356,6 +1383,7 @@ def registrar_comprobante(request):
                 comprobante.imagen_comprobante = ficha
                 comprobante.metodo_pago = metodo
                 comprobante.usuario = evaluacion.usuario
+                comprobante.evaluacion = evaluacion
                 comprobante.save()
 
                 usuario = Usuario.objects.get(id=evaluacion.usuario.id)
@@ -1370,6 +1398,7 @@ def registrar_comprobante(request):
                 comprobante.imagen_comprobante = ficha
                 comprobante.metodo_pago = metodo
                 comprobante.usuario = evaluacion.usuario
+                comprobante.evaluacion = evaluacion
                 comprobante.save()
 
                 usuario = Usuario.objects.get(id=evaluacion.usuario.id)
@@ -1397,12 +1426,72 @@ def Reporte_eneagrama(request):
         messages.error(request, 'Debes de pagar el formato antes de obtenerlo.')
         return redirect('Eneagrama:pago_formato')
     else:
+        comprobante = Comprobante.objects.filter(evaluacion=evaluacion,usuario=usuario).last()
+        if comprobante.tipo_pago == '0':
+            messages.success(request, 'El reporte te sera entregado cuando asistas al taller.')
+            subject = 'Eneagrama, resultados para: {0}'.format(evaluacion.usuario.nombre)
+            html_content = get_template('eneagrama/email/formato_email.html').render({'evaluacion': evaluacion,
+                                                                                      'comprobante':comprobante})
+
+            msg = EmailMessage(
+                subject=subject,
+                body=html_content,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=['manuel.chavez.carrillo@gmail.com', ],
+                cc=['c.iturriosalcaraz@gmail.com', ],
+            )
+            msg.content_subtype = "html"
+            msg.send(fail_silently=not settings.DEBUG)
+
+            usuario.pago = False
+            usuario.save()
+
+            nuevaEvaluacion = Evaluacion()
+            nuevaEvaluacion.usuario = evaluacion.usuario
+            nuevaEvaluacion.save()
+
+            comprobante = Comprobante()
+            comprobante.usuario = evaluacion.usuario
+            comprobante.evaluacion = nuevaEvaluacion
+            comprobante.save()
+
+            return redirect('Eneagrama:principal')
+        elif comprobante.tipo_pago == '3':
+            messages.success(request, 'Estamos verificando tu comprobante de pago, una vez validado '
+                                      'te enviaremos el reporte a tu correo.')
+            subject = 'Eneagrama, resultados para: {0}'.format(evaluacion.usuario.nombre)
+            html_content = get_template('eneagrama/email/formato_email.html').render({'evaluacion': evaluacion,
+                                                                                      'comprobante':comprobante})
+
+            msg = EmailMessage(
+                subject=subject,
+                body=html_content,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=['manuel.chavez.carrillo@gmail.com', ],
+                cc=['c.iturriosalcaraz@gmail.com', ],
+            )
+            msg.content_subtype = "html"
+            msg.send(fail_silently=not settings.DEBUG)
+
+            usuario.pago = False
+            usuario.save()
+
+            nuevaEvaluacion = Evaluacion()
+            nuevaEvaluacion.usuario = evaluacion.usuario
+            nuevaEvaluacion.save()
+
+            comprobante = Comprobante()
+            comprobante.usuario = evaluacion.usuario
+            comprobante.evaluacion = nuevaEvaluacion
+            comprobante.save()
+
+            return redirect('Eneagrama:principal')
         #################################### DATOS #################################################
-        eneatipoPrincipal = Eneatipo.objects.get(eneatipo=evaluacion.eneatipoPrincipal)
-        eneatipoSecundario = Eneatipo.objects.get(eneatipo=evaluacion.eneatipoSecundario)
-        eneatipoTerciario = Eneatipo.objects.get(eneatipo=evaluacion.eneatipoTerciario)
-        centro = Centro.objects.get(centro=evaluacion.centroPrimario)
-        energia = Energia.objects.get(energia=evaluacion.eneatipoPrincipal)
+        eneatipoPrincipal = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoPrincipal)
+        eneatipoSecundario = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoSecundario)
+        eneatipoTerciario = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoTerciario)
+        centro_descripciones = Centro.objects.filter(centro=evaluacion.centroPrimario)
+        energia_descripciones = Energia.objects.filter(energia=evaluacion.eneatipoPrincipal)
         diccionarioUno = {'tipo': '1. Perfeccionista', 'total': evaluacion.tipoUno}
         diccionarioDos = {'tipo': '2. Colaborador', 'total': evaluacion.tipoDos}
         diccionarioTres = {'tipo': '3. Competitivo', 'total': evaluacion.tipoTres}
@@ -1421,25 +1510,24 @@ def Reporte_eneagrama(request):
         response['Content-Disposition'] = 'inline; filename="ReporteEneagrama.pdf"'
 
         buffer = BytesIO()
-        p = canvas.Canvas(buffer, pagesize=A4)
+        p = canvas.Canvas(buffer, pagesize=letter)
         p.setTitle("Reporte eneagrama {0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         p.setLineWidth(.3)
-        date_time = str(date.today())
-
+        date_time = str(evaluacion.fecha_creacion.date())
+        p.setFont('Helvetica-Bold', 12)
         eneagrama = ImageReader(settings.MEDIA_ROOT + '/excel/about.png')
         p.drawImage(eneagrama, 40, 170, mask='auto')
 
-        p.drawString(10,10,"Transformando el aprendizaje en Acción…")
+        p.drawString(36,36,"Transformando el aprendizaje en Acción…")
         logo = ImageReader(settings.MEDIA_ROOT + '/excel/LOGO_EXCEL.png')
-        p.drawImage(logo, 520, 5, mask='auto')
-        p.drawImage(logo, 520, 5, mask='auto')
+        p.drawImage(logo, 520, 36, mask='auto')
         p.showPage()
         ############################################## portada ###################################################3
         fondo_azul = ImageReader(settings.MEDIA_ROOT + '/excel/fondo_azul.png')
-        p.drawImage(fondo_azul, 3, 785, 589, 30, mask='auto')
-
-        p.drawString(215, 795, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
-        p.drawString(520, 795, "{0}".format(date_time))
+        p.setFont('Helvetica-Bold', 10)
+        p.drawImage(fondo_azul, 36, 725, 538, 30, mask='auto')
+        p.drawString(234, 735, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
+        p.drawString(502, 735, "{0}".format(date_time))
 
         if newList[8]['tipo'] == listaOrdenada[8]['tipo']:
             tabla = ImageReader(settings.MEDIA_ROOT + '/excel/9_coinciliador_tabla.png')
@@ -1459,34 +1547,35 @@ def Reporte_eneagrama(request):
             tabla = ImageReader(settings.MEDIA_ROOT + '/excel/7_dinamico_tabla.png')
         else:
             tabla = ImageReader(settings.MEDIA_ROOT + '/excel/8_lider_tabla.png')
-        p.drawImage(tabla, 10, 580, 198, 196, mask='auto')
 
-        p.drawString(15, 739, "{0}".format(newList[8]['tipo']))
-        p.drawString(155, 739, "{0}".format(newList[8]['total']))
+        p.drawImage(tabla, 36, 527, 198, 196, mask='auto')
 
-        p.drawString(15, 720, "{0}".format(newList[0]['tipo']))
-        p.drawString(155, 720, "{0}".format(newList[0]['total']))
+        p.drawString(41, 684, "{0}".format(newList[8]['tipo']))
+        p.drawString(181, 684, "{0}".format(newList[8]['total']))
 
-        p.drawString(15, 702, "{0}".format(newList[1]['tipo']))
-        p.drawString(155, 702, "{0}".format(newList[1]['total']))
+        p.drawString(41, 665, "{0}".format(newList[0]['tipo']))
+        p.drawString(181, 665, "{0}".format(newList[0]['total']))
 
-        p.drawString(15, 684, "{0}".format(newList[2]['tipo']))
-        p.drawString(155, 684, "{0}".format(newList[2]['total']))
+        p.drawString(41, 647, "{0}".format(newList[1]['tipo']))
+        p.drawString(181, 647, "{0}".format(newList[1]['total']))
 
-        p.drawString(15, 665, "{0}".format(newList[3]['tipo']))
-        p.drawString(155, 665, "{0}".format(newList[3]['total']))
+        p.drawString(41, 629, "{0}".format(newList[2]['tipo']))
+        p.drawString(181, 629, "{0}".format(newList[2]['total']))
 
-        p.drawString(15, 646, "{0}".format(newList[4]['tipo']))
-        p.drawString(155, 646, "{0}".format(newList[4]['total']))
+        p.drawString(41, 610, "{0}".format(newList[3]['tipo']))
+        p.drawString(181, 610, "{0}".format(newList[3]['total']))
 
-        p.drawString(15, 628, "{0}".format(newList[5]['tipo']))
-        p.drawString(155, 628, "{0}".format(newList[5]['total']))
+        p.drawString(41, 591, "{0}".format(newList[4]['tipo']))
+        p.drawString(181, 591, "{0}".format(newList[4]['total']))
 
-        p.drawString(15, 608, "{0}".format(newList[6]['tipo']))
-        p.drawString(155, 608, "{0}".format(newList[6]['total']))
+        p.drawString(41, 573, "{0}".format(newList[5]['tipo']))
+        p.drawString(181, 573, "{0}".format(newList[5]['total']))
 
-        p.drawString(15, 588, "{0}".format(newList[7]['tipo']))
-        p.drawString(155, 588, "{0}".format(newList[7]['total']))
+        p.drawString(41, 553, "{0}".format(newList[6]['tipo']))
+        p.drawString(181, 553, "{0}".format(newList[6]['total']))
+
+        p.drawString(41, 535, "{0}".format(newList[7]['tipo']))
+        p.drawString(181, 535, "{0}".format(newList[7]['total']))
         d = Drawing(400, 400)
         sp = SpiderChart()
         sp.x = 50
@@ -1517,16 +1606,18 @@ def Reporte_eneagrama(request):
         sp.strands[5].strokeColor = grey_transparent
         d.add(sp)
 
-        d.drawOn(p, 250, 520)
+        d.drawOn(p, 290, 470)
 
         tabla = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipos_tabla.png')
-        p.drawImage(tabla, 50, 455, 180, 90, mask='auto')
-        p.drawString(54, 505, "{0}".format(listaOrdenada[8]['tipo']))
-        p.drawString(180, 505, "{0}".format(listaOrdenada[8]['total']))
-        p.drawString(54, 484, "{0}".format(listaOrdenada[7]['tipo']))
-        p.drawString(180, 484, "{0}".format(listaOrdenada[7]['total']))
-        p.drawString(54, 462, "{0}".format(listaOrdenada[6]['tipo']))
-        p.drawString(180, 462, "{0}".format(listaOrdenada[6]['total']))
+
+        p.drawImage(tabla, 36, 401, 180, 90, mask='auto')
+
+        p.drawString(40, 451, "{0}".format(listaOrdenada[8]['tipo']))
+        p.drawString(166, 451, "{0}".format(listaOrdenada[8]['total']))
+        p.drawString(40, 430, "{0}".format(listaOrdenada[7]['tipo']))
+        p.drawString(166, 430, "{0}".format(listaOrdenada[7]['total']))
+        p.drawString(40, 408, "{0}".format(listaOrdenada[6]['tipo']))
+        p.drawString(166, 408, "{0}".format(listaOrdenada[6]['total']))
 
         drawing = Drawing(400, 200)
         data = [(listaOrdenada[8]['total'], listaOrdenada[7]['total'], listaOrdenada[6]['total'])]
@@ -1551,135 +1642,104 @@ def Reporte_eneagrama(request):
         bc.categoryAxis.strokeColor = colors.white
         drawing.add(bc)
 
-        drawing.drawOn(p, 220, 390)
+        drawing.drawOn(p, 258, 354)
 
-        p.line(4, 560, 589, 560)
+        p.setStrokeColor(azulito)
+        p.line(36, 509, 574, 509)
+        p.setStrokeColor(colors.black)
 
-        if newList[8]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_nueve_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_nueve.png')
-        elif newList[0]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_uno_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_uno.png')
-        elif newList[1]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_dos_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_dos.png')
-        elif newList[2]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_tres_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_tres.png')
-        elif newList[3]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_cuatro_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_cuatro.png')
-        elif newList[4]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_cinco_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_cinco.png')
-        elif newList[5]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_seis_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_seis.png')
-        elif newList[6]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_siete_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_siete.png')
-        else:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_ocho_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_ocho.png')
+        alto = 338
 
-        if newList[8]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_nueve_descripcion.png')
-        elif newList[0]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_uno_descripcion.png')
-        elif newList[1]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_dos_descripcion.png')
-        elif newList[2]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_tres_descripcion.png')
-        elif newList[3]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_cuatro_descripcion.png')
-        elif newList[4]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_cinco_descripcion.png')
-        elif newList[5]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_seis_descripcion.png')
-        elif newList[6]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_siete_descripcion.png')
-        else:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_ocho_descripcion.png')
+        p.drawImage(fondo_azul, 36, 354, 538, 30, mask='auto')
+        p.drawString(287, 364, "{0}".format(listaOrdenada[8]['tipo']))
+        p.setFont('Helvetica', 11)
+        for principal in eneatipoPrincipal:
+            p.drawString(45, alto, "{0}".format(principal.descripcion))
+            alto -=12
 
-        if newList[8]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_nueve_descripcion.png')
-        elif newList[0]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_uno_descripcion.png')
-        elif newList[1]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_dos_descripcion.png')
-        elif newList[2]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_tres_descripcion.png')
-        elif newList[3]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_cuatro_descripcion.png')
-        elif newList[4]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_cinco_descripcion.png')
-        elif newList[5]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_seis_descripcion.png')
-        elif newList[6]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_siete_descripcion.png')
-        else:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_ocho_descripcion.png')
+        alto = 219
+        p.drawImage(fondo_azul, 36, 235, 538, 30, mask='auto')
+        p.setFont('Helvetica-Bold', 10)
+        p.drawString(287, 245, "{0}".format(listaOrdenada[7]['tipo']))
+        p.setFont('Helvetica', 11)
+        for principal in eneatipoSecundario:
+            p.drawString(45, alto, "{0}".format(principal.descripcion))
+            alto -=12
 
+        alto = 100
+        p.drawImage(fondo_azul, 36, 116, 538, 30, mask='auto')
+        p.setFont('Helvetica-Bold', 10)
+        p.drawString(287, 126, "{0}".format(listaOrdenada[6]['tipo']))
+        p.setFont('Helvetica', 11)
+        for principal in eneatipoTerciario:
+            p.drawString(45, alto, "{0}".format(principal.descripcion))
+            alto -=12
 
-        p.drawImage(fondo_azul, 3, 380, 589, 30, mask='auto')
-        p.drawString(265, 390, "{0}".format(listaOrdenada[8]['tipo']))
-        p.drawImage(eneatipo_principal_descripcion,6,270,580,100, mask='auto')
-
-        p.drawImage(fondo_azul, 3, 250, 589, 30, mask='auto')
-        p.drawString(265, 260, "{0}".format(listaOrdenada[7]['tipo']))
-        p.drawImage(eneatipo_secundario_descripcion,6,150,580,100, mask='auto')
-
-        p.drawImage(fondo_azul, 3, 110, 589, 30, mask='auto')
-        p.drawString(265, 130, "{0}".format(listaOrdenada[6]['tipo']))
-        p.drawImage(eneatipo_terciario_descripcion,6,10,580,100, mask='auto')
 
 
         p.showPage()
         ############################################## segunda pagina ###################################################
-        p.setFillColor(colors.lightgrey)
-        p.setStrokeColor(colors.lightgrey)
+
         tabla_centros = ImageReader(settings.MEDIA_ROOT + '/excel/tabla_centros.png')
         tabla_energias = ImageReader(settings.MEDIA_ROOT + '/excel/tabla_energias.png')
-        p.drawImage(tabla_centros, 10, 700, 180, 90, mask='auto')
+        p.drawImage(tabla_centros, 36, 665, 180, 90, mask='auto')
+
+
+        p.setFillColor(colors.lightgrey)
+        p.setStrokeColor(colors.lightgrey)
+        p.rect(252, 674, 306, 72, stroke=True, fill=True)
 
         p.setFillColor(colors.black)
         p.setStrokeColor(colors.black)
+        p.setFont('Helvetica-Bold', 10)
+
+
 
         if evaluacion.centroPrimario == '1':
-            p.drawString(162,752,"{0}".format(evaluacion.centroEmocional))
-            descripcion_centro = ImageReader(settings.MEDIA_ROOT + '/excel/centro_emocional.png')
+            p.drawString(188,717,"{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroPrimario == '2':
-            p.drawString(162,752,"{0}".format(evaluacion.centroFisico))
-            descripcion_centro = ImageReader(settings.MEDIA_ROOT + '/excel/centro_fisico.png')
+            p.drawString(188,717,"{0}".format(evaluacion.centroFisico))
         elif evaluacion.centroPrimario == '3':
-            p.drawString(162,752,"{0}".format(evaluacion.centroIntelectual))
-            descripcion_centro = ImageReader(settings.MEDIA_ROOT + '/excel/centro_intelectual.png')
+            p.drawString(188,717,"{0}".format(evaluacion.centroIntelectual))
         if evaluacion.centroSecundario == '1':
-            p.drawString(162,730,"{0}".format(evaluacion.centroEmocional))
+            p.drawString(188,695,"{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroSecundario == '2':
-            p.drawString(162,730,"{0}".format(evaluacion.centroFisico))
+            p.drawString(188,695,"{0}".format(evaluacion.centroFisico))
         elif evaluacion.centroSecundario == '3':
-            p.drawString(162,730,"{0}".format(evaluacion.centroIntelectual))
+            p.drawString(188,695,"{0}".format(evaluacion.centroIntelectual))
         if evaluacion.centroTerciario == '1':
-            p.drawString(162,708,"{0}".format(evaluacion.centroEmocional))
+            p.drawString(188,673,"{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroTerciario == '2':
-            p.drawString(162,708,"{0}".format(evaluacion.centroFisico))
+            p.drawString(188,673,"{0}".format(evaluacion.centroFisico))
         elif evaluacion.centroTerciario == '3':
-            p.drawString(162,708,"{0}".format(evaluacion.centroIntelectual))
+            p.drawString(188,673,"{0}".format(evaluacion.centroIntelectual))
 
-        p.drawImage(descripcion_centro, 210, 667, 324, 162, mask='auto')
 
-        p.drawString(20,752,"{0}".format(evaluacion.get_centroPrimario_display()))
-        p.drawString(20,730,"{0}".format(evaluacion.get_centroSecundario_display()))
-        p.drawString(20,708,"{0}".format(evaluacion.get_centroTerciario_display()))
 
+        p.drawString(46,717,"{0}".format(evaluacion.get_centroPrimario_display()))
+        p.drawString(46,695,"{0}".format(evaluacion.get_centroSecundario_display()))
+        p.drawString(46,673,"{0}".format(evaluacion.get_centroTerciario_display()))
+        p.setFont('Helvetica', 11)
+
+        alto = 725
+        for centro in centro_descripciones:
+            p.drawString(264, alto,"{0}".format(centro.descripcion))
+            alto -= 12
         p.drawImage(tabla_energias, 370, 510, 180, 90, mask='auto')
 
-        # ws['N38'] = energia.descripcion
+
+        p.setFillColor(colors.lightgrey)
+        p.setStrokeColor(colors.lightgrey)
+        p.rect(36, 474, 306, 162, stroke=True, fill=True)
+
+        p.setFillColor(colors.black)
+        p.setStrokeColor(colors.black)
+        p.setFont('Helvetica-Bold', 10)
+
         p.drawString(380,562,"{0}".format(evaluacion.get_energiaPrimaria_display()))
         p.drawString(380,540,"{0}".format(evaluacion.get_energiaSecundaria_display()))
         p.drawString(380,518,"{0}".format(evaluacion.get_energiaTerciaria_display()))
+
         if evaluacion.energiaPrimaria == '1':
             p.drawString(522,562,"{0}".format(evaluacion.energiaInterna))
         elif evaluacion.energiaPrimaria == '2':
@@ -1699,7 +1759,13 @@ def Reporte_eneagrama(request):
         elif evaluacion.energiaTerciaria == '3':
             p.drawString(522,518,"{0}".format(evaluacion.energiaEquilibrio))
 
-        p.drawImage(energia_principal, 10, 470, 324, 162, mask='auto')
+        p.setFont('Helvetica', 11)
+
+        alto = 591
+        for energia in energia_descripciones:
+            p.drawString(45, alto,"{0}".format(energia.descripcion))
+            alto -= 12
+
 
         p.showPage()
         p.save()
@@ -1708,20 +1774,37 @@ def Reporte_eneagrama(request):
         buffer.close()
         response.write(pdf)
 
-        # subject = 'Eneagrama, resultados para: {0}'.format(evaluacion.usuario.nombre)
-        # html_content = get_template('eneagrama/email/formato_email.html').render({'evaluacion': evaluacion})
-        #
-        # msg = EmailMessage(
-        #     subject=subject,
-        #     body=html_content,
-        #     from_email=settings.DEFAULT_FROM_EMAIL,
-        #     to=['c.iturriosalcaraz@gmail.com', ],
-        #     cc=['c.iturriosalcaraz@gmail.com', ],
-        # )
-        # msg.content_subtype = "html"
-        # msg.send(fail_silently=not settings.DEBUG)
-        # messages.success(request, '¡{0} {1}, Tu reporte te llegara a tu correo en unos momentos!'.format(
-        #     evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
+        subject = 'Eneagrama, resultados para: {0}'.format(evaluacion.usuario.nombre)
+        html_content = get_template('eneagrama/email/formato_email.html').render({'evaluacion': evaluacion,
+                                                                                  'comprobante':comprobante})
+
+        msg = EmailMessage(
+            subject=subject,
+            body=html_content,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=['manuel.chavez.carrillo@gmail.com', ],
+            cc=['c.iturriosalcaraz@gmail.com', ],
+        )
+        msg.content_subtype = "html"
+        msg.send(fail_silently=not settings.DEBUG)
+
+        messages.success(request, '¡{0} {1}, Imprime o guarda tu reporte!'.format(
+            evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
+
+        usuario.pago = False
+        usuario.save()
+
+        nuevaEvaluacion = Evaluacion()
+        nuevaEvaluacion.usuario = evaluacion.usuario
+        nuevaEvaluacion.save()
+
+        comprobante = Comprobante()
+        comprobante.usuario = evaluacion.usuario
+        comprobante.evaluacion = nuevaEvaluacion
+        comprobante.save()
+
+        del request.session['nombre']
+        del request.session['id_evaluacion']
 
     return response
 
@@ -1735,11 +1818,11 @@ def write_pdf_view(request, pk):
         return redirect('Eneagrama:Dashboard')
     else:
         #################################### DATOS #################################################
-        eneatipoPrincipal = Eneatipo.objects.get(eneatipo=evaluacion.eneatipoPrincipal)
-        eneatipoSecundario = Eneatipo.objects.get(eneatipo=evaluacion.eneatipoSecundario)
-        eneatipoTerciario = Eneatipo.objects.get(eneatipo=evaluacion.eneatipoTerciario)
-        centro = Centro.objects.get(centro=evaluacion.centroPrimario)
-        energia = Energia.objects.get(energia=evaluacion.eneatipoPrincipal)
+        eneatipoPrincipal = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoPrincipal)
+        eneatipoSecundario = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoSecundario)
+        eneatipoTerciario = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoTerciario)
+        centro_descripciones = Centro.objects.filter(centro=evaluacion.centroPrimario)
+        energia_descripciones = Energia.objects.filter(energia=evaluacion.eneatipoPrincipal)
         diccionarioUno = {'tipo': '1. Perfeccionista', 'total': evaluacion.tipoUno}
         diccionarioDos = {'tipo': '2. Colaborador', 'total': evaluacion.tipoDos}
         diccionarioTres = {'tipo': '3. Competitivo', 'total': evaluacion.tipoTres}
@@ -1758,25 +1841,28 @@ def write_pdf_view(request, pk):
         response['Content-Disposition'] = 'inline; filename="ReporteEneagrama.pdf"'
 
         buffer = BytesIO()
-        p = canvas.Canvas(buffer, pagesize=A4)
+        p = canvas.Canvas(buffer, pagesize=letter)
         p.setTitle("Reporte eneagrama {0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         p.setLineWidth(.3)
-        date_time = str(date.today())
+        date_time = str(evaluacion.fecha_creacion.date())
+        azul = colors.Color(0, 0.1803921568627, 0.3647058823529)
+        p.setStrokeColor(azul)
+        p.setFillColor(azul)
+        p.setFont('Helvetica-Bold', 20)
 
-        eneagrama = ImageReader(settings.MEDIA_ROOT + '/excel/about.png')
-        p.drawImage(eneagrama, 40, 170, mask='auto')
+        logo = ImageReader(settings.MEDIA_ROOT + '/excel/portada.png')
+        p.drawImage(logo, 38, 36,538,719,  mask='auto')
+        p.drawString(147, 380, "{0} {1}".format(evaluacion.usuario.nombre,evaluacion.usuario.apellidos))
+        p.setFont('Helvetica-Bold', 18)
+        p.drawString(258, 340, "{0}".format(date_time))
 
-        p.drawString(10,10,"Transformando el aprendizaje en Acción…")
-        logo = ImageReader(settings.MEDIA_ROOT + '/excel/LOGO_EXCEL.png')
-        p.drawImage(logo, 520, 5, mask='auto')
-        p.drawImage(logo, 520, 5, mask='auto')
         p.showPage()
         ############################################## portada ###################################################3
         fondo_azul = ImageReader(settings.MEDIA_ROOT + '/excel/fondo_azul.png')
-        p.drawImage(fondo_azul, 3, 785, 589, 30, mask='auto')
-
-        p.drawString(215, 795, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
-        p.drawString(520, 795, "{0}".format(date_time))
+        p.setFont('Helvetica-Bold', 10)
+        p.drawImage(fondo_azul, 36, 725, 538, 30, mask='auto')
+        p.drawString(234, 735, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
+        p.drawString(502, 735, "{0}".format(date_time))
 
         if newList[8]['tipo'] == listaOrdenada[8]['tipo']:
             tabla = ImageReader(settings.MEDIA_ROOT + '/excel/9_coinciliador_tabla.png')
@@ -1796,34 +1882,35 @@ def write_pdf_view(request, pk):
             tabla = ImageReader(settings.MEDIA_ROOT + '/excel/7_dinamico_tabla.png')
         else:
             tabla = ImageReader(settings.MEDIA_ROOT + '/excel/8_lider_tabla.png')
-        p.drawImage(tabla, 10, 580, 198, 196, mask='auto')
 
-        p.drawString(15, 739, "{0}".format(newList[8]['tipo']))
-        p.drawString(155, 739, "{0}".format(newList[8]['total']))
+        p.drawImage(tabla, 36, 527, 198, 196, mask='auto')
 
-        p.drawString(15, 720, "{0}".format(newList[0]['tipo']))
-        p.drawString(155, 720, "{0}".format(newList[0]['total']))
+        p.drawString(41, 684, "{0}".format(newList[8]['tipo']))
+        p.drawString(181, 684, "{0}".format(newList[8]['total']))
 
-        p.drawString(15, 702, "{0}".format(newList[1]['tipo']))
-        p.drawString(155, 702, "{0}".format(newList[1]['total']))
+        p.drawString(41, 665, "{0}".format(newList[0]['tipo']))
+        p.drawString(181, 665, "{0}".format(newList[0]['total']))
 
-        p.drawString(15, 684, "{0}".format(newList[2]['tipo']))
-        p.drawString(155, 684, "{0}".format(newList[2]['total']))
+        p.drawString(41, 647, "{0}".format(newList[1]['tipo']))
+        p.drawString(181, 647, "{0}".format(newList[1]['total']))
 
-        p.drawString(15, 665, "{0}".format(newList[3]['tipo']))
-        p.drawString(155, 665, "{0}".format(newList[3]['total']))
+        p.drawString(41, 629, "{0}".format(newList[2]['tipo']))
+        p.drawString(181, 629, "{0}".format(newList[2]['total']))
 
-        p.drawString(15, 646, "{0}".format(newList[4]['tipo']))
-        p.drawString(155, 646, "{0}".format(newList[4]['total']))
+        p.drawString(41, 610, "{0}".format(newList[3]['tipo']))
+        p.drawString(181, 610, "{0}".format(newList[3]['total']))
 
-        p.drawString(15, 628, "{0}".format(newList[5]['tipo']))
-        p.drawString(155, 628, "{0}".format(newList[5]['total']))
+        p.drawString(41, 591, "{0}".format(newList[4]['tipo']))
+        p.drawString(181, 591, "{0}".format(newList[4]['total']))
 
-        p.drawString(15, 608, "{0}".format(newList[6]['tipo']))
-        p.drawString(155, 608, "{0}".format(newList[6]['total']))
+        p.drawString(41, 573, "{0}".format(newList[5]['tipo']))
+        p.drawString(181, 573, "{0}".format(newList[5]['total']))
 
-        p.drawString(15, 588, "{0}".format(newList[7]['tipo']))
-        p.drawString(155, 588, "{0}".format(newList[7]['total']))
+        p.drawString(41, 553, "{0}".format(newList[6]['tipo']))
+        p.drawString(181, 553, "{0}".format(newList[6]['total']))
+
+        p.drawString(41, 535, "{0}".format(newList[7]['tipo']))
+        p.drawString(181, 535, "{0}".format(newList[7]['total']))
         d = Drawing(400, 400)
         sp = SpiderChart()
         sp.x = 50
@@ -1854,16 +1941,18 @@ def write_pdf_view(request, pk):
         sp.strands[5].strokeColor = grey_transparent
         d.add(sp)
 
-        d.drawOn(p, 250, 520)
+        d.drawOn(p, 290, 470)
 
         tabla = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipos_tabla.png')
-        p.drawImage(tabla, 50, 455, 180, 90, mask='auto')
-        p.drawString(54, 505, "{0}".format(listaOrdenada[8]['tipo']))
-        p.drawString(180, 505, "{0}".format(listaOrdenada[8]['total']))
-        p.drawString(54, 484, "{0}".format(listaOrdenada[7]['tipo']))
-        p.drawString(180, 484, "{0}".format(listaOrdenada[7]['total']))
-        p.drawString(54, 462, "{0}".format(listaOrdenada[6]['tipo']))
-        p.drawString(180, 462, "{0}".format(listaOrdenada[6]['total']))
+
+        p.drawImage(tabla, 36, 401, 180, 90, mask='auto')
+
+        p.drawString(40, 451, "{0}".format(listaOrdenada[8]['tipo']))
+        p.drawString(166, 451, "{0}".format(listaOrdenada[8]['total']))
+        p.drawString(40, 430, "{0}".format(listaOrdenada[7]['tipo']))
+        p.drawString(166, 430, "{0}".format(listaOrdenada[7]['total']))
+        p.drawString(40, 408, "{0}".format(listaOrdenada[6]['tipo']))
+        p.drawString(166, 408, "{0}".format(listaOrdenada[6]['total']))
 
         drawing = Drawing(400, 200)
         data = [(listaOrdenada[8]['total'], listaOrdenada[7]['total'], listaOrdenada[6]['total'])]
@@ -1888,135 +1977,104 @@ def write_pdf_view(request, pk):
         bc.categoryAxis.strokeColor = colors.white
         drawing.add(bc)
 
-        drawing.drawOn(p, 220, 390)
+        drawing.drawOn(p, 258, 354)
 
-        p.line(4, 560, 589, 560)
+        p.setStrokeColor(azulito)
+        p.line(36, 509, 574, 509)
+        p.setStrokeColor(colors.black)
 
-        if newList[8]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_nueve_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_nueve.png')
-        elif newList[0]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_uno_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_uno.png')
-        elif newList[1]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_dos_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_dos.png')
-        elif newList[2]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_tres_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_tres.png')
-        elif newList[3]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_cuatro_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_cuatro.png')
-        elif newList[4]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_cinco_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_cinco.png')
-        elif newList[5]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_seis_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_seis.png')
-        elif newList[6]['tipo'] == listaOrdenada[8]['tipo']:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_siete_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_siete.png')
-        else:
-            eneatipo_principal_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_ocho_descripcion.png')
-            energia_principal = ImageReader(settings.MEDIA_ROOT + '/excel/energia_ocho.png')
+        alto = 338
 
-        if newList[8]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_nueve_descripcion.png')
-        elif newList[0]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_uno_descripcion.png')
-        elif newList[1]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_dos_descripcion.png')
-        elif newList[2]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_tres_descripcion.png')
-        elif newList[3]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_cuatro_descripcion.png')
-        elif newList[4]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_cinco_descripcion.png')
-        elif newList[5]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_seis_descripcion.png')
-        elif newList[6]['tipo'] == listaOrdenada[7]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_siete_descripcion.png')
-        else:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_ocho_descripcion.png')
+        p.drawImage(fondo_azul, 36, 354, 538, 30, mask='auto')
+        p.drawString(287, 364, "{0}".format(listaOrdenada[8]['tipo']))
+        p.setFont('Helvetica', 11)
+        for principal in eneatipoPrincipal:
+            p.drawString(45, alto, "{0}".format(principal.descripcion))
+            alto -=12
 
-        if newList[8]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_nueve_descripcion.png')
-        elif newList[0]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_uno_descripcion.png')
-        elif newList[1]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_dos_descripcion.png')
-        elif newList[2]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_tres_descripcion.png')
-        elif newList[3]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_secundario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_cuatro_descripcion.png')
-        elif newList[4]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_cinco_descripcion.png')
-        elif newList[5]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_seis_descripcion.png')
-        elif newList[6]['tipo'] == listaOrdenada[6]['tipo']:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_siete_descripcion.png')
-        else:
-            eneatipo_terciario_descripcion = ImageReader(settings.MEDIA_ROOT + '/excel/eneatipo_ocho_descripcion.png')
+        alto = 219
+        p.drawImage(fondo_azul, 36, 235, 538, 30, mask='auto')
+        p.setFont('Helvetica-Bold', 10)
+        p.drawString(287, 245, "{0}".format(listaOrdenada[7]['tipo']))
+        p.setFont('Helvetica', 11)
+        for principal in eneatipoSecundario:
+            p.drawString(45, alto, "{0}".format(principal.descripcion))
+            alto -=12
 
+        alto = 100
+        p.drawImage(fondo_azul, 36, 116, 538, 30, mask='auto')
+        p.setFont('Helvetica-Bold', 10)
+        p.drawString(287, 126, "{0}".format(listaOrdenada[6]['tipo']))
+        p.setFont('Helvetica', 11)
+        for principal in eneatipoTerciario:
+            p.drawString(45, alto, "{0}".format(principal.descripcion))
+            alto -=12
 
-        p.drawImage(fondo_azul, 3, 380, 589, 30, mask='auto')
-        p.drawString(265, 390, "{0}".format(listaOrdenada[8]['tipo']))
-        p.drawImage(eneatipo_principal_descripcion,6,270,580,100, mask='auto')
-
-        p.drawImage(fondo_azul, 3, 250, 589, 30, mask='auto')
-        p.drawString(265, 260, "{0}".format(listaOrdenada[7]['tipo']))
-        p.drawImage(eneatipo_secundario_descripcion,6,150,580,100, mask='auto')
-
-        p.drawImage(fondo_azul, 3, 110, 589, 30, mask='auto')
-        p.drawString(265, 130, "{0}".format(listaOrdenada[6]['tipo']))
-        p.drawImage(eneatipo_terciario_descripcion,6,10,580,100, mask='auto')
 
 
         p.showPage()
         ############################################## segunda pagina ###################################################
-        p.setFillColor(colors.lightgrey)
-        p.setStrokeColor(colors.lightgrey)
+
         tabla_centros = ImageReader(settings.MEDIA_ROOT + '/excel/tabla_centros.png')
         tabla_energias = ImageReader(settings.MEDIA_ROOT + '/excel/tabla_energias.png')
-        p.drawImage(tabla_centros, 10, 700, 180, 90, mask='auto')
+        p.drawImage(tabla_centros, 36, 665, 180, 90, mask='auto')
+
+
+        p.setFillColor(colors.lightgrey)
+        p.setStrokeColor(colors.lightgrey)
+        p.rect(252, 674, 306, 72, stroke=True, fill=True)
 
         p.setFillColor(colors.black)
         p.setStrokeColor(colors.black)
+        p.setFont('Helvetica-Bold', 10)
+
+
 
         if evaluacion.centroPrimario == '1':
-            p.drawString(162,752,"{0}".format(evaluacion.centroEmocional))
-            descripcion_centro = ImageReader(settings.MEDIA_ROOT + '/excel/centro_emocional.png')
+            p.drawString(188,717,"{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroPrimario == '2':
-            p.drawString(162,752,"{0}".format(evaluacion.centroFisico))
-            descripcion_centro = ImageReader(settings.MEDIA_ROOT + '/excel/centro_fisico.png')
+            p.drawString(188,717,"{0}".format(evaluacion.centroFisico))
         elif evaluacion.centroPrimario == '3':
-            p.drawString(162,752,"{0}".format(evaluacion.centroIntelectual))
-            descripcion_centro = ImageReader(settings.MEDIA_ROOT + '/excel/centro_intelectual.png')
+            p.drawString(188,717,"{0}".format(evaluacion.centroIntelectual))
         if evaluacion.centroSecundario == '1':
-            p.drawString(162,730,"{0}".format(evaluacion.centroEmocional))
+            p.drawString(188,695,"{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroSecundario == '2':
-            p.drawString(162,730,"{0}".format(evaluacion.centroFisico))
+            p.drawString(188,695,"{0}".format(evaluacion.centroFisico))
         elif evaluacion.centroSecundario == '3':
-            p.drawString(162,730,"{0}".format(evaluacion.centroIntelectual))
+            p.drawString(188,695,"{0}".format(evaluacion.centroIntelectual))
         if evaluacion.centroTerciario == '1':
-            p.drawString(162,708,"{0}".format(evaluacion.centroEmocional))
+            p.drawString(188,673,"{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroTerciario == '2':
-            p.drawString(162,708,"{0}".format(evaluacion.centroFisico))
+            p.drawString(188,673,"{0}".format(evaluacion.centroFisico))
         elif evaluacion.centroTerciario == '3':
-            p.drawString(162,708,"{0}".format(evaluacion.centroIntelectual))
+            p.drawString(188,673,"{0}".format(evaluacion.centroIntelectual))
 
-        p.drawImage(descripcion_centro, 210, 667, 324, 162, mask='auto')
 
-        p.drawString(20,752,"{0}".format(evaluacion.get_centroPrimario_display()))
-        p.drawString(20,730,"{0}".format(evaluacion.get_centroSecundario_display()))
-        p.drawString(20,708,"{0}".format(evaluacion.get_centroTerciario_display()))
 
+        p.drawString(46,717,"{0}".format(evaluacion.get_centroPrimario_display()))
+        p.drawString(46,695,"{0}".format(evaluacion.get_centroSecundario_display()))
+        p.drawString(46,673,"{0}".format(evaluacion.get_centroTerciario_display()))
+        p.setFont('Helvetica', 11)
+
+        alto = 725
+        for centro in centro_descripciones:
+            p.drawString(264, alto,"{0}".format(centro.descripcion))
+            alto -= 12
         p.drawImage(tabla_energias, 370, 510, 180, 90, mask='auto')
 
-        # ws['N38'] = energia.descripcion
+
+        p.setFillColor(colors.lightgrey)
+        p.setStrokeColor(colors.lightgrey)
+        p.rect(36, 474, 306, 162, stroke=True, fill=True)
+
+        p.setFillColor(colors.black)
+        p.setStrokeColor(colors.black)
+        p.setFont('Helvetica-Bold', 10)
+
         p.drawString(380,562,"{0}".format(evaluacion.get_energiaPrimaria_display()))
         p.drawString(380,540,"{0}".format(evaluacion.get_energiaSecundaria_display()))
         p.drawString(380,518,"{0}".format(evaluacion.get_energiaTerciaria_display()))
+
         if evaluacion.energiaPrimaria == '1':
             p.drawString(522,562,"{0}".format(evaluacion.energiaInterna))
         elif evaluacion.energiaPrimaria == '2':
@@ -2036,7 +2094,13 @@ def write_pdf_view(request, pk):
         elif evaluacion.energiaTerciaria == '3':
             p.drawString(522,518,"{0}".format(evaluacion.energiaEquilibrio))
 
-        p.drawImage(energia_principal, 10, 470, 324, 162, mask='auto')
+        p.setFont('Helvetica', 11)
+
+        alto = 591
+        for energia in energia_descripciones:
+            p.drawString(45, alto,"{0}".format(energia.descripcion))
+            alto -= 12
+
 
         p.showPage()
         p.save()

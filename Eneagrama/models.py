@@ -134,6 +134,7 @@ class Evaluacion(models.Model):
     energiaExterna = models.IntegerField(null=True, blank=False)
     energiaEquilibrio = models.IntegerField(null=True, blank=False)
     fecha_creacion = models.DateTimeField(null=False, blank=False, auto_now_add=True)
+    fecha_finalizacion = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return 'Evaluacion # {0} del usuario: {1}'.format(self.id, self.usuario.email)
@@ -158,7 +159,7 @@ class Eneatipo(models.Model):
             ('2', 'Colaborador'),  # valor = F
             ('3', 'Competitivo'),  # valor = C
             ('4', 'Creativo'),  # valor = E
-            ('5', 'Analítico'),  # valor = H
+            ('5', 'Analitico'),  # valor = H
             ('6', 'Comprometido'),  # valor = B
             ('7', 'Dinámico'),  # valor = I
             ('8', 'Líder'),  # valor = G
@@ -167,7 +168,7 @@ class Eneatipo(models.Model):
     )
 
     def __str__(self):
-        return 'eneatipo: {0}'.format(self.get_eneatipo_display())
+        return 'eneatipo: {0}'.format(self.eneatipo)
 
 
 class Centro(models.Model):
@@ -181,7 +182,7 @@ class Centro(models.Model):
     )
 
     def __str__(self):
-        return 'Centro: {0}'.format(self.get_centro_display())
+        return 'Centro: {0}'.format(self.centro)
 
 
 class Energia(models.Model):
@@ -201,7 +202,7 @@ class Energia(models.Model):
     )
 
     def __str__(self):
-        return 'Energia: '.format(self.get_energia_display())
+        return 'Energia: {0} '.format(self.energia)
 
 
 class Comprobante(models.Model):
@@ -226,6 +227,9 @@ class Comprobante(models.Model):
 	)
     usuario = models.ForeignKey(
         Usuario, null=False, blank=False, related_name='comprobante_user_set', on_delete=models.PROTECT
+    )
+    evaluacion = models.ForeignKey(
+        Evaluacion, null=True, blank=False, related_name='evaluacion_pago_set', on_delete=models.PROTECT
     )
     def __str__(self):
         return 'Comprobante con metodo de pago: {0}'.format(self.get_tipo_pago_display())

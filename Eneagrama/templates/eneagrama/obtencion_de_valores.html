@@ -1,5 +1,7 @@
 {% extends 'eneagrama/app-base.html' %}
+{% load mathfilters %}
 {% load static %}
+{% load humanize %}
 {% block main %}
     <div class="right_col" role="main">
         <br>
@@ -10,6 +12,8 @@
                     <div class="x_title">
                         <h2>Usuarios<strong> que han realizado la evaluacion.</strong></h2>
                         <ul class="nav navbar-right panel_toolbox">
+                            <li style="color: white;"><a style="color: white;" type="button" class="btn btn-info"
+                                       href="{% url 'Eneagrama:Dashboard' %}">Regresar.</a></li>
                             <li><a href="{% url 'logout' %}">LogOut</a>
                             </li>
                         </ul>
@@ -25,11 +29,14 @@
                                 <th>Eneatipo principal</th>
                                 <th>Centro principal</th>
                                 <th>Energia principal</th>
+                                <th>Duracion de la evaluacion</th>
                                 <th>Estado</th>
                                 <th>Ciudad</th>
                                 <th>Empresa</th>
                                 <th>Puesto</th>
                                 <th>Correo</th>
+                                <th>Fecha de inicio de la evaluacion</th>
+                                <th>Fecha de terminacion de la evaluacion</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -47,11 +54,14 @@
                                         {{ evaluacion.get_centroPrimario_display }}
                                     </td>
                                     <td>{{ evaluacion.get_energiaPrimaria_display }}</td>
+                                    <td>{{ evaluacion.fecha_finalizacion|sub:evaluacion.fecha_creacion }}</td>
                                     <td>{{ evaluacion.usuario.estado }}</td>
                                     <td>{{ evaluacion.usuario.ciudad }}</td>
                                     <td>{{ evaluacion.usuario.empresa }}</td>
                                     <td>{{ evaluacion.usuario.puesto }}</td>
                                     <td>{{ evaluacion.usuario.email }}</td>
+                                    <td>{{ evaluacion.fecha_creacion }}</td>
+                                    <td>{{ evaluacion.fecha_finalizacion }}</td>
                                 </tr>
                             {% empty %}
                                 <h2> No hay usuarios para mostrar. </h2>

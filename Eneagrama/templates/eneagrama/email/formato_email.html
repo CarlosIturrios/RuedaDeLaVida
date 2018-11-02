@@ -113,6 +113,10 @@ a[x-apple-data-detectors] {
               su eneatipo principal es: {{ evaluacion.get_eneatipoPrincipal_display }}
               <br><br>
             </div>
+              <div class="body-text" style="font-family:Helvetica, Arial, sans-serif;font-size:14px;line-height:20px;text-align:left;color:#333333">
+              Tipo de evaluacion: {{ comprobante.get_tipo_pago_display }}
+              <br><br>
+            </div>
             <div class="body-text" style="font-family:Helvetica, Arial, sans-serif;font-size:14px;line-height:20px;text-align:left;color:#333333">
               Correo: {{ evaluacion.usuario.email }}
               <br><br>
@@ -123,6 +127,16 @@ a[x-apple-data-detectors] {
           <td class="container-padding footer-text" align="left" style="font-family:Helvetica, Arial, sans-serif;font-size:12px;line-height:16px;color:#aaaaaa;padding-left:24px;padding-right:24px">
             <br>
             <br>
+              {% if comprobante.tipo_pago == '3' %}
+                  <a href="http://127.0.0.1:8000//{% url 'Eneagrama:Comprobante_deposito' comprobante.id %}"
+                          >Revisa su comprobante para descargar el reporte | Eneagrama
+                  </a>
+                  {% elif comprobante.tipo_pago == '0' %}
+                  <a href="http://127.0.0.1:8000{% url 'Eneagrama:write_pdf_view' evaluacion.id %}"
+                          >Descarga el reporte | Eneagrama
+                  </a>
+              {% endif %}
+          <br>
             <a href="tools.co2liderazgo.com/enagrama">Tools.Co2liderazgo.com | Eneagrama</a>
             <br>
           </td>
