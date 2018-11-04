@@ -1,11 +1,9 @@
-from django.conf.urls import url
-from django.contrib.auth import views as auth_views
+from django.conf.urls import url, include
 
 from . import views
 from .views import Borrar_sesion
 
 urlpatterns = [
-    # App views    
     url(r'^$', views.principal, name='principal'),
     url(r'^taller/$', views.taller, name='taller'),
     url(r'^register/(?P<metodo_pago>[0-9]+)/$', views.register, name='register'),
@@ -22,10 +20,11 @@ urlpatterns = [
     url(r'^metodo-pago/$', views.metodo_pago, name='metodo_pago'),
     url(r'^realizar-pago/$', views.realizar_pago, name='realizar_pago'),
     url(r'^registrar-comprobante/$', views.registrar_comprobante, name='registrar_comprobante'),
-    url(r'^Reporte-Eneagrama/$', views.Reporte_eneagrama, name="Reporte_eneagrama"),
-    url(r'^Reporte-en-pdf-Eneagrama/(?P<pk>[0-9]+)/$', views.write_pdf_view, name='write_pdf_view'),
-    url(r'^Dashboard/$', views.Dashboard, name="Dashboard"),
+    url(r'^reporte-Eneagrama/$', views.Reporte_eneagrama, name="Reporte_eneagrama"),
+    url(r'^reporte-en-pdf-Eneagrama/(?P<pk>[0-9]+)/$', views.write_pdf_view, name='write_pdf_view'),
+    url(r'^dashboard/$', views.Dashboard, name="Dashboard"),
     url(r'^modificar-codigo/(?P<pk>[0-9]+)/$', views.Modificar_codigo, name='Modificar_codigo'),
     url(r'^crear-codigo/$', views.Crear_codigo, name='Crear_codigo'),
-    url(r'^Comprobante-deposito/(?P<pk>[0-9]+)/$', views.Comprobante_deposito, name='Comprobante_deposito'),
+    url(r'^comprobante-deposito/(?P<pk>[0-9]+)/$', views.Comprobante_deposito, name='Comprobante_deposito'),
+    url(r'^paypal-standard-ipn-urls/', include('paypal.standard.ipn.urls')),
 ]

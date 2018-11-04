@@ -14,7 +14,7 @@ DEBUG = True
 
 SECRET_KEY = 'mv9z(m^8@g5f--t8-2gmjvcwlh%4pzo^g=exmb73bxat$eh+=f'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 ROOT_URLCONF = 'RuedaDeLaVida.urls'
 
@@ -30,8 +30,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'paypal.standard.ipn',
     'bootstrap3',
     'mathfilters',
+    'landingpage',
     'WebPagRuedaDLV',
     'Eneagrama',
 ]
@@ -92,12 +94,11 @@ TEMPLATES = [
 ]
 
 # AUTHENTICATION
-LOGIN_URL = '/rueda-de-la-vida/login/'
+LOGIN_URL = '/auth/login/'
 
-LOGIN_REDIRECT_URL = '/rueda-de-la-vida/resultados/'
+LOGIN_REDIRECT_URL = '/'
 
-LOGOUT_REDIRECT_URL = '/evaluacion-eneagrama/'
-#LOGOUT_REDIRECT_URL = None
+LOGOUT_REDIRECT_URL = '/'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -119,6 +120,10 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 SESSION_COOKIE_AGE = 1209600  # 2 Weeks
 
+
+# PAYPAL
+PAYPAL_BUSINESS = 'iturrios3063-facilitator@gmail.com'
+PAYPAL_TEST = DEBUG
 
 try:
     from local_settings import *

@@ -6,3 +6,6 @@ from django.apps import AppConfig
 
 class EneagramaConfig(AppConfig):
     name = 'Eneagrama'
+
+    def ready(self):
+        super(EneagramaConfig, self).ready()

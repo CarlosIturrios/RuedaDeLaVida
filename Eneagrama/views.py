@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse  # email sender
 from django.template import Context  # email sender
 from django.template.loader import render_to_string, get_template  # email sender
@@ -22,6 +23,7 @@ from reportlab.lib import colors
 from reportlab.graphics.shapes import Drawing
 from reportlab.graphics.charts.barcharts import VerticalBarChart
 from reportlab.graphics.charts.spider import SpiderChart
+from paypal.standard.forms import PayPalPaymentsForm
 
 from reportlab.platypus import Paragraph, Table, TableStyle, Image
 
@@ -1306,7 +1308,7 @@ def pago_formato(request):
             if comprobante.tipo_pago == '1':
                 subject = 'Eneagrama, resultados para: {0}'.format(evaluacion.usuario.nombre)
                 html_content = get_template('eneagrama/email/formato_email.html').render({'evaluacion': evaluacion,
-                                                                                          'comprobante':comprobante})
+                                                                                          'comprobante': comprobante})
 
                 msg = EmailMessage(
                     subject=subject,
@@ -1358,8 +1360,27 @@ def taller(request):
 
 
 def realizar_pago(request):
+    if not 'nombre' in request.session:
+        messages.warning(request, '¡Antes de realizar la encuesta debes de registrarte!')
+        return redirect('Eneagrama:register', (1))
+
     nombreMostrar = request.session['nombre']
-    return render(request, 'eneagrama/realizar_pago.html', {'nombreMostrar': nombreMostrar})
+    evaluacion_id = Evaluacion.objects.get(id=request.session['id_evaluacion'])
+
+    initial = {
+        'business': settings.PAYPAL_BUSINESS,
+        'currency_code': 'MXN',
+        'amount': '190.00',
+        'item_name': 'Encuesta eneagrama CO2LIDERAZGO',
+        'invoice': '{}'.format(evaluacion_id),
+        'notify_url': request.build_absolute_uri(reverse('Eneagrama:paypal-ipn')),
+        'return': request.build_absolute_uri(reverse('Eneagrama:parteUno')),
+        'cancel_return': request.build_absolute_uri(reverse('Eneagrama:realizar_pago')),
+    }
+
+    form_paypal = PayPalPaymentsForm(initial=initial)
+
+    return render(request, 'eneagrama/realizar_pago.html', {'nombreMostrar': nombreMostrar, 'form_paypal': form_paypal})
 
 
 def registrar_comprobante(request):
@@ -1412,11 +1433,13 @@ def registrar_comprobante(request):
     return render(request, 'eneagrama/registrar_comprobante.html', {'nombreMostrar': nombreMostrar})
 
 
+def registra_pago_paypal(request):
+    pass
+
+
 def error_404_view(request, exception):
     data = {"name": "ThePythonDjango.com"}
     return render(request, 'eneagrama/404_not_found.html', data)
-
-
 
 
 def Reporte_eneagrama(request):
@@ -1426,12 +1449,12 @@ def Reporte_eneagrama(request):
         messages.error(request, 'Debes de pagar el formato antes de obtenerlo.')
         return redirect('Eneagrama:pago_formato')
     else:
-        comprobante = Comprobante.objects.filter(evaluacion=evaluacion,usuario=usuario).last()
+        comprobante = Comprobante.objects.filter(evaluacion=evaluacion, usuario=usuario).last()
         if comprobante.tipo_pago == '0':
             messages.success(request, 'El reporte te sera entregado cuando asistas al taller.')
             subject = 'Eneagrama, resultados para: {0}'.format(evaluacion.usuario.nombre)
             html_content = get_template('eneagrama/email/formato_email.html').render({'evaluacion': evaluacion,
-                                                                                      'comprobante':comprobante})
+                                                                                      'comprobante': comprobante})
 
             msg = EmailMessage(
                 subject=subject,
@@ -1461,7 +1484,7 @@ def Reporte_eneagrama(request):
                                       'te enviaremos el reporte a tu correo.')
             subject = 'Eneagrama, resultados para: {0}'.format(evaluacion.usuario.nombre)
             html_content = get_template('eneagrama/email/formato_email.html').render({'evaluacion': evaluacion,
-                                                                                      'comprobante':comprobante})
+                                                                                      'comprobante': comprobante})
 
             msg = EmailMessage(
                 subject=subject,
@@ -1518,7 +1541,7 @@ def Reporte_eneagrama(request):
         eneagrama = ImageReader(settings.MEDIA_ROOT + '/excel/about.png')
         p.drawImage(eneagrama, 40, 170, mask='auto')
 
-        p.drawString(36,36,"Transformando el aprendizaje en Acción…")
+        p.drawString(36, 36, "Transformando el aprendizaje en Acción…")
         logo = ImageReader(settings.MEDIA_ROOT + '/excel/LOGO_EXCEL.png')
         p.drawImage(logo, 520, 36, mask='auto')
         p.showPage()
@@ -1584,7 +1607,8 @@ def Reporte_eneagrama(request):
         sp.height = 190
         sp.data = [[35, 35, 35, 35, 35, 35, 35, 35, 35], [25, 25, 25, 25, 25, 25, 25, 25, 25],
                    [20, 20, 20, 20, 20, 20, 20, 20, 20],
-                   [15, 15, 15, 15, 15, 15, 15, 15, 15], [10, 10, 10, 10, 10, 10, 10, 10, 10], [5, 5, 5, 5, 5, 5, 5, 5, 5],
+                   [15, 15, 15, 15, 15, 15, 15, 15, 15], [10, 10, 10, 10, 10, 10, 10, 10, 10],
+                   [5, 5, 5, 5, 5, 5, 5, 5, 5],
                    [newList[8]['total'], newList[0]['total'], newList[1]['total'],
                     newList[2]['total'], newList[3]['total'], newList[4]['total'],
                     newList[5]['total'], newList[6]['total'], newList[7]['total']]]
@@ -1655,7 +1679,7 @@ def Reporte_eneagrama(request):
         p.setFont('Helvetica', 11)
         for principal in eneatipoPrincipal:
             p.drawString(45, alto, "{0}".format(principal.descripcion))
-            alto -=12
+            alto -= 12
 
         alto = 219
         p.drawImage(fondo_azul, 36, 235, 538, 30, mask='auto')
@@ -1664,7 +1688,7 @@ def Reporte_eneagrama(request):
         p.setFont('Helvetica', 11)
         for principal in eneatipoSecundario:
             p.drawString(45, alto, "{0}".format(principal.descripcion))
-            alto -=12
+            alto -= 12
 
         alto = 100
         p.drawImage(fondo_azul, 36, 116, 538, 30, mask='auto')
@@ -1673,9 +1697,7 @@ def Reporte_eneagrama(request):
         p.setFont('Helvetica', 11)
         for principal in eneatipoTerciario:
             p.drawString(45, alto, "{0}".format(principal.descripcion))
-            alto -=12
-
-
+            alto -= 12
 
         p.showPage()
         ############################################## segunda pagina ###################################################
@@ -1683,7 +1705,6 @@ def Reporte_eneagrama(request):
         tabla_centros = ImageReader(settings.MEDIA_ROOT + '/excel/tabla_centros.png')
         tabla_energias = ImageReader(settings.MEDIA_ROOT + '/excel/tabla_energias.png')
         p.drawImage(tabla_centros, 36, 665, 180, 90, mask='auto')
-
 
         p.setFillColor(colors.lightgrey)
         p.setStrokeColor(colors.lightgrey)
@@ -1693,40 +1714,35 @@ def Reporte_eneagrama(request):
         p.setStrokeColor(colors.black)
         p.setFont('Helvetica-Bold', 10)
 
-
-
         if evaluacion.centroPrimario == '1':
-            p.drawString(188,717,"{0}".format(evaluacion.centroEmocional))
+            p.drawString(188, 717, "{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroPrimario == '2':
-            p.drawString(188,717,"{0}".format(evaluacion.centroFisico))
+            p.drawString(188, 717, "{0}".format(evaluacion.centroFisico))
         elif evaluacion.centroPrimario == '3':
-            p.drawString(188,717,"{0}".format(evaluacion.centroIntelectual))
+            p.drawString(188, 717, "{0}".format(evaluacion.centroIntelectual))
         if evaluacion.centroSecundario == '1':
-            p.drawString(188,695,"{0}".format(evaluacion.centroEmocional))
+            p.drawString(188, 695, "{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroSecundario == '2':
-            p.drawString(188,695,"{0}".format(evaluacion.centroFisico))
+            p.drawString(188, 695, "{0}".format(evaluacion.centroFisico))
         elif evaluacion.centroSecundario == '3':
-            p.drawString(188,695,"{0}".format(evaluacion.centroIntelectual))
+            p.drawString(188, 695, "{0}".format(evaluacion.centroIntelectual))
         if evaluacion.centroTerciario == '1':
-            p.drawString(188,673,"{0}".format(evaluacion.centroEmocional))
+            p.drawString(188, 673, "{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroTerciario == '2':
-            p.drawString(188,673,"{0}".format(evaluacion.centroFisico))
+            p.drawString(188, 673, "{0}".format(evaluacion.centroFisico))
         elif evaluacion.centroTerciario == '3':
-            p.drawString(188,673,"{0}".format(evaluacion.centroIntelectual))
+            p.drawString(188, 673, "{0}".format(evaluacion.centroIntelectual))
 
-
-
-        p.drawString(46,717,"{0}".format(evaluacion.get_centroPrimario_display()))
-        p.drawString(46,695,"{0}".format(evaluacion.get_centroSecundario_display()))
-        p.drawString(46,673,"{0}".format(evaluacion.get_centroTerciario_display()))
+        p.drawString(46, 717, "{0}".format(evaluacion.get_centroPrimario_display()))
+        p.drawString(46, 695, "{0}".format(evaluacion.get_centroSecundario_display()))
+        p.drawString(46, 673, "{0}".format(evaluacion.get_centroTerciario_display()))
         p.setFont('Helvetica', 11)
 
         alto = 725
         for centro in centro_descripciones:
-            p.drawString(264, alto,"{0}".format(centro.descripcion))
+            p.drawString(264, alto, "{0}".format(centro.descripcion))
             alto -= 12
         p.drawImage(tabla_energias, 370, 510, 180, 90, mask='auto')
-
 
         p.setFillColor(colors.lightgrey)
         p.setStrokeColor(colors.lightgrey)
@@ -1736,36 +1752,35 @@ def Reporte_eneagrama(request):
         p.setStrokeColor(colors.black)
         p.setFont('Helvetica-Bold', 10)
 
-        p.drawString(380,562,"{0}".format(evaluacion.get_energiaPrimaria_display()))
-        p.drawString(380,540,"{0}".format(evaluacion.get_energiaSecundaria_display()))
-        p.drawString(380,518,"{0}".format(evaluacion.get_energiaTerciaria_display()))
+        p.drawString(380, 562, "{0}".format(evaluacion.get_energiaPrimaria_display()))
+        p.drawString(380, 540, "{0}".format(evaluacion.get_energiaSecundaria_display()))
+        p.drawString(380, 518, "{0}".format(evaluacion.get_energiaTerciaria_display()))
 
         if evaluacion.energiaPrimaria == '1':
-            p.drawString(522,562,"{0}".format(evaluacion.energiaInterna))
+            p.drawString(522, 562, "{0}".format(evaluacion.energiaInterna))
         elif evaluacion.energiaPrimaria == '2':
-            p.drawString(522,562,"{0}".format(evaluacion.energiaExterna))
+            p.drawString(522, 562, "{0}".format(evaluacion.energiaExterna))
         elif evaluacion.energiaPrimaria == '3':
-            p.drawString(522,562,"{0}".format(evaluacion.energiaEquilibrio))
+            p.drawString(522, 562, "{0}".format(evaluacion.energiaEquilibrio))
         if evaluacion.energiaSecundaria == '1':
-            p.drawString(522,540,"{0}".format(evaluacion.energiaInterna))
+            p.drawString(522, 540, "{0}".format(evaluacion.energiaInterna))
         elif evaluacion.energiaSecundaria == '2':
-            p.drawString(522,540,"{0}".format(evaluacion.energiaExterna))
+            p.drawString(522, 540, "{0}".format(evaluacion.energiaExterna))
         elif evaluacion.energiaSecundaria == '3':
-            p.drawString(522,540,"{0}".format(evaluacion.energiaEquilibrio))
+            p.drawString(522, 540, "{0}".format(evaluacion.energiaEquilibrio))
         if evaluacion.energiaTerciaria == '1':
-            p.drawString(522,518,"{0}".format(evaluacion.energiaInterna))
+            p.drawString(522, 518, "{0}".format(evaluacion.energiaInterna))
         elif evaluacion.energiaTerciaria == '2':
-            p.drawString(522,518,"{0}".format(evaluacion.energiaExterna))
+            p.drawString(522, 518, "{0}".format(evaluacion.energiaExterna))
         elif evaluacion.energiaTerciaria == '3':
-            p.drawString(522,518,"{0}".format(evaluacion.energiaEquilibrio))
+            p.drawString(522, 518, "{0}".format(evaluacion.energiaEquilibrio))
 
         p.setFont('Helvetica', 11)
 
         alto = 591
         for energia in energia_descripciones:
-            p.drawString(45, alto,"{0}".format(energia.descripcion))
+            p.drawString(45, alto, "{0}".format(energia.descripcion))
             alto -= 12
-
 
         p.showPage()
         p.save()
@@ -1776,7 +1791,7 @@ def Reporte_eneagrama(request):
 
         subject = 'Eneagrama, resultados para: {0}'.format(evaluacion.usuario.nombre)
         html_content = get_template('eneagrama/email/formato_email.html').render({'evaluacion': evaluacion,
-                                                                                  'comprobante':comprobante})
+                                                                                  'comprobante': comprobante})
 
         msg = EmailMessage(
             subject=subject,
@@ -1851,8 +1866,8 @@ def write_pdf_view(request, pk):
         p.setFont('Helvetica-Bold', 20)
 
         logo = ImageReader(settings.MEDIA_ROOT + '/excel/portada.png')
-        p.drawImage(logo, 38, 36,538,719,  mask='auto')
-        p.drawString(147, 380, "{0} {1}".format(evaluacion.usuario.nombre,evaluacion.usuario.apellidos))
+        p.drawImage(logo, 38, 36, 538, 719, mask='auto')
+        p.drawString(147, 380, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         p.setFont('Helvetica-Bold', 18)
         p.drawString(258, 340, "{0}".format(date_time))
 
@@ -1919,7 +1934,8 @@ def write_pdf_view(request, pk):
         sp.height = 190
         sp.data = [[35, 35, 35, 35, 35, 35, 35, 35, 35], [25, 25, 25, 25, 25, 25, 25, 25, 25],
                    [20, 20, 20, 20, 20, 20, 20, 20, 20],
-                   [15, 15, 15, 15, 15, 15, 15, 15, 15], [10, 10, 10, 10, 10, 10, 10, 10, 10], [5, 5, 5, 5, 5, 5, 5, 5, 5],
+                   [15, 15, 15, 15, 15, 15, 15, 15, 15], [10, 10, 10, 10, 10, 10, 10, 10, 10],
+                   [5, 5, 5, 5, 5, 5, 5, 5, 5],
                    [newList[8]['total'], newList[0]['total'], newList[1]['total'],
                     newList[2]['total'], newList[3]['total'], newList[4]['total'],
                     newList[5]['total'], newList[6]['total'], newList[7]['total']]]
@@ -1990,7 +2006,7 @@ def write_pdf_view(request, pk):
         p.setFont('Helvetica', 11)
         for principal in eneatipoPrincipal:
             p.drawString(45, alto, "{0}".format(principal.descripcion))
-            alto -=12
+            alto -= 12
 
         alto = 219
         p.drawImage(fondo_azul, 36, 235, 538, 30, mask='auto')
@@ -1999,7 +2015,7 @@ def write_pdf_view(request, pk):
         p.setFont('Helvetica', 11)
         for principal in eneatipoSecundario:
             p.drawString(45, alto, "{0}".format(principal.descripcion))
-            alto -=12
+            alto -= 12
 
         alto = 100
         p.drawImage(fondo_azul, 36, 116, 538, 30, mask='auto')
@@ -2008,9 +2024,7 @@ def write_pdf_view(request, pk):
         p.setFont('Helvetica', 11)
         for principal in eneatipoTerciario:
             p.drawString(45, alto, "{0}".format(principal.descripcion))
-            alto -=12
-
-
+            alto -= 12
 
         p.showPage()
         ############################################## segunda pagina ###################################################
@@ -2018,7 +2032,6 @@ def write_pdf_view(request, pk):
         tabla_centros = ImageReader(settings.MEDIA_ROOT + '/excel/tabla_centros.png')
         tabla_energias = ImageReader(settings.MEDIA_ROOT + '/excel/tabla_energias.png')
         p.drawImage(tabla_centros, 36, 665, 180, 90, mask='auto')
-
 
         p.setFillColor(colors.lightgrey)
         p.setStrokeColor(colors.lightgrey)
@@ -2028,40 +2041,35 @@ def write_pdf_view(request, pk):
         p.setStrokeColor(colors.black)
         p.setFont('Helvetica-Bold', 10)
 
-
-
         if evaluacion.centroPrimario == '1':
-            p.drawString(188,717,"{0}".format(evaluacion.centroEmocional))
+            p.drawString(188, 717, "{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroPrimario == '2':
-            p.drawString(188,717,"{0}".format(evaluacion.centroFisico))
+            p.drawString(188, 717, "{0}".format(evaluacion.centroFisico))
         elif evaluacion.centroPrimario == '3':
-            p.drawString(188,717,"{0}".format(evaluacion.centroIntelectual))
+            p.drawString(188, 717, "{0}".format(evaluacion.centroIntelectual))
         if evaluacion.centroSecundario == '1':
-            p.drawString(188,695,"{0}".format(evaluacion.centroEmocional))
+            p.drawString(188, 695, "{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroSecundario == '2':
-            p.drawString(188,695,"{0}".format(evaluacion.centroFisico))
+            p.drawString(188, 695, "{0}".format(evaluacion.centroFisico))
         elif evaluacion.centroSecundario == '3':
-            p.drawString(188,695,"{0}".format(evaluacion.centroIntelectual))
+            p.drawString(188, 695, "{0}".format(evaluacion.centroIntelectual))
         if evaluacion.centroTerciario == '1':
-            p.drawString(188,673,"{0}".format(evaluacion.centroEmocional))
+            p.drawString(188, 673, "{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroTerciario == '2':
-            p.drawString(188,673,"{0}".format(evaluacion.centroFisico))
+            p.drawString(188, 673, "{0}".format(evaluacion.centroFisico))
         elif evaluacion.centroTerciario == '3':
-            p.drawString(188,673,"{0}".format(evaluacion.centroIntelectual))
+            p.drawString(188, 673, "{0}".format(evaluacion.centroIntelectual))
 
-
-
-        p.drawString(46,717,"{0}".format(evaluacion.get_centroPrimario_display()))
-        p.drawString(46,695,"{0}".format(evaluacion.get_centroSecundario_display()))
-        p.drawString(46,673,"{0}".format(evaluacion.get_centroTerciario_display()))
+        p.drawString(46, 717, "{0}".format(evaluacion.get_centroPrimario_display()))
+        p.drawString(46, 695, "{0}".format(evaluacion.get_centroSecundario_display()))
+        p.drawString(46, 673, "{0}".format(evaluacion.get_centroTerciario_display()))
         p.setFont('Helvetica', 11)
 
         alto = 725
         for centro in centro_descripciones:
-            p.drawString(264, alto,"{0}".format(centro.descripcion))
+            p.drawString(264, alto, "{0}".format(centro.descripcion))
             alto -= 12
         p.drawImage(tabla_energias, 370, 510, 180, 90, mask='auto')
-
 
         p.setFillColor(colors.lightgrey)
         p.setStrokeColor(colors.lightgrey)
@@ -2071,36 +2079,35 @@ def write_pdf_view(request, pk):
         p.setStrokeColor(colors.black)
         p.setFont('Helvetica-Bold', 10)
 
-        p.drawString(380,562,"{0}".format(evaluacion.get_energiaPrimaria_display()))
-        p.drawString(380,540,"{0}".format(evaluacion.get_energiaSecundaria_display()))
-        p.drawString(380,518,"{0}".format(evaluacion.get_energiaTerciaria_display()))
+        p.drawString(380, 562, "{0}".format(evaluacion.get_energiaPrimaria_display()))
+        p.drawString(380, 540, "{0}".format(evaluacion.get_energiaSecundaria_display()))
+        p.drawString(380, 518, "{0}".format(evaluacion.get_energiaTerciaria_display()))
 
         if evaluacion.energiaPrimaria == '1':
-            p.drawString(522,562,"{0}".format(evaluacion.energiaInterna))
+            p.drawString(522, 562, "{0}".format(evaluacion.energiaInterna))
         elif evaluacion.energiaPrimaria == '2':
-            p.drawString(522,562,"{0}".format(evaluacion.energiaExterna))
+            p.drawString(522, 562, "{0}".format(evaluacion.energiaExterna))
         elif evaluacion.energiaPrimaria == '3':
-            p.drawString(522,562,"{0}".format(evaluacion.energiaEquilibrio))
+            p.drawString(522, 562, "{0}".format(evaluacion.energiaEquilibrio))
         if evaluacion.energiaSecundaria == '1':
-            p.drawString(522,540,"{0}".format(evaluacion.energiaInterna))
+            p.drawString(522, 540, "{0}".format(evaluacion.energiaInterna))
         elif evaluacion.energiaSecundaria == '2':
-            p.drawString(522,540,"{0}".format(evaluacion.energiaExterna))
+            p.drawString(522, 540, "{0}".format(evaluacion.energiaExterna))
         elif evaluacion.energiaSecundaria == '3':
-            p.drawString(522,540,"{0}".format(evaluacion.energiaEquilibrio))
+            p.drawString(522, 540, "{0}".format(evaluacion.energiaEquilibrio))
         if evaluacion.energiaTerciaria == '1':
-            p.drawString(522,518,"{0}".format(evaluacion.energiaInterna))
+            p.drawString(522, 518, "{0}".format(evaluacion.energiaInterna))
         elif evaluacion.energiaTerciaria == '2':
-            p.drawString(522,518,"{0}".format(evaluacion.energiaExterna))
+            p.drawString(522, 518, "{0}".format(evaluacion.energiaExterna))
         elif evaluacion.energiaTerciaria == '3':
-            p.drawString(522,518,"{0}".format(evaluacion.energiaEquilibrio))
+            p.drawString(522, 518, "{0}".format(evaluacion.energiaEquilibrio))
 
         p.setFont('Helvetica', 11)
 
         alto = 591
         for energia in energia_descripciones:
-            p.drawString(45, alto,"{0}".format(energia.descripcion))
+            p.drawString(45, alto, "{0}".format(energia.descripcion))
             alto -= 12
-
 
         p.showPage()
         p.save()
@@ -2117,8 +2124,8 @@ def Dashboard(request):
     codigos = Codigo.objects.all()
     evaluaciones = Evaluacion.objects.all()
     comprobantes = Comprobante.objects.filter(tipo_pago='3')
-    return render(request, 'eneagrama/dashboard.html', {'codigos': codigos, 'evaluaciones':evaluaciones,
-                                                        'comprobantes':comprobantes})
+    return render(request, 'eneagrama/dashboard.html', {'codigos': codigos, 'evaluaciones': evaluaciones,
+                                                        'comprobantes': comprobantes})
 
 
 @login_required()
@@ -2136,7 +2143,7 @@ def Modificar_codigo(request, pk):
 
         messages.success(request, '¡El codigo ha sido actualizado con exito!')
         return redirect('Eneagrama:Dashboard')
-    return render(request, 'eneagrama/modificar_codigo.html', {'codigo':codigo})
+    return render(request, 'eneagrama/modificar_codigo.html', {'codigo': codigo})
 
 
 @login_required()
@@ -2161,4 +2168,5 @@ def Crear_codigo(request):
 def Comprobante_deposito(request, pk):
     comprobante = get_object_or_404(Comprobante, pk=pk)
     evaluacion = Evaluacion.objects.filter(usuario=comprobante.usuario).last()
-    return render(request, 'eneagrama/comprobante_deposito.html',{'comprobante': comprobante,'evaluacion': evaluacion})
+    return render(request, 'eneagrama/comprobante_deposito.html',
+                  {'comprobante': comprobante, 'evaluacion': evaluacion})
