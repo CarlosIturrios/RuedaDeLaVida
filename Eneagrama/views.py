@@ -1876,7 +1876,7 @@ def write_pdf_view(request, pk):
 
         template = ImageReader(settings.MEDIA_ROOT + '/excel/portada.png')
         p.drawImage(template, 27, 18, 565, 755, mask='auto')
-        p.drawString(147, 380, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
+        p.drawString(190, 380, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         p.setFont('Helvetica-Bold', 18)
         p.drawString(228, 340, "{0}".format(date_time))
 
