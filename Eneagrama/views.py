@@ -2004,10 +2004,9 @@ def write_pdf_view(request, pk):
         bc.categoryAxis.strokeColor = colors.white
         drawing.add(bc)
 
-        drawing.drawOn(p, 250, 315)
+        drawing.drawOn(p, 235, 315)
 
-        p.setStrokeColor(azulito)
-        p.line(36, 468, 574, 468)
+
         p.setStrokeColor(colors.black)
 
         alto = 310
