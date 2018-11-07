@@ -1451,7 +1451,7 @@ def Reporte_eneagrama(request):
     else:
         comprobante = Comprobante.objects.filter(evaluacion=evaluacion, usuario=usuario).last()
         if comprobante.tipo_pago == '0':
-            messages.success(request, 'El reporte te sera entregado cuando asistas al taller.')
+            messages.success(request, 'El reporte te sera entregado el 24 de noviembre del 2018 en el taller.')
             subject = 'Eneagrama, resultados para: {0}'.format(evaluacion.usuario.nombre)
             html_content = get_template('eneagrama/email/formato_email.html').render({'evaluacion': evaluacion,
                                                                                       'comprobante': comprobante})
@@ -1478,7 +1478,11 @@ def Reporte_eneagrama(request):
             comprobante.evaluacion = nuevaEvaluacion
             comprobante.save()
 
+            del request.session['nombre']
+            del request.session['id_evaluacion']
+
             return redirect('Eneagrama:principal')
+
         elif comprobante.tipo_pago == '3':
             messages.success(request, 'Estamos verificando tu comprobante de pago, una vez validado '
                                       'te enviaremos el reporte a tu correo.')
@@ -1507,9 +1511,30 @@ def Reporte_eneagrama(request):
             comprobante.usuario = evaluacion.usuario
             comprobante.evaluacion = nuevaEvaluacion
             comprobante.save()
+            del request.session['nombre']
+            del request.session['id_evaluacion']
 
             return redirect('Eneagrama:principal')
         #################################### DATOS #################################################
+        eneatipoPrincipal = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoPrincipal)
+        eneatipoSecundario = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoSecundario)
+        eneatipoTerciario = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoTerciario)
+        centro_descripciones = Centro.objects.filter(centro=evaluacion.centroPrimario)
+        energia_descripciones = Energia.objects.filter(energia=evaluacion.eneatipoPrincipal)
+        diccionarioUno = {'tipo': '1. Perfeccionista', 'total': evaluacion.tipoUno}
+        diccionarioDos = {'tipo': '2. Colaborador', 'total': evaluacion.tipoDos}
+        diccionarioTres = {'tipo': '3. Competitivo', 'total': evaluacion.tipoTres}
+        diccionarioCuatro = {'tipo': '4. Creativo', 'total': evaluacion.tipoCuatro}
+        diccionarioCinco = {'tipo': '5. Analítico', 'total': evaluacion.tipoCinco}
+        diccionarioSeis = {'tipo': '6. Comprometido', 'total': evaluacion.tipoSeis}
+        diccionarioSiete = {'tipo': '7. Dinámico', 'total': evaluacion.tipoSiete}
+        diccionarioOcho = {'tipo': '8. Líder', 'total': evaluacion.tipoOcho}
+        diccionarioNueve = {'tipo': '9. Conciliador', 'total': evaluacion.tipoNueve}
+        lista = [diccionarioUno, diccionarioDos, diccionarioTres, diccionarioCuatro, diccionarioCinco,
+                 diccionarioSeis, diccionarioSiete, diccionarioOcho, diccionarioNueve]
+        newList = lista
+        listaOrdenada = sorted(lista, key=lambda k: k['total'])
+        ##################################### DATOS #################################################
         eneatipoPrincipal = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoPrincipal)
         eneatipoSecundario = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoSecundario)
         eneatipoTerciario = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoTerciario)
@@ -1536,17 +1561,18 @@ def Reporte_eneagrama(request):
         p = canvas.Canvas(buffer, pagesize=letter)
         p.setTitle("Reporte eneagrama {0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         p.setLineWidth(.3)
-        date_time = str(evaluacion.fecha_creacion.date())
+        date_time = str(evaluacion.fecha_creacion.strftime('%d, %B %Y'))
         azul = colors.Color(0, 0.1803921568627, 0.3647058823529)
         p.setStrokeColor(azul)
         p.setFillColor(azul)
-        p.setFont('Helvetica-Bold', 20)
+        p.setFont('Helvetica-Bold', 18)
 
         template = ImageReader(settings.MEDIA_ROOT + '/excel/portada.png')
         p.drawImage(template, 27, 18, 565, 755, mask='auto')
-        p.drawString(147, 380, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
-        p.setFont('Helvetica-Bold', 18)
-        p.drawString(258, 340, "{0}".format(date_time))
+        nombre = evaluacion.usuario.nombre +' '+ evaluacion.usuario.apellidos
+        p.drawCentredString(305, 390, "{0}".format(nombre))
+        p.setFont('Helvetica-Bold', 13)
+        p.drawCentredString(305, 360, "{0}".format(date_time))
 
         p.showPage()
         ############################################## portada ###################################################3
@@ -1555,7 +1581,7 @@ def Reporte_eneagrama(request):
         p.drawImage(template, 0, 0, 610, 791, mask='auto')
         p.setFont('Helvetica-Bold', 10)
 
-        p.drawString(306, 745, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
+        p.drawCentredString(305, 745, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
 
         if newList[8]['tipo'] == listaOrdenada[8]['tipo']:
             tabla = ImageReader(settings.MEDIA_ROOT + '/excel/9_coinciliador_tabla.png')
@@ -1672,16 +1698,15 @@ def Reporte_eneagrama(request):
         bc.categoryAxis.strokeColor = colors.white
         drawing.add(bc)
 
-        drawing.drawOn(p, 250, 315)
+        drawing.drawOn(p, 235, 315)
 
-        p.setStrokeColor(azulito)
-        p.line(36, 468, 574, 468)
+
         p.setStrokeColor(colors.black)
 
         alto = 310
 
         p.drawImage(fondo_azul, 36, 314, 538, 40, mask='auto')
-        p.drawString(287, 329, "{0}".format(listaOrdenada[8]['tipo']))
+        p.drawCentredString(305, 329, "{0}".format(listaOrdenada[8]['tipo']))
         p.setFont('Helvetica', 11)
         for principal in eneatipoPrincipal:
             p.drawString(45, alto, "{0}".format(principal.descripcion))
@@ -1690,7 +1715,7 @@ def Reporte_eneagrama(request):
         alto = 213
         p.drawImage(fondo_azul, 36, 217, 538, 40, mask='auto')
         p.setFont('Helvetica-Bold', 10)
-        p.drawString(287, 232, "{0}".format(listaOrdenada[7]['tipo']))
+        p.drawCentredString(305, 232, "{0}".format(listaOrdenada[7]['tipo']))
         p.setFont('Helvetica', 11)
         for principal in eneatipoSecundario:
             p.drawString(45, alto, "{0}".format(principal.descripcion))
@@ -1699,7 +1724,7 @@ def Reporte_eneagrama(request):
         alto = 112
         p.drawImage(fondo_azul, 36, 116, 538, 40, mask='auto')
         p.setFont('Helvetica-Bold', 10)
-        p.drawString(287, 131, "{0}".format(listaOrdenada[6]['tipo']))
+        p.drawCentredString(305, 131, "{0}".format(listaOrdenada[6]['tipo']))
         p.setFont('Helvetica', 11)
         for principal in eneatipoTerciario:
             p.drawString(45, alto, "{0}".format(principal.descripcion))
@@ -1721,7 +1746,7 @@ def Reporte_eneagrama(request):
         p.setFillColor(colors.black)
         p.setStrokeColor(colors.black)
         p.setFont('Helvetica-Bold', 10)
-        p.drawString(306, 745, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
+        p.drawCentredString(305, 745, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         if evaluacion.centroPrimario == '1':
             p.drawString(188, 645, "{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroPrimario == '2':
@@ -2013,7 +2038,7 @@ def write_pdf_view(request, pk):
         alto = 310
 
         p.drawImage(fondo_azul, 36, 314, 538, 40, mask='auto')
-        p.drawString(287, 329, "{0}".format(listaOrdenada[8]['tipo']))
+        p.drawCentredString(305, 329, "{0}".format(listaOrdenada[8]['tipo']))
         p.setFont('Helvetica', 11)
         for principal in eneatipoPrincipal:
             p.drawString(45, alto, "{0}".format(principal.descripcion))
@@ -2022,7 +2047,7 @@ def write_pdf_view(request, pk):
         alto = 213
         p.drawImage(fondo_azul, 36, 217, 538, 40, mask='auto')
         p.setFont('Helvetica-Bold', 10)
-        p.drawString(287, 232, "{0}".format(listaOrdenada[7]['tipo']))
+        p.drawCentredString(305, 232, "{0}".format(listaOrdenada[7]['tipo']))
         p.setFont('Helvetica', 11)
         for principal in eneatipoSecundario:
             p.drawString(45, alto, "{0}".format(principal.descripcion))
@@ -2031,7 +2056,7 @@ def write_pdf_view(request, pk):
         alto = 112
         p.drawImage(fondo_azul, 36, 116, 538, 40, mask='auto')
         p.setFont('Helvetica-Bold', 10)
-        p.drawString(287, 131, "{0}".format(listaOrdenada[6]['tipo']))
+        p.drawCentredString(305, 131, "{0}".format(listaOrdenada[6]['tipo']))
         p.setFont('Helvetica', 11)
         for principal in eneatipoTerciario:
             p.drawString(45, alto, "{0}".format(principal.descripcion))

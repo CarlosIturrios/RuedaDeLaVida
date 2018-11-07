@@ -132,8 +132,16 @@ a[x-apple-data-detectors] {
                           >Revisa su comprobante para descargar el reporte | Eneagrama
                   </a>
                   {% elif comprobante.tipo_pago == '0' %}
-                  <a href="http://127.0.0.1:8000{% url 'Eneagrama:write_pdf_view' evaluacion.id %}"
+                  <a href="tools.co2liderazgo.com{% url 'Eneagrama:write_pdf_view' evaluacion.id %}"
                           >Descarga el reporte | Eneagrama
+                  </a>
+                  {% elif comprobante.tipo_pago == '1' %}
+                  <a href="tools.co2liderazgo.com{% url 'Eneagrama:write_pdf_view' evaluacion.id %}"
+                          >Descarga el reporte y obten un nuevo prospecto | Eneagrama
+                  </a>
+                  {% elif comprobante.tipo_pago == '2' %}
+                  <a href="tools.co2liderazgo.com{% url 'Eneagrama:write_pdf_view' evaluacion.id %}"
+                          >Descarga el reporte  | Eneagrama
                   </a>
               {% endif %}
           <br>
