@@ -1872,16 +1872,14 @@ def write_pdf_view(request, pk):
         azul = colors.Color(0, 0.1803921568627, 0.3647058823529)
         p.setStrokeColor(azul)
         p.setFillColor(azul)
-        p.setFont('Helvetica-Bold', 22)
+        p.setFont('Helvetica-Bold', 18)
 
         template = ImageReader(settings.MEDIA_ROOT + '/excel/portada.png')
         p.drawImage(template, 27, 18, 565, 755, mask='auto')
         nombre = evaluacion.usuario.nombre +' '+ evaluacion.usuario.apellidos
-        comienza = (len(nombre)) * 2.5 + 170
-
-        p.drawString(170, 380, "{0}".format(nombre))
-        p.setFont('Helvetica-Bold', 16)
-        p.drawString(comienza, 340, "{0}".format(date_time))
+        p.drawCentredString(305, 390, "{0}".format(nombre))
+        p.setFont('Helvetica-Bold', 13)
+        p.drawCentredString(305, 360, "{0}".format(date_time))
 
         p.showPage()
         ############################################## portada ###################################################3
@@ -1890,7 +1888,7 @@ def write_pdf_view(request, pk):
         p.drawImage(template, 0, 0, 610, 791, mask='auto')
         p.setFont('Helvetica-Bold', 10)
 
-        p.drawString(306, 745, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
+        p.drawCentredString(305, 745, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
 
         if newList[8]['tipo'] == listaOrdenada[8]['tipo']:
             tabla = ImageReader(settings.MEDIA_ROOT + '/excel/9_coinciliador_tabla.png')
@@ -2055,7 +2053,7 @@ def write_pdf_view(request, pk):
         p.setFillColor(colors.black)
         p.setStrokeColor(colors.black)
         p.setFont('Helvetica-Bold', 10)
-        p.drawString(306, 745, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
+        p.drawCentredString(305, 745, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         if evaluacion.centroPrimario == '1':
             p.drawString(188, 645, "{0}".format(evaluacion.centroEmocional))
         elif evaluacion.centroPrimario == '2':
