@@ -1872,13 +1872,16 @@ def write_pdf_view(request, pk):
         azul = colors.Color(0, 0.1803921568627, 0.3647058823529)
         p.setStrokeColor(azul)
         p.setFillColor(azul)
-        p.setFont('Helvetica-Bold', 20)
+        p.setFont('Helvetica-Bold', 22)
 
         template = ImageReader(settings.MEDIA_ROOT + '/excel/portada.png')
         p.drawImage(template, 27, 18, 565, 755, mask='auto')
-        p.drawString(190, 380, "{0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
-        p.setFont('Helvetica-Bold', 18)
-        p.drawString(228, 340, "{0}".format(date_time))
+        nombre = evaluacion.usuario.nombre +' '+ evaluacion.usuario.apellidos
+        comienza = (len(nombre)) * 2.5 + 170
+
+        p.drawString(170, 380, "{0}".format(nombre))
+        p.setFont('Helvetica-Bold', 16)
+        p.drawString(comienza, 340, "{0}".format(date_time))
 
         p.showPage()
         ############################################## portada ###################################################3
