@@ -105,7 +105,7 @@ a[x-apple-data-detectors] {
             <br>
 
             <div class="title" style="font-family:Helvetica, Arial, sans-serif;font-size:18px;font-weight:600;color:#374550">
-             {{ evaluacion.usuario.nombre }} {{ evaluacion.usuario.apellidos }} ah realizado una evaluacion.
+             {{ evaluacion.usuario.nombre }} {{ evaluacion.usuario.apellidos }} ha realizado una evaluacion.
             </div>
             <br>
 
@@ -128,24 +128,24 @@ a[x-apple-data-detectors] {
             <br>
             <br>
               {% if comprobante.tipo_pago == '3' %}
-                  <a href="http://127.0.0.1:8000//{% url 'Eneagrama:Comprobante_deposito' comprobante.id %}"
+                  <a href="http://tools.co2liderazgo.com{% url 'Eneagrama:Comprobante_deposito' comprobante.id %}"
                           >Revisa su comprobante para descargar el reporte | Eneagrama
                   </a>
                   {% elif comprobante.tipo_pago == '0' %}
-                  <a href="tools.co2liderazgo.com{% url 'Eneagrama:write_pdf_view' evaluacion.id %}"
+                  <a href="http://tools.co2liderazgo.com{% url 'Eneagrama:write_pdf_view' evaluacion.id %}"
                           >Descarga el reporte | Eneagrama
                   </a>
                   {% elif comprobante.tipo_pago == '1' %}
-                  <a href="tools.co2liderazgo.com{% url 'Eneagrama:write_pdf_view' evaluacion.id %}"
+                  <a href="http://tools.co2liderazgo.com{% url 'Eneagrama:write_pdf_view' evaluacion.id %}"
                           >Descarga el reporte y obten un nuevo prospecto | Eneagrama
                   </a>
                   {% elif comprobante.tipo_pago == '2' %}
-                  <a href="tools.co2liderazgo.com{% url 'Eneagrama:write_pdf_view' evaluacion.id %}"
+                  <a href="http://tools.co2liderazgo.com{% url 'Eneagrama:write_pdf_view' evaluacion.id %}"
                           >Descarga el reporte  | Eneagrama
                   </a>
               {% endif %}
           <br>
-            <a href="tools.co2liderazgo.com/enagrama">Tools.Co2liderazgo.com | Eneagrama</a>
+            <a href="http://tools.co2liderazgo.com/evaluacion-enagrama">Tools.Co2liderazgo.com | Eneagrama</a>
             <br>
           </td>
         </tr>
