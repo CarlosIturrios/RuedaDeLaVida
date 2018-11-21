@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from PIL.Image import eval
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -1535,25 +1536,6 @@ def Reporte_eneagrama(request):
         newList = lista
         listaOrdenada = sorted(lista, key=lambda k: k['total'])
         ##################################### DATOS #################################################
-        eneatipoPrincipal = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoPrincipal)
-        eneatipoSecundario = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoSecundario)
-        eneatipoTerciario = Eneatipo.objects.filter(eneatipo=evaluacion.eneatipoTerciario)
-        centro_descripciones = Centro.objects.filter(centro=evaluacion.centroPrimario)
-        energia_descripciones = Energia.objects.filter(energia=evaluacion.eneatipoPrincipal)
-        diccionarioUno = {'tipo': '1. Perfeccionista', 'total': evaluacion.tipoUno}
-        diccionarioDos = {'tipo': '2. Colaborador', 'total': evaluacion.tipoDos}
-        diccionarioTres = {'tipo': '3. Competitivo', 'total': evaluacion.tipoTres}
-        diccionarioCuatro = {'tipo': '4. Creativo', 'total': evaluacion.tipoCuatro}
-        diccionarioCinco = {'tipo': '5. Analítico', 'total': evaluacion.tipoCinco}
-        diccionarioSeis = {'tipo': '6. Comprometido', 'total': evaluacion.tipoSeis}
-        diccionarioSiete = {'tipo': '7. Dinámico', 'total': evaluacion.tipoSiete}
-        diccionarioOcho = {'tipo': '8. Líder', 'total': evaluacion.tipoOcho}
-        diccionarioNueve = {'tipo': '9. Conciliador', 'total': evaluacion.tipoNueve}
-        lista = [diccionarioUno, diccionarioDos, diccionarioTres, diccionarioCuatro, diccionarioCinco,
-                 diccionarioSeis, diccionarioSiete, diccionarioOcho, diccionarioNueve]
-        newList = lista
-        listaOrdenada = sorted(lista, key=lambda k: k['total'])
-        ##################################### DATOS #################################################
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = 'inline; filename="ReporteEneagrama.pdf"'
 
@@ -1561,7 +1543,34 @@ def Reporte_eneagrama(request):
         p = canvas.Canvas(buffer, pagesize=letter)
         p.setTitle("Reporte eneagrama {0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         p.setLineWidth(.3)
-        date_time = str(evaluacion.fecha_creacion.strftime('%d, %B %Y'))
+
+        if evaluacion.fecha_creacion.month == 1:
+            mes = 'Enero'
+        elif evaluacion.fecha_creacion.month == 2:
+            mes = 'Febrero'
+        elif evaluacion.fecha_creacion.month == 3:
+            mes = 'Marzo'
+        elif evaluacion.fecha_creacion.month == 4:
+            mes = 'Abril'
+        elif evaluacion.fecha_creacion.month == 5:
+            mes = 'Mayo'
+        elif evaluacion.fecha_creacion.month == 6:
+            mes = 'Junio'
+        elif evaluacion.fecha_creacion.month == 7:
+            mes = 'Julio'
+        elif evaluacion.fecha_creacion.month == 8:
+            mes = 'Agosto'
+        elif evaluacion.fecha_creacion.month == 9:
+            mes = 'Septiembre'
+        elif evaluacion.fecha_creacion.month == 10:
+            mes = 'Octubre'
+        elif evaluacion.fecha_creacion.month == 11:
+            mes = 'Noviembre'
+        elif evaluacion.fecha_creacion.month == 12:
+            mes = 'Diciembre'
+
+        date_time = "{0} {1}, {2}".format(mes, evaluacion.fecha_creacion.day, evaluacion.fecha_creacion.year)
+
         azul = colors.Color(0, 0.1803921568627, 0.3647058823529)
         p.setStrokeColor(azul)
         p.setFillColor(azul)
@@ -1893,7 +1902,34 @@ def write_pdf_view(request, pk):
         p = canvas.Canvas(buffer, pagesize=letter)
         p.setTitle("Reporte eneagrama {0} {1}".format(evaluacion.usuario.nombre, evaluacion.usuario.apellidos))
         p.setLineWidth(.3)
-        date_time = str(evaluacion.fecha_creacion.strftime('%d, %B %Y'))
+
+        if evaluacion.fecha_creacion.month == 1:
+            mes = 'Enero'
+        elif evaluacion.fecha_creacion.month == 2:
+            mes = 'Febrero'
+        elif evaluacion.fecha_creacion.month == 3:
+            mes = 'Marzo'
+        elif evaluacion.fecha_creacion.month == 4:
+            mes = 'Abril'
+        elif evaluacion.fecha_creacion.month == 5:
+            mes = 'Mayo'
+        elif evaluacion.fecha_creacion.month == 6:
+            mes = 'Junio'
+        elif evaluacion.fecha_creacion.month == 7:
+            mes = 'Julio'
+        elif evaluacion.fecha_creacion.month == 8:
+            mes = 'Agosto'
+        elif evaluacion.fecha_creacion.month == 9:
+            mes = 'Septiembre'
+        elif evaluacion.fecha_creacion.month == 10:
+            mes = 'Octubre'
+        elif evaluacion.fecha_creacion.month == 11:
+            mes = 'Noviembre'
+        elif evaluacion.fecha_creacion.month == 12:
+            mes = 'Diciembre'
+
+        date_time = "{0} {1}, {2}".format(mes, evaluacion.fecha_creacion.day, evaluacion.fecha_creacion.year)
+
         azul = colors.Color(0, 0.1803921568627, 0.3647058823529)
         p.setStrokeColor(azul)
         p.setFillColor(azul)
