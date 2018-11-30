@@ -10,10 +10,12 @@
             <div class="col-md-4 col-sm-4 col-xs-8">
                 <div class="progress">
                     <div class="progress">
-                    {% if preguntas == 0 %} &nbsp; 0% {% else %}
-                    <div class="progress-bar progress-bar-success" data-transitiongoal="{{ preguntas }}" style="color: black">{{ preguntas }}%</div>
-                    {% endif %}
-                </div>
+                        {% if preguntas == 0 %} &nbsp; 0% {% else %}
+                            <div class="progress-bar progress-bar-success" data-transitiongoal="{{ preguntas }}"
+                                 style="color: black">{{ preguntas }}%
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -40,7 +42,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="F"
-                                                       name="preguntaCientoUno"> Interviene y rescata a la gente
+                                                       name="preguntaCientoUno"
+                                                        {% if pregunta_cien_uno.valor == 'F' %}
+                                                       checked="checked" {% endif %}> Interviene y rescata a la gente
                                             </label>
                                         </div>
                                     </div>
@@ -49,7 +53,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="G" name="preguntaCientoUno">
+                                                <input type="radio" class="flat" value="G" name="preguntaCientoUno"
+                                                        {% if pregunta_cien_uno.valor == 'G' %}
+                                                       checked="checked" {% endif %}>
                                                 Enseña a los demás a ayudarse a si mismos
                                             </label>
                                         </div>
@@ -64,7 +70,10 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="I"
-                                                       name="preguntaCientoDos"> Me ha gustado dejarme llevar y llegar a
+                                                       name="preguntaCientoDos"
+                                                        {% if pregunta_cien_dos.valor == 'I' %}
+                                                       checked="checked" {% endif %}> Me ha gustado dejarme llevar y
+                                                llegar a
                                                 situaciones extremas
                                             </label>
                                         </div>
@@ -74,7 +83,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="D" name="preguntaCientoDos"> Me
+                                                <input type="radio" class="flat" value="D" name="preguntaCientoDos"
+                                                        {% if pregunta_cien_dos.valor == 'D' %}
+                                                       checked="checked" {% endif %}> Me
                                                 ha gustado mantener siempre el control de mi persona
                                             </label>
                                         </div>
@@ -89,7 +100,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="C"
-                                                       name="preguntaCientoTres"> Lograr más que los demás
+                                                       name="preguntaCientoTres"
+                                                        {% if pregunta_cien_tres.valor == 'C' %}
+                                                       checked="checked" {% endif %}> Lograr más que los demás
                                             </label>
                                         </div>
                                     </div>
@@ -98,7 +111,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="A" name="preguntaCientoTres">
+                                                <input type="radio" class="flat" value="A" name="preguntaCientoTres"
+                                                        {% if pregunta_cien_tres.valor == 'A' %}
+                                                       checked="checked" {% endif %}>
                                                 Hacer que los demás estén bien
                                             </label>
                                         </div>
@@ -113,7 +128,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="H"
-                                                       name="preguntaCientoCuatro"> Con especulación y aplicando mi
+                                                       name="preguntaCientoCuatro"
+                                                        {% if pregunta_cien_cuatro.valor == 'H' %}
+                                                       checked="checked" {% endif %}> Con especulación y aplicando mi
                                                 imaginación y curiosidad
                                             </label>
                                         </div>
@@ -123,7 +140,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="B" name="preguntaCientoCuatro">
+                                                <input type="radio" class="flat" value="B" name="preguntaCientoCuatro"
+                                                        {% if pregunta_cien_cuatro.valor == 'B' %}
+                                                       checked="checked" {% endif %}>
                                                 Muy práctico para mantener las cosas funcionando
                                             </label>
                                         </div>
@@ -138,7 +157,10 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="G"
-                                                       name="preguntaCientoCinco"> Mi capacidad de hacerme cargo de las
+                                                       name="preguntaCientoCinco"
+                                                        {% if pregunta_cien_cinco.valor == 'G' %}
+                                                       checked="checked" {% endif %}> Mi capacidad de hacerme cargo de
+                                                las
                                                 cosas
                                             </label>
                                         </div>
@@ -148,7 +170,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="E" name="preguntaCientoCinco">
+                                                <input type="radio" class="flat" value="E" name="preguntaCientoCinco"
+                                                        {% if pregunta_cien_cinco.valor == 'E' %}
+                                                       checked="checked" {% endif %}>
                                                 Mi capacidad de describir los estados de ánimo de los demás
                                             </label>
                                         </div>
@@ -163,7 +187,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="D"
-                                                       name="preguntaCientoSeis"> Insisto en que las cosas se hagan
+                                                       name="preguntaCientoSeis"
+                                                        {% if pregunta_cien_seis.valor == 'D' %}
+                                                       checked="checked" {% endif %}> Insisto en que las cosas se hagan
                                                 correctamente, aún cuando esto hiciera sentir a la gente incómoda
                                             </label>
                                         </div>
@@ -173,7 +199,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="A" name="preguntaCientoSeis"> No
+                                                <input type="radio" class="flat" value="A" name="preguntaCientoSeis"
+                                                        {% if pregunta_cien_seis.valor == 'A' %}
+                                                       checked="checked" {% endif %}> No
                                                 me ha gustado sentirme presionado, y por eso no me ha gustado presionar
                                                 a los demás
                                             </label>
@@ -189,7 +217,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="F"
-                                                       name="preguntaCientoSiete"> Saber lo importante que soy en la
+                                                       name="preguntaCientoSiete"
+                                                        {% if pregunta_cien_siete.valor == 'F' %}
+                                                       checked="checked" {% endif %}> Saber lo importante que soy en la
                                                 vida de los demás
                                             </label>
                                         </div>
@@ -199,7 +229,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="I" name="preguntaCientoSiete">
+                                                <input type="radio" class="flat" value="I" name="preguntaCientoSiete"
+                                                        {% if pregunta_cien_siete.valor == 'I' %}
+                                                       checked="checked" {% endif %}>
                                                 La forma en la que me abro y disfruto de nuevas experiencias
                                             </label>
                                         </div>
@@ -214,7 +246,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="C"
-                                                       name="preguntaCientoOcho"> Presentable y admirable
+                                                       name="preguntaCientoOcho"
+                                                        {% if pregunta_cien_ocho.valor == 'C' %}
+                                                       checked="checked" {% endif %}> Presentable y admirable
                                             </label>
                                         </div>
                                     </div>
@@ -223,7 +257,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="H" name="preguntaCientoOcho">
+                                                <input type="radio" class="flat" value="H" name="preguntaCientoOcho"
+                                                        {% if pregunta_cien_ocho.valor == 'H' %}
+                                                       checked="checked" {% endif %}>
                                                 Inusual y diferente
                                             </label>
                                         </div>
@@ -238,7 +274,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="B"
-                                                       name="preguntaCientoNueve"> Lo que he tenido que hacer
+                                                       name="preguntaCientoNueve"
+                                                        {% if pregunta_cien_nueve.valor == 'B' %}
+                                                       checked="checked" {% endif %}> Lo que he tenido que hacer
                                             </label>
                                         </div>
                                     </div>
@@ -247,7 +285,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="E" name="preguntaCientoNueve">
+                                                <input type="radio" class="flat" value="E" name="preguntaCientoNueve"
+                                                        {% if pregunta_cien_nueve.valor == 'E' %}
+                                                       checked="checked" {% endif %}>
                                                 Lo que he querido hacer
                                             </label>
                                         </div>
@@ -262,7 +302,10 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="G"
-                                                       name="preguntaCientoDiez"> Me han llamado mucho la atención y me
+                                                       name="preguntaCientoDiez"
+                                                        {% if pregunta_cien_diez.valor == 'G' %}
+                                                       checked="checked" {% endif %}> Me han llamado mucho la atención y
+                                                me
                                                 agradan
                                             </label>
                                         </div>
@@ -272,7 +315,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="A" name="preguntaCientoDiez"> No
+                                                <input type="radio" class="flat" value="A" name="preguntaCientoDiez"
+                                                        {% if pregunta_cien_diez.valor == 'A' %}
+                                                       checked="checked" {% endif %}> No
                                                 me gustan y prefiero evitarlas
                                             </label>
                                         </div>
@@ -287,7 +332,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="C"
-                                                       name="preguntaCientoOnce"> Ser flexible, las cosas cambian
+                                                       name="preguntaCientoOnce"
+                                                        {% if pregunta_cien_diez_uno.valor == 'C' %}
+                                                       checked="checked" {% endif %}> Ser flexible, las cosas cambian
                                             </label>
                                         </div>
                                     </div>
@@ -296,7 +343,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="D" name="preguntaCientoOnce">
+                                                <input type="radio" class="flat" value="D" name="preguntaCientoOnce"
+                                                        {% if pregunta_cien_diez_uno.valor == 'D' %}
+                                                       checked="checked" {% endif %}>
                                                 Mantenerme firme en mis creencias
                                             </label>
                                         </div>
@@ -311,7 +360,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="H"
-                                                       name="preguntaCientoDoce"> Las limitaciones y la austeridad
+                                                       name="preguntaCientoDoce"
+                                                        {% if pregunta_cien_diez_dos.valor == 'H' %}
+                                                       checked="checked" {% endif %}> Las limitaciones y la austeridad
                                             </label>
                                         </div>
                                     </div>
@@ -320,7 +371,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="I" name="preguntaCientoDoce"> El
+                                                <input type="radio" class="flat" value="I" name="preguntaCientoDoce"
+                                                        {% if pregunta_cien_diez_dos.valor == 'I' %}
+                                                       checked="checked" {% endif %}> El
                                                 exceso y la extra limitación
                                             </label>
                                         </div>
@@ -335,7 +388,10 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="F"
-                                                       name="preguntaCientoTrece"> Mi salud y bienestar han sufrido por
+                                                       name="preguntaCientoTrece"
+                                                        {% if pregunta_cien_diez_tres.valor == 'F' %}
+                                                       checked="checked" {% endif %}> Mi salud y bienestar han sufrido
+                                                por
                                                 mi deseo enorme de ayudar a otros
                                             </label>
                                         </div>
@@ -345,7 +401,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="E" name="preguntaCientoTrece">
+                                                <input type="radio" class="flat" value="E" name="preguntaCientoTrece"
+                                                        {% if pregunta_cien_diez_tres.valor == 'E' %}
+                                                       checked="checked" {% endif %}>
                                                 Mis relaciones han sufrido, por mi deseo enorme de atender mis propias
                                                 necesidades
                                             </label>
@@ -361,7 +419,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="A"
-                                                       name="preguntaCientoCatorce"> Abierto e ingenuo
+                                                       name="preguntaCientoCatorce"
+                                                        {% if pregunta_cien_diez_cuatro.valor == 'A' %}
+                                                       checked="checked" {% endif %}> Abierto e ingenuo
                                             </label>
                                         </div>
                                     </div>
@@ -370,7 +430,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="B" name="preguntaCientoCatorce">
+                                                <input type="radio" class="flat" value="B" name="preguntaCientoCatorce"
+                                                        {% if pregunta_cien_diez_cuatro.valor == 'B' %}
+                                                       checked="checked" {% endif %}>
                                                 Cauto y prudente
                                             </label>
                                         </div>
@@ -385,7 +447,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="G"
-                                                       name="preguntaCientoQuince"> Mi agresividad
+                                                       name="preguntaCientoQuince"
+                                                        {% if pregunta_cien_diez_cinco.valor == 'G' %}
+                                                       checked="checked" {% endif %}> Mi agresividad
                                             </label>
                                         </div>
                                     </div>
@@ -394,7 +458,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="D" name="preguntaCientoQuince">
+                                                <input type="radio" class="flat" value="D" name="preguntaCientoQuince"
+                                                        {% if pregunta_cien_diez_cinco.valor == 'D' %}
+                                                       checked="checked" {% endif %}>
                                                 Mi rigidez
                                             </label>
                                         </div>
@@ -409,7 +475,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="F"
-                                                       name="preguntaCientoDieciseis"> Ayudar y responder a las
+                                                       name="preguntaCientoDieciseis"
+                                                        {% if pregunta_cien_diez_seis.valor == 'F' %}
+                                                       checked="checked" {% endif %}> Ayudar y responder a las
                                                 necesidades de otros
                                             </label>
                                         </div>
@@ -420,7 +488,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="H"
-                                                       name="preguntaCientoDieciseis"> Encontrar formas nuevas de hacer
+                                                       name="preguntaCientoDieciseis"
+                                                        {% if pregunta_cien_diez_seis.valor == 'H' %}
+                                                       checked="checked" {% endif %}> Encontrar formas nuevas de hacer
                                                 las cosas
                                             </label>
                                         </div>
@@ -435,7 +505,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="C"
-                                                       name="preguntaCientoDiecisiete"> He sido de ideas fijas y
+                                                       name="preguntaCientoDiecisiete"
+                                                        {% if pregunta_cien_diez_siete.valor == 'C' %}
+                                                       checked="checked" {% endif %}> He sido de ideas fijas y
                                                 persistentes en la persecución de mis metas
                                             </label>
                                         </div>
@@ -446,7 +518,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="I"
-                                                       name="preguntaCientoDiecisiete"> He preferido explorar varios
+                                                       name="preguntaCientoDiecisiete"
+                                                        {% if pregunta_cien_diez_siete.valor == 'I' %}
+                                                       checked="checked" {% endif %}> He preferido explorar varios
                                                 cursos de acción para ver a donde conducen
                                             </label>
                                         </div>
@@ -461,7 +535,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="E"
-                                                       name="preguntaCientoDieciocho"> Me despiertan emociones profundas
+                                                       name="preguntaCientoDieciocho"
+                                                        {% if pregunta_cien_diez_ocho.valor == 'E' %}
+                                                       checked="checked" {% endif %}> Me despiertan emociones profundas
                                                 e intensas
                                             </label>
                                         </div>
@@ -472,7 +548,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="A"
-                                                       name="preguntaCientoDieciocho"> Me hacen sentir una profunda
+                                                       name="preguntaCientoDieciocho"
+                                                        {% if pregunta_cien_diez_ocho.valor == 'A' %}
+                                                       checked="checked" {% endif %}> Me hacen sentir una profunda
                                                 calma y paz interior
                                             </label>
                                         </div>
@@ -487,7 +565,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="H"
-                                                       name="preguntaCientoDiecinueve"> Seguir mis intereses antes que
+                                                       name="preguntaCientoDiecinueve"
+                                                        {% if pregunta_cien_diez_nueve.valor == 'H' %}
+                                                       checked="checked" {% endif %}> Seguir mis intereses antes que
                                                 tener resultados prácticos
                                             </label>
                                         </div>
@@ -498,7 +578,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="G"
-                                                       name="preguntaCientoDiecinueve"> Ser practico y tener resultados
+                                                       name="preguntaCientoDiecinueve"
+                                                        {% if pregunta_cien_diez_nueve.valor == 'G' %}
+                                                       checked="checked" {% endif %}> Ser practico y tener resultados
                                                 acertados
                                             </label>
                                         </div>
@@ -513,7 +595,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="B"
-                                                       name="preguntaCientoVeinte"> Pertenecer
+                                                       name="preguntaCientoVeinte"
+                                                        {% if pregunta_cien_veinte.valor == 'B' %}
+                                                       checked="checked" {% endif %}> Pertenecer
                                             </label>
                                         </div>
                                     </div>
@@ -522,7 +606,9 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="D" name="preguntaCientoVeinte">
+                                                <input type="radio" class="flat" value="D" name="preguntaCientoVeinte"
+                                                        {% if pregunta_cien_veinte.valor == 'D' %}
+                                                       checked="checked" {% endif %}>
                                                 Estar equilibrado
                                             </label>
                                         </div>
@@ -537,7 +623,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="F"
-                                                       name="preguntaCientoVeinteyUno"> He buscado demasiada cercanía
+                                                       name="preguntaCientoVeinteyUno"
+                                                        {% if pregunta_cien_veinte_uno.valor == 'F' %}
+                                                       checked="checked" {% endif %}> He buscado demasiada cercanía
                                                 con mis amistades
                                             </label>
                                         </div>
@@ -548,7 +636,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="C"
-                                                       name="preguntaCientoVeinteyUno"> He puesto demasiada distancia
+                                                       name="preguntaCientoVeinteyUno"
+                                                        {% if pregunta_cien_veinte_uno.valor == 'C' %}
+                                                       checked="checked" {% endif %}> He puesto demasiada distancia
                                                 con mis amistades
                                             </label>
                                         </div>
@@ -563,7 +653,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="E"
-                                                       name="preguntaCientoVeinteyDos"> Seguir pensando en lo que ha
+                                                       name="preguntaCientoVeinteyDos"
+                                                        {% if pregunta_cien_veinte_dos.valor == 'E' %}
+                                                       checked="checked" {% endif %}> Seguir pensando en lo que ha
                                                 sucedido en el pasado
                                             </label>
                                         </div>
@@ -574,7 +666,9 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="I"
-                                                       name="preguntaCientoVeinteyDos"> Anticiparme a las cosas que van
+                                                       name="preguntaCientoVeinteyDos"
+                                                        {% if pregunta_cien_veinte_dos.valor == 'I' %}
+                                                       checked="checked" {% endif %}> Anticiparme a las cosas que van
                                                 a suceder en el futuro
                                             </label>
                                         </div>

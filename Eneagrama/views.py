@@ -285,6 +285,26 @@ def parteUno(request):
     preguntas = Respuesta.objects.filter(evaluacion=evaluacion).count()
     preguntas = float((preguntas * 100) / 144)
     preguntas = float(("%0.2f" % preguntas))
+    pregunta_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='1').first()
+    pregunta_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='2').first()
+    pregunta_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='3').first()
+    pregunta_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='4').first()
+    pregunta_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='5').first()
+    pregunta_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='6').first()
+    pregunta_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='7').first()
+    pregunta_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='8').first()
+    pregunta_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='9').first()
+    pregunta_diez = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='10').first()
+    pregunta_once = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='11').first()
+    pregunta_doce = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='12').first()
+    pregunta_trese = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='13').first()
+    pregunta_catorce = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='14').first()
+    pregunta_quince = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='15').first()
+    pregunta_diesiseis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='16').first()
+    pregunta_diesisiete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='17').first()
+    pregunta_diesiocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='18').first()
+    pregunta_diesinueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='19').first()
+    pregunta_veinte = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='20').first()
     if request.method == "POST":
         preguntaUno = request.POST.get('preguntaUno', None)
         preguntaDos = request.POST.get('preguntaDos', None)
@@ -391,7 +411,27 @@ def parteUno(request):
 
     nombreMostrar = request.session['nombre']
     return render(request, 'eneagrama/perfil_de_personalidad_parte_1.html', {'nombreMostrar': nombreMostrar,
-                                                                             'preguntas': preguntas})
+                                                                             'preguntas': preguntas,
+                                                                             'pregunta_uno': pregunta_uno,
+                                                                             'pregunta_dos': pregunta_dos,
+                                                                             'pregunta_tres': pregunta_tres,
+                                                                             'pregunta_cuatro': pregunta_cuatro,
+                                                                             'pregunta_cinco': pregunta_cinco,
+                                                                             'pregunta_seis': pregunta_seis,
+                                                                             'pregunta_siete': pregunta_siete,
+                                                                             'pregunta_ocho': pregunta_ocho,
+                                                                             'pregunta_nueve': pregunta_nueve,
+                                                                             'pregunta_diez': pregunta_diez,
+                                                                             'pregunta_once': pregunta_once,
+                                                                             'pregunta_doce': pregunta_doce,
+                                                                             'pregunta_trese': pregunta_trese,
+                                                                             'pregunta_catorce': pregunta_catorce,
+                                                                             'pregunta_quince': pregunta_quince,
+                                                                             'pregunta_diesiseis': pregunta_diesiseis,
+                                                                             'pregunta_diesisiete': pregunta_diesisiete,
+                                                                             'pregunta_diesiocho': pregunta_diesiocho,
+                                                                             'pregunta_diesinueve': pregunta_diesinueve,
+                                                                             'pregunta_veinte': pregunta_veinte})
 
 
 def parteDos(request):
@@ -402,6 +442,27 @@ def parteDos(request):
     preguntas = Respuesta.objects.filter(evaluacion=evaluacion).count()
     preguntas = float((preguntas * 100) / 144)
     preguntas = float(("%0.2f" % preguntas))
+    pregunta_veinti_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='21').first()
+    pregunta_veinti_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='22').first()
+    pregunta_veinti_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='23').first()
+    pregunta_veinti_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='24').first()
+    pregunta_veinti_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='25').first()
+    pregunta_veinti_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='26').first()
+    pregunta_veinti_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='27').first()
+    pregunta_veinti_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='28').first()
+    pregunta_veinti_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='29').first()
+    pregunta_treinta = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='30').first()
+    pregunta_treinta_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='31').first()
+    pregunta_treinta_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='32').first()
+    pregunta_treinta_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='33').first()
+    pregunta_treinta_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='34').first()
+    pregunta_treinta_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='35').first()
+    pregunta_treinta_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='36').first()
+    pregunta_treinta_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='37').first()
+    pregunta_treinta_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='38').first()
+    pregunta_treinta_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='39').first()
+    pregunta_cuarenta = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='40').first()
+
     if request.method == "POST":
         preguntaVeintiUno = request.POST.get('preguntaVeintiUno', None)
         preguntaVeintiDos = request.POST.get('preguntaVeintiDos', None)
@@ -508,7 +569,27 @@ def parteDos(request):
 
     nombreMostrar = request.session['nombre']
     return render(request, 'eneagrama/perfil_de_personalidad_parte_2.html', {'nombreMostrar': nombreMostrar,
-                                                                             'preguntas': preguntas})
+                                                                             'preguntas': preguntas,
+                                                                             'pregunta_veinti_uno': pregunta_veinti_uno,
+                                                                             'pregunta_veinti_dos': pregunta_veinti_dos,
+                                                                             'pregunta_veinti_tres': pregunta_veinti_tres,
+                                                                             'pregunta_veinti_cuatro': pregunta_veinti_cuatro,
+                                                                             'pregunta_veinti_cinco': pregunta_veinti_cinco,
+                                                                             'pregunta_veinti_seis': pregunta_veinti_seis,
+                                                                             'pregunta_veinti_siete': pregunta_veinti_siete,
+                                                                             'pregunta_veinti_ocho': pregunta_veinti_ocho,
+                                                                             'pregunta_veinti_nueve': pregunta_veinti_nueve,
+                                                                             'pregunta_treinta': pregunta_treinta,
+                                                                             'pregunta_treinta_uno': pregunta_treinta_uno,
+                                                                             'pregunta_treinta_dos': pregunta_treinta_dos,
+                                                                             'pregunta_treinta_tres': pregunta_treinta_tres,
+                                                                             'pregunta_treinta_cuatro': pregunta_treinta_cuatro,
+                                                                             'pregunta_treinta_cinco': pregunta_treinta_cinco,
+                                                                             'pregunta_treinta_seis': pregunta_treinta_seis,
+                                                                             'pregunta_treinta_siete': pregunta_treinta_siete,
+                                                                             'pregunta_treinta_ocho': pregunta_treinta_ocho,
+                                                                             'pregunta_treinta_nueve': pregunta_treinta_nueve,
+                                                                             'pregunta_cuarenta': pregunta_cuarenta})
 
 
 def parteTres(request):
@@ -519,6 +600,26 @@ def parteTres(request):
     preguntas = Respuesta.objects.filter(evaluacion=evaluacion).count()
     preguntas = float((preguntas * 100) / 144)
     preguntas = float(("%0.2f" % preguntas))
+    pregunta_cuarenta_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='41').first()
+    pregunta_cuarenta_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='42').first()
+    pregunta_cuarenta_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='43').first()
+    pregunta_cuarenta_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='44').first()
+    pregunta_cuarenta_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='45').first()
+    pregunta_cuarenta_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='46').first()
+    pregunta_cuarenta_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='47').first()
+    pregunta_cuarenta_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='48').first()
+    pregunta_cuarenta_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='49').first()
+    pregunta_cincuenta = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='50').first()
+    pregunta_cincuenta_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='51').first()
+    pregunta_cincuenta_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='52').first()
+    pregunta_cincuenta_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='53').first()
+    pregunta_cincuenta_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='54').first()
+    pregunta_cincuenta_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='55').first()
+    pregunta_cincuenta_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='56').first()
+    pregunta_cincuenta_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='57').first()
+    pregunta_cincuenta_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='58').first()
+    pregunta_cincuenta_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='59').first()
+    pregunta_sesenta = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='60').first()
     if request.method == "POST":
         preguntaCuarentayUno = request.POST.get('preguntaCuarentayUno', None)
         preguntaCuarentayDos = request.POST.get('preguntaCuarentayDos', None)
@@ -625,7 +726,27 @@ def parteTres(request):
 
     nombreMostrar = request.session['nombre']
     return render(request, 'eneagrama/perfil_de_personalidad_parte_3.html', {'nombreMostrar': nombreMostrar,
-                                                                             'preguntas': preguntas})
+                                                                             'preguntas': preguntas,
+                                                                             'pregunta_cuarenta_uno': pregunta_cuarenta_uno,
+                                                                             'pregunta_cuarenta_dos': pregunta_cuarenta_dos,
+                                                                             'pregunta_cuarenta_tres': pregunta_cuarenta_tres,
+                                                                             'pregunta_cuarenta_cuatro': pregunta_cuarenta_cuatro,
+                                                                             'pregunta_cuarenta_cinco': pregunta_cuarenta_cinco,
+                                                                             'pregunta_cuarenta_seis': pregunta_cuarenta_seis,
+                                                                             'pregunta_cuarenta_siete': pregunta_cuarenta_siete,
+                                                                             'pregunta_cuarenta_ocho': pregunta_cuarenta_ocho,
+                                                                             'pregunta_cuarenta_nueve': pregunta_cuarenta_nueve,
+                                                                             'pregunta_cincuenta': pregunta_cincuenta,
+                                                                             'pregunta_cincuenta_uno': pregunta_cincuenta_uno,
+                                                                             'pregunta_cincuenta_dos': pregunta_cincuenta_dos,
+                                                                             'pregunta_cincuenta_tres': pregunta_cincuenta_tres,
+                                                                             'pregunta_cincuenta_cuatro': pregunta_cincuenta_cuatro,
+                                                                             'pregunta_cincuenta_cinco': pregunta_cincuenta_cinco,
+                                                                             'pregunta_cincuenta_seis': pregunta_cincuenta_seis,
+                                                                             'pregunta_cincuenta_siete': pregunta_cincuenta_siete,
+                                                                             'pregunta_cincuenta_ocho': pregunta_cincuenta_ocho,
+                                                                             'pregunta_cincuenta_nueve': pregunta_cincuenta_nueve,
+                                                                             'pregunta_sesenta': pregunta_sesenta})
 
 
 def parteCuatro(request):
@@ -636,6 +757,26 @@ def parteCuatro(request):
     preguntas = Respuesta.objects.filter(evaluacion=evaluacion).count()
     preguntas = float((preguntas * 100) / 144)
     preguntas = float(("%0.2f" % preguntas))
+    pregunta_sesenta_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='61').first()
+    pregunta_sesenta_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='62').first()
+    pregunta_sesenta_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='63').first()
+    pregunta_sesenta_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='64').first()
+    pregunta_sesenta_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='65').first()
+    pregunta_sesenta_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='66').first()
+    pregunta_sesenta_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='67').first()
+    pregunta_sesenta_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='68').first()
+    pregunta_sesenta_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='69').first()
+    pregunta_setenta = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='70').first()
+    pregunta_setenta_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='71').first()
+    pregunta_setenta_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='72').first()
+    pregunta_setenta_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='73').first()
+    pregunta_setenta_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='74').first()
+    pregunta_setenta_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='75').first()
+    pregunta_setenta_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='76').first()
+    pregunta_setenta_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='77').first()
+    pregunta_setenta_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='78').first()
+    pregunta_setenta_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='79').first()
+    pregunta_ochenta = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='80').first()
     if request.method == "POST":
         preguntaSesentayUno = request.POST.get('preguntaSesentayUno', None)
         preguntaSesentayDos = request.POST.get('preguntaSesentayDos', None)
@@ -742,7 +883,27 @@ def parteCuatro(request):
 
     nombreMostrar = request.session['nombre']
     return render(request, 'eneagrama/perfil_de_personalidad_parte_4.html', {'nombreMostrar': nombreMostrar,
-                                                                             'preguntas': preguntas})
+                                                                             'preguntas': preguntas,
+                                                                             'pregunta_sesenta_uno': pregunta_sesenta_uno,
+                                                                             'pregunta_sesenta_dos': pregunta_sesenta_dos,
+                                                                             'pregunta_sesenta_tres': pregunta_sesenta_tres,
+                                                                             'pregunta_sesenta_cuatro': pregunta_sesenta_cuatro,
+                                                                             'pregunta_sesenta_cinco': pregunta_sesenta_cinco,
+                                                                             'pregunta_sesenta_seis': pregunta_sesenta_seis,
+                                                                             'pregunta_sesenta_siete': pregunta_sesenta_siete,
+                                                                             'pregunta_sesenta_ocho': pregunta_sesenta_ocho,
+                                                                             'pregunta_sesenta_nueve': pregunta_sesenta_nueve,
+                                                                             'pregunta_setenta': pregunta_setenta,
+                                                                             'pregunta_setenta_uno': pregunta_setenta_uno,
+                                                                             'pregunta_setenta_dos': pregunta_setenta_dos,
+                                                                             'pregunta_setenta_tres': pregunta_setenta_tres,
+                                                                             'pregunta_setenta_cuatro': pregunta_setenta_cuatro,
+                                                                             'pregunta_setenta_cinco': pregunta_setenta_cinco,
+                                                                             'pregunta_setenta_seis': pregunta_setenta_seis,
+                                                                             'pregunta_setenta_siete': pregunta_setenta_siete,
+                                                                             'pregunta_setenta_ocho': pregunta_setenta_ocho,
+                                                                             'pregunta_setenta_nueve': pregunta_setenta_nueve,
+                                                                             'pregunta_ochenta': pregunta_ochenta})
 
 
 def parteCinco(request):
@@ -753,6 +914,26 @@ def parteCinco(request):
     preguntas = Respuesta.objects.filter(evaluacion=evaluacion).count()
     preguntas = float((preguntas * 100) / 144)
     preguntas = float(("%0.2f" % preguntas))
+    pregunta_ochenta_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='81').first()
+    pregunta_ochenta_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='82').first()
+    pregunta_ochenta_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='83').first()
+    pregunta_ochenta_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='84').first()
+    pregunta_ochenta_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='85').first()
+    pregunta_ochenta_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='86').first()
+    pregunta_ochenta_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='87').first()
+    pregunta_ochenta_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='88').first()
+    pregunta_ochenta_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='89').first()
+    pregunta_noventa = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='90').first()
+    pregunta_noventa_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='91').first()
+    pregunta_noventa_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='92').first()
+    pregunta_noventa_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='93').first()
+    pregunta_noventa_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='94').first()
+    pregunta_noventa_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='95').first()
+    pregunta_noventa_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='96').first()
+    pregunta_noventa_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='97').first()
+    pregunta_noventa_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='98').first()
+    pregunta_noventa_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='99').first()
+    pregunta_cien = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='100').first()
     if request.method == "POST":
         preguntaOchentayUno = request.POST.get('preguntaOchentayUno', None)
         preguntaOchentayDos = request.POST.get('preguntaOchentayDos', None)
@@ -858,7 +1039,27 @@ def parteCinco(request):
 
     nombreMostrar = request.session['nombre']
     return render(request, 'eneagrama/perfil_de_personalidad_parte_5.html', {'nombreMostrar': nombreMostrar,
-                                                                             'preguntas': preguntas})
+                                                                             'preguntas': preguntas,
+                                                                             'pregunta_ochenta_uno': pregunta_ochenta_uno,
+                                                                             'pregunta_ochenta_dos': pregunta_ochenta_dos,
+                                                                             'pregunta_ochenta_tres': pregunta_ochenta_tres,
+                                                                             'pregunta_ochenta_cuatro': pregunta_ochenta_cuatro,
+                                                                             'pregunta_ochenta_cinco': pregunta_ochenta_cinco,
+                                                                             'pregunta_ochenta_seis': pregunta_ochenta_seis,
+                                                                             'pregunta_ochenta_siete': pregunta_ochenta_siete,
+                                                                             'pregunta_ochenta_ocho': pregunta_ochenta_ocho,
+                                                                             'pregunta_ochenta_nueve': pregunta_ochenta_nueve,
+                                                                             'pregunta_noventa': pregunta_noventa,
+                                                                             'pregunta_noventa_uno': pregunta_noventa_uno,
+                                                                             'pregunta_noventa_dos': pregunta_noventa_dos,
+                                                                             'pregunta_noventa_tres': pregunta_noventa_tres,
+                                                                             'pregunta_noventa_cuatro': pregunta_noventa_cuatro,
+                                                                             'pregunta_noventa_cinco': pregunta_noventa_cinco,
+                                                                             'pregunta_noventa_seis': pregunta_noventa_seis,
+                                                                             'pregunta_noventa_siete': pregunta_noventa_siete,
+                                                                             'pregunta_noventa_ocho': pregunta_noventa_ocho,
+                                                                             'pregunta_noventa_nueve': pregunta_noventa_nueve,
+                                                                             'pregunta_cien': pregunta_cien})
 
 
 def parteSeis(request):
@@ -869,6 +1070,28 @@ def parteSeis(request):
     preguntas = Respuesta.objects.filter(evaluacion=evaluacion).count()
     preguntas = float((preguntas * 100) / 144)
     preguntas = float(("%0.2f" % preguntas))
+    pregunta_cien_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='101').first()
+    pregunta_cien_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='102').first()
+    pregunta_cien_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='103').first()
+    pregunta_cien_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='104').first()
+    pregunta_cien_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='105').first()
+    pregunta_cien_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='106').first()
+    pregunta_cien_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='107').first()
+    pregunta_cien_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='108').first()
+    pregunta_cien_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='109').first()
+    pregunta_cien_diez = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='110').first()
+    pregunta_cien_diez_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='111').first()
+    pregunta_cien_diez_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='112').first()
+    pregunta_cien_diez_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='113').first()
+    pregunta_cien_diez_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='114').first()
+    pregunta_cien_diez_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='115').first()
+    pregunta_cien_diez_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='116').first()
+    pregunta_cien_diez_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='117').first()
+    pregunta_cien_diez_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='118').first()
+    pregunta_cien_diez_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='119').first()
+    pregunta_cien_veinte = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='120').first()
+    pregunta_cien_veinte_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='121').first()
+    pregunta_cien_veinte_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='122').first()
     if request.method == "POST":
         preguntaCientoUno = request.POST.get('preguntaCientoUno', None)
         preguntaCientoDos = request.POST.get('preguntaCientoDos', None)
@@ -886,7 +1109,7 @@ def parteSeis(request):
         preguntaCientoCatorce = request.POST.get('preguntaCientoCatorce', None)
         preguntaCientoQuince = request.POST.get('preguntaCientoQuince', None)
         preguntaCientoDieciseis = request.POST.get('preguntaCientoDieciseis', None)
-        preguntaCientoDiecisiete = request.POST.get('preguntaCientoSiete', None)
+        preguntaCientoDiecisiete = request.POST.get('preguntaCientoDiecisiete', None)
         preguntaCientoDieciocho = request.POST.get('preguntaCientoDieciocho', None)
         preguntaCientoDiecinueve = request.POST.get('preguntaCientoDiecinueve', None)
         preguntaCientoVeinte = request.POST.get('preguntaCientoVeinte', None)
@@ -984,7 +1207,29 @@ def parteSeis(request):
 
     nombreMostrar = request.session['nombre']
     return render(request, 'eneagrama/perfil_de_personalidad_parte_6.html', {'nombreMostrar': nombreMostrar,
-                                                                             'preguntas': preguntas})
+                                                                             'preguntas': preguntas,
+                                                                             'pregunta_cien_uno': pregunta_cien_uno,
+                                                                             'pregunta_cien_dos': pregunta_cien_dos,
+                                                                             'pregunta_cien_tres': pregunta_cien_tres,
+                                                                             'pregunta_cien_cuatro': pregunta_cien_cuatro,
+                                                                             'pregunta_cien_cinco': pregunta_cien_cinco,
+                                                                             'pregunta_cien_seis': pregunta_cien_seis,
+                                                                             'pregunta_cien_siete': pregunta_cien_siete,
+                                                                             'pregunta_cien_ocho': pregunta_cien_ocho,
+                                                                             'pregunta_cien_nueve': pregunta_cien_nueve,
+                                                                             'pregunta_cien_diez': pregunta_cien_diez,
+                                                                             'pregunta_cien_diez_uno': pregunta_cien_diez_uno,
+                                                                             'pregunta_cien_diez_dos': pregunta_cien_diez_dos,
+                                                                             'pregunta_cien_diez_tres': pregunta_cien_diez_tres,
+                                                                             'pregunta_cien_diez_cuatro': pregunta_cien_diez_cuatro,
+                                                                             'pregunta_cien_diez_cinco': pregunta_cien_diez_cinco,
+                                                                             'pregunta_cien_diez_seis': pregunta_cien_diez_seis,
+                                                                             'pregunta_cien_diez_siete': pregunta_cien_diez_siete,
+                                                                             'pregunta_cien_diez_ocho': pregunta_cien_diez_ocho,
+                                                                             'pregunta_cien_diez_nueve': pregunta_cien_diez_nueve,
+                                                                             'pregunta_cien_veinte': pregunta_cien_veinte,
+                                                                             'pregunta_cien_veinte_uno': pregunta_cien_veinte_uno,
+                                                                             'pregunta_cien_veinte_dos': pregunta_cien_veinte_dos})
 
 
 def parteSiete(request):
@@ -995,6 +1240,28 @@ def parteSiete(request):
     preguntas = Respuesta.objects.filter(evaluacion=evaluacion).count()
     preguntas = float((preguntas * 100) / 144)
     preguntas = float(("%0.2f" % preguntas))
+    pregunta_cien_veinte_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='123').first()
+    pregunta_cien_veinte_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='124').first()
+    pregunta_cien_veinte_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='125').first()
+    pregunta_cien_veinte_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='126').first()
+    pregunta_cien_veinte_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='127').first()
+    pregunta_cien_veinte_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='128').first()
+    pregunta_cien_veinte_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='129').first()
+    pregunta_cien_treinta = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='130').first()
+    pregunta_cien_treinta_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='131').first()
+    pregunta_cien_treinta_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='132').first()
+    pregunta_cien_treinta_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='133').first()
+    pregunta_cien_treinta_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='134').first()
+    pregunta_cien_treinta_cinco = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='135').first()
+    pregunta_cien_treinta_seis = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='136').first()
+    pregunta_cien_treinta_siete = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='137').first()
+    pregunta_cien_treinta_ocho = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='138').first()
+    pregunta_cien_treinta_nueve = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='139').first()
+    pregunta_cien_cuarenta = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='140').first()
+    pregunta_cien_cuarenta_uno = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='141').first()
+    pregunta_cien_cuarenta_dos = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='142').first()
+    pregunta_cien_cuarenta_tres = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='143').first()
+    pregunta_cien_cuarenta_cuatro = Respuesta.objects.filter(evaluacion=evaluacion, pregunta='144').first()
     if request.method == "POST":
         preguntaCientoVeintiTres = request.POST.get('preguntaCientoVeintiTres', None)
         preguntaCientoVeintiCuatro = request.POST.get('preguntaCientoVeintiCuatro', None)
@@ -1114,7 +1381,29 @@ def parteSiete(request):
 
     nombreMostrar = request.session['nombre']
     return render(request, 'eneagrama/perfil_de_personalidad_parte_7.html', {'nombreMostrar': nombreMostrar,
-                                                                             'preguntas': preguntas})
+                                                                             'preguntas': preguntas,
+                                                                             'pregunta_cien_veinte_tres': pregunta_cien_veinte_tres,
+                                                                             'pregunta_cien_veinte_cuatro': pregunta_cien_veinte_cuatro,
+                                                                             'pregunta_cien_veinte_cinco': pregunta_cien_veinte_cinco,
+                                                                             'pregunta_cien_veinte_seis': pregunta_cien_veinte_seis,
+                                                                             'pregunta_cien_veinte_siete': pregunta_cien_veinte_siete,
+                                                                             'pregunta_cien_veinte_ocho': pregunta_cien_veinte_ocho,
+                                                                             'pregunta_cien_veinte_nueve': pregunta_cien_veinte_nueve,
+                                                                             'pregunta_cien_treinta': pregunta_cien_treinta,
+                                                                             'pregunta_cien_treinta_uno': pregunta_cien_treinta_uno,
+                                                                             'pregunta_cien_treinta_dos': pregunta_cien_treinta_dos,
+                                                                             'pregunta_cien_treinta_tres': pregunta_cien_treinta_tres,
+                                                                             'pregunta_cien_treinta_cuatro': pregunta_cien_treinta_cuatro,
+                                                                             'pregunta_cien_treinta_cinco': pregunta_cien_treinta_cinco,
+                                                                             'pregunta_cien_treinta_seis': pregunta_cien_treinta_seis,
+                                                                             'pregunta_cien_treinta_siete': pregunta_cien_treinta_siete,
+                                                                             'pregunta_cien_treinta_ocho': pregunta_cien_treinta_ocho,
+                                                                             'pregunta_cien_treinta_nueve': pregunta_cien_treinta_nueve,
+                                                                             'pregunta_cien_cuarenta': pregunta_cien_cuarenta,
+                                                                             'pregunta_cien_cuarenta_uno': pregunta_cien_cuarenta_uno,
+                                                                             'pregunta_cien_cuarenta_dos': pregunta_cien_cuarenta_dos,
+                                                                             'pregunta_cien_cuarenta_tres': pregunta_cien_cuarenta_tres,
+                                                                             'pregunta_cien_cuarenta_cuatro': pregunta_cien_cuarenta_cuatro})
 
 
 def pago_formato(request):
@@ -1357,6 +1646,11 @@ def metodo_pago(request):
 
 
 def taller(request):
+    codigos = Codigo.objects.filter(activo=True)
+    if not codigos:
+        messages.success(request, '¡Compra tu reporte eneagrama o  realiza la evaluacion gratuita!')
+        messages.warning(request, '¡No hay talleres disponibles!')
+        return redirect('Eneagrama:principal')
     return render(request, 'eneagrama/principal_taller.html')
 
 
@@ -1482,7 +1776,7 @@ def Reporte_eneagrama(request):
             del request.session['nombre']
             del request.session['id_evaluacion']
 
-            return redirect('Eneagrama:principal')
+            return redirect('Eneagrama:taller')
 
         elif comprobante.tipo_pago == '3':
             messages.success(request, 'Estamos verificando tu comprobante de pago, una vez validado '
@@ -1578,7 +1872,7 @@ def Reporte_eneagrama(request):
 
         template = ImageReader(settings.MEDIA_ROOT + '/excel/portada.png')
         p.drawImage(template, 27, 18, 565, 755, mask='auto')
-        nombre = evaluacion.usuario.nombre +' '+ evaluacion.usuario.apellidos
+        nombre = evaluacion.usuario.nombre + ' ' + evaluacion.usuario.apellidos
         p.drawCentredString(305, 390, "{0}".format(nombre))
         p.setFont('Helvetica-Bold', 13)
         p.drawCentredString(305, 360, "{0}".format(date_time))
@@ -1708,7 +2002,6 @@ def Reporte_eneagrama(request):
         drawing.add(bc)
 
         drawing.drawOn(p, 235, 315)
-
 
         p.setStrokeColor(colors.black)
 
@@ -1937,7 +2230,7 @@ def write_pdf_view(request, pk):
 
         template = ImageReader(settings.MEDIA_ROOT + '/excel/portada.png')
         p.drawImage(template, 27, 18, 565, 755, mask='auto')
-        nombre = evaluacion.usuario.nombre +' '+ evaluacion.usuario.apellidos
+        nombre = evaluacion.usuario.nombre + ' ' + evaluacion.usuario.apellidos
         p.drawCentredString(305, 390, "{0}".format(nombre))
         p.setFont('Helvetica-Bold', 13)
         p.drawCentredString(305, 360, "{0}".format(date_time))
@@ -2067,7 +2360,6 @@ def write_pdf_view(request, pk):
         drawing.add(bc)
 
         drawing.drawOn(p, 235, 315)
-
 
         p.setStrokeColor(colors.black)
 

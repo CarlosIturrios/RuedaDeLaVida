@@ -38,6 +38,7 @@
                                             </thead>
                                             <tbody>
                                             {% for evaluacion in evaluaciones %}
+                                                {% if evaluacion.evaluacion_resuesta_set.count == 144 %}
                                                 <tr>
                                                     <td>
                                                         <a class="btn btn-warning" target="_blank"
@@ -48,10 +49,10 @@
                                                         {{ evaluacion.usuario.nombre }}
                                                         {{ evaluacion.usuario.apellidos }}
                                                     </td>
-                                                    <td>{% if evaluacion.evaluacion_resuesta_set.count == 144 %}
-                                                        Completa{% else %}
-                                                        Incompleta{% endif %}</td>
+                                                    <td>
+                                                        Completa</td>
                                                 </tr>
+                                                {% endif %}
                                             {% empty %}
                                                 <h2> No hay evaluaciones para mostrar. </h2>
                                             {% endfor %}

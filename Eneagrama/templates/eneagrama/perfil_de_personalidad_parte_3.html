@@ -40,7 +40,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="F"
-                                                       name="preguntaCuarentayUno">
+                                                       name="preguntaCuarentayUno"
+                                                        {% if pregunta_cuarenta_uno.valor == 'F' %} checked="checked" {% endif %}>
                                                 Extrovertido, carismático e interesado en los demás
                                             </label>
                                         </div>
@@ -50,7 +51,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="E" name="preguntaCuarentayUno">
+                                                <input type="radio" class="flat" value="E" name="preguntaCuarentayUno"
+                                                        {% if pregunta_cuarenta_uno.valor == 'E' %} checked="checked" {% endif %}>
                                                 Callado, poco común y profundo
                                             </label>
                                         </div>
@@ -65,7 +67,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="B"
-                                                       name="preguntaCuarentayDos">
+                                                       name="preguntaCuarentayDos"
+                                                        {% if pregunta_cuarenta_dos.valor == 'B' %} checked="checked" {% endif %}>
                                                 El deber y la responsabilidad
                                             </label>
                                         </div>
@@ -75,7 +78,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="A" name="preguntaCuarentayDos">
+                                                <input type="radio" class="flat" value="A" name="preguntaCuarentayDos"
+                                                        {% if pregunta_cuarenta_dos.valor == 'A' %} checked="checked" {% endif %}>
                                                 La armonía y la aceptación
                                             </label>
                                         </div>
@@ -90,7 +94,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="G"
-                                                       name="preguntaCuarentayTres">
+                                                       name="preguntaCuarentayTres"
+                                                        {% if pregunta_cuarenta_tres.valor == 'G' %} checked="checked" {% endif %}>
                                                 Con grandes planes y grandes promesas
                                             </label>
                                         </div>
@@ -100,7 +105,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="D" name="preguntaCuarentayTres">
+                                                <input type="radio" class="flat" value="D" name="preguntaCuarentayTres"
+                                                        {% if pregunta_cuarenta_tres.valor == 'D' %} checked="checked" {% endif %}>
                                                 Haciéndoles ver las consecuencias negativas si no me escuchan
                                             </label>
                                         </div>
@@ -115,7 +121,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="H"
-                                                       name="preguntaCuarentayCuatro"> Rara vez
+                                                       name="preguntaCuarentayCuatro"
+                                                        {% if pregunta_cuarenta_cuatro.valor == 'H' %} checked="checked" {% endif %}> Rara vez
                                             </label>
                                         </div>
                                     </div>
@@ -125,7 +132,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="F"
-                                                       name="preguntaCuarentayCuatro">
+                                                       name="preguntaCuarentayCuatro"
+                                                        {% if pregunta_cuarenta_cuatro.valor == 'F' %} checked="checked" {% endif %}>
                                                 Con frecuencia
                                             </label>
                                         </div>
@@ -140,7 +148,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="I"
-                                                       name="preguntaCuarentayCinco">
+                                                       name="preguntaCuarentayCinco"
+                                                        {% if pregunta_cuarenta_cinco.valor == 'I' %} checked="checked" {% endif %}>
                                                 No es una de mis fortalezas
                                             </label>
                                         </div>
@@ -151,7 +160,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="C"
-                                                       name="preguntaCuarentayCinco"> Me ha distinguido de los demás
+                                                       name="preguntaCuarentayCinco"
+                                                        {% if pregunta_cuarenta_cinco.valor == 'C' %} checked="checked" {% endif %}> Me ha distinguido de los demás
                                             </label>
                                         </div>
                                     </div>
@@ -165,7 +175,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="E"
-                                                       name="preguntaCuarentaySeis">
+                                                       name="preguntaCuarentaySeis"
+                                                        {% if pregunta_cuarenta_seis.valor == 'E' %} checked="checked" {% endif %}>
                                                 En lo diferente que soy de la mayoría de la gente, por ejemplo, mi
                                                 familia
                                             </label>
@@ -176,7 +187,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="A" name="preguntaCuarentaySeis">
+                                                <input type="radio" class="flat" value="A" name="preguntaCuarentaySeis"
+                                                        {% if pregunta_cuarenta_seis.valor == 'A' %} checked="checked" {% endif %}>
                                                 En lo que tengo en común con la mayoría de la gente, por ejemplo, mi
                                                 familia
                                             </label>
@@ -192,7 +204,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="H"
-                                                       name="preguntaCuarentaySiete">
+                                                       name="preguntaCuarentaySiete"
+                                                        {% if pregunta_cuarenta_siete.valor == 'H' %} checked="checked" {% endif %}>
                                                 Suelo mantenerme al margen
                                             </label>
                                         </div>
@@ -203,7 +216,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="G"
-                                                       name="preguntaCuarentaySiete"> Me gusta estar en el medio de las
+                                                       name="preguntaCuarentaySiete"
+                                                        {% if pregunta_cuarenta_siete.valor == 'G' %} checked="checked" {% endif %}> Me gusta estar en el medio de las
                                                 cosas
                                             </label>
                                         </div>
@@ -218,7 +232,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="B"
-                                                       name="preguntaCuarentayOcho">
+                                                       name="preguntaCuarentayOcho"
+                                                        {% if pregunta_cuarenta_ocho.valor == 'B' %} checked="checked" {% endif %}>
                                                 He apoyado a mis amigos aún cuando estén equivocados
                                             </label>
                                         </div>
@@ -228,7 +243,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="D" name="preguntaCuarentayOcho">
+                                                <input type="radio" class="flat" value="D" name="preguntaCuarentayOcho"
+                                                        {% if pregunta_cuarenta_ocho.valor == 'D' %} checked="checked" {% endif %}>
                                                 No he puesto en peligro lo que está bien, ni por mis amigos
                                             </label>
                                         </div>
@@ -243,7 +259,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="F"
-                                                       name="preguntaCuarentayNueve">
+                                                       name="preguntaCuarentayNueve"
+                                                        {% if pregunta_cuarenta_nueve.valor == 'F' %} checked="checked" {% endif %}>
                                                 Alguien que apoya con buenas intenciones
                                             </label>
                                         </div>
@@ -254,7 +271,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="C"
-                                                       name="preguntaCuarentayNueve"> Un ejecutor de proyectos muy
+                                                       name="preguntaCuarentayNueve"
+                                                        {% if pregunta_cuarenta_nueve.valor == 'C' %} checked="checked" {% endif %}> Un ejecutor de proyectos muy
                                                 motivado
                                             </label>
                                         </div>
@@ -269,7 +287,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="E"
-                                                       name="preguntaCincuenta"> Pensar constantemente en ellos
+                                                       name="preguntaCincuenta"
+                                                        {% if pregunta_cincuenta.valor == 'E' %} checked="checked" {% endif %}> Pensar constantemente en ellos
                                             </label>
                                         </div>
                                     </div>
@@ -278,7 +297,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="I" name="preguntaCincuenta">
+                                                <input type="radio" class="flat" value="I" name="preguntaCincuenta"
+                                                        {% if pregunta_cincuenta.valor == 'I' %} checked="checked" {% endif %}>
                                                 Buscar cosas que me distraigan de ellos
                                             </label>
                                         </div>
@@ -293,7 +313,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="D"
-                                                       name="preguntaCincuentayUno">
+                                                       name="preguntaCincuentayUno"
+                                                        {% if pregunta_cincuenta_uno.valor == 'D' %} checked="checked" {% endif %}>
                                                 He tenido convicciones firmes y una idea clara
                                             </label>
                                         </div>
@@ -303,7 +324,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="H" name="preguntaCincuentayUno">
+                                                <input type="radio" class="flat" value="H" name="preguntaCincuentayUno"
+                                                        {% if pregunta_cincuenta_uno.valor == 'H' %} checked="checked" {% endif %}>
                                                 He tenido serias dudas y me lo he cuestionado
                                             </label>
                                         </div>
@@ -318,7 +340,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="B"
-                                                       name="preguntaCincuentayDos">
+                                                       name="preguntaCincuentayDos"
+                                                        {% if pregunta_cincuenta_dos.valor == 'B' %} checked="checked" {% endif %}>
                                                 El ser pesimista y quejumbroso
                                             </label>
                                         </div>
@@ -328,7 +351,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="G" name="preguntaCincuentayDos">
+                                                <input type="radio" class="flat" value="G" name="preguntaCincuentayDos"
+                                                        {% if pregunta_cincuenta_dos.valor == 'G' %} checked="checked" {% endif %}>
                                                 El ser controlador y tomar el mando
                                             </label>
                                         </div>
@@ -343,7 +367,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="F"
-                                                       name="preguntaCincuentayTres">
+                                                       name="preguntaCincuentayTres"
+                                                        {% if pregunta_cincuenta_tres.valor == 'F' %} checked="checked" {% endif %}>
                                                 Actuar de acuerdo a mis sentimientos y dejar que las cosas suceda
                                             </label>
                                         </div>
@@ -354,7 +379,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="A"
-                                                       name="preguntaCincuentayTres"> Olvidarme de mis sentimientos para
+                                                       name="preguntaCincuentayTres"
+                                                        {% if pregunta_cincuenta_tres.valor == 'A' %} checked="checked" {% endif %}> Olvidarme de mis sentimientos para
                                                 no causar mayores problemas
                                             </label>
                                         </div>
@@ -369,7 +395,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="C"
-                                                       name="preguntaCincuentayCuatro"> Natural
+                                                       name="preguntaCincuentayCuatro"
+                                                        {% if pregunta_cincuenta_cuatro.valor == 'C' %} checked="checked" {% endif %}> Natural
                                             </label>
                                         </div>
                                     </div>
@@ -379,7 +406,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="E"
-                                                       name="preguntaCincuentayCuatro">
+                                                       name="preguntaCincuentayCuatro"
+                                                        {% if pregunta_cincuenta_cuatro.valor == 'E' %} checked="checked" {% endif %}>
                                                 Extraño
                                             </label>
                                         </div>
@@ -394,7 +422,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="B"
-                                                       name="preguntaCincuentayCinco">
+                                                       name="preguntaCincuentayCinco"
+                                                        {% if pregunta_cincuenta_cinco.valor == 'B' %} checked="checked" {% endif %}>
                                                 He sido cuidadoso y he estado preparado para ellos
                                             </label>
                                         </div>
@@ -405,7 +434,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="I"
-                                                       name="preguntaCincuentayCinco">
+                                                       name="preguntaCincuentayCinco"
+                                                        {% if pregunta_cincuenta_cinco.valor == 'I' %} checked="checked" {% endif %}>
                                                 He sido espontáneo y he ido improvisando conforme suceden
                                             </label>
                                         </div>
@@ -420,7 +450,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="F"
-                                                       name="preguntaCincuentaySeis">
+                                                       name="preguntaCincuentaySeis"
+                                                        {% if pregunta_cincuenta_seis.valor == 'F' %} checked="checked" {% endif %}>
                                                 No me demuestran aprecio cuando hago algo por los demás
                                             </label>
                                         </div>
@@ -431,7 +462,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="D"
-                                                       name="preguntaCincuentaySeis"> No escuchan cuando les expongo mi
+                                                       name="preguntaCincuentaySeis"
+                                                        {% if pregunta_cincuenta_seis.valor == 'D' %} checked="checked" {% endif %}> No escuchan cuando les expongo mi
                                                 punto de vista a otros
                                             </label>
                                         </div>
@@ -446,7 +478,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="G"
-                                                       name="preguntaCincuentaySiete">
+                                                       name="preguntaCincuentaySiete"
+                                                        {% if pregunta_cincuenta_siete.valor == 'G' %} checked="checked" {% endif %}>
                                                 Ser independiente y auto-suficiente...
                                             </label>
                                         </div>
@@ -457,7 +490,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="C"
-                                                       name="preguntaCincuentaySiete"> Ser admirado y valorado
+                                                       name="preguntaCincuentaySiete"
+                                                        {% if pregunta_cincuenta_siete.valor == 'C' %} checked="checked" {% endif %}> Ser admirado y valorado
                                             </label>
                                         </div>
                                     </div>
@@ -471,7 +505,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="H"
-                                                       name="preguntaCincuentayOcho">
+                                                       name="preguntaCincuentayOcho"
+                                                        {% if pregunta_cincuenta_ocho.valor == 'H' %} checked="checked" {% endif %}>
                                                 Tiendo a expresar mis argumentos de forma enérgica
                                             </label>
                                         </div>
@@ -482,7 +517,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="A"
-                                                       name="preguntaCincuentayOcho"> Dejo pasar las cosas para evitar
+                                                       name="preguntaCincuentayOcho"
+                                                        {% if pregunta_cincuenta_ocho.valor == 'A' %} checked="checked" {% endif %}> Dejo pasar las cosas para evitar
                                                 que se ofendan
                                             </label>
                                         </div>
@@ -497,7 +533,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="F"
-                                                       name="preguntaCincuentayNueve">
+                                                       name="preguntaCincuentayNueve"
+                                                        {% if pregunta_cincuenta_nueve.valor == 'F' %} checked="checked" {% endif %}>
                                                 He sido posesivo con las personas que me importan
                                             </label>
                                         </div>
@@ -508,7 +545,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" value="B"
-                                                       name="preguntaCincuentayNueve"> He probado a las personas para
+                                                       name="preguntaCincuentayNueve"
+                                                        {% if pregunta_cincuenta_nueve.valor == 'B' %} checked="checked" {% endif %}> He probado a las personas para
                                                 saber si puedo contar con ellos
                                             </label>
                                         </div>
@@ -523,7 +561,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
                                                 <input type="radio" class="flat" required value="G"
-                                                       name="preguntaSesenta">
+                                                       name="preguntaSesenta"
+                                                        {% if pregunta_sesenta.valor == 'G' %} checked="checked" {% endif %}>
                                                 Organizar recursos y hacer que las cosas sucedan
                                             </label>
                                         </div>
@@ -533,7 +572,8 @@
                                     <div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 radio">
                                             <label>
-                                                <input type="radio" class="flat" value="I" name="preguntaSesenta">
+                                                <input type="radio" class="flat" value="I" name="preguntaSesenta"
+                                                        {% if pregunta_sesenta.valor == 'I' %} checked="checked" {% endif %}>
                                                 Proponer nuevas ideas y generar entusiasmo con los demás
                                             </label>
                                         </div>
